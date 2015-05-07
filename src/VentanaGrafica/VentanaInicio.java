@@ -6,16 +6,20 @@
 
 package VentanaGrafica;
 
+import Control.ControladorUsuarios;
+
 /**
  *
  * @author juanjose
  */
 public class VentanaInicio extends javax.swing.JPanel {
 	
+	ControladorUsuarios control;
     /**
      * Creates new form VentanaInicio
      */
-    public VentanaInicio() {
+    public VentanaInicio(ControladorUsuarios controlador) {
+    	control = controlador;
         initComponents();
     }
 
@@ -134,8 +138,9 @@ public class VentanaInicio extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfNombreUserActionPerformed
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btEntrarActionPerformed
+        if((!jtfNombreUser.getText().isEmpty()) && (!jtfContraseña.getText().isEmpty()))
+        	control.login(jtfNombreUser.getText(), jtfContraseña.getText());
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,17 +6,30 @@
 
 package VentanaGrafica;
 
+import javax.swing.JOptionPane;
+
+import Control.ControladorUsuarios;
+import transfers.Entrenador;
+import transfers.Funcionario;
+import transfers.Usuario;
+
 /**
  *
  * @author juanjose
  */
 public class AltaPersonal extends javax.swing.JPanel {
-
+	private Usuario socio;
+	private ControladorUsuarios control;
     /**
      * Creates new form AltaMaterial
      */
-    public AltaPersonal(boolean personal) {
+    public AltaPersonal(boolean personal, ControladorUsuarios controlador) {
+    	control = controlador;
         initComponents();
+        if(!personal){
+        	jlTipo.setVisible(false);
+        	jcbTipo.setVisible(false);
+        }
     }
 
     /**
@@ -50,8 +63,8 @@ public class AltaPersonal extends javax.swing.JPanel {
         jtfEmail = new javax.swing.JTextField();
         jtfUsuario = new javax.swing.JTextField();
         jtfTelefono = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jlTipo = new javax.swing.JLabel();
+        jcbTipo = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -109,9 +122,9 @@ public class AltaPersonal extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Tipo");
+        jlTipo.setText("Tipo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Entrenador", "Funcionario" }));
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Entrenador", "Funcionario", "Socio" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -176,9 +189,9 @@ public class AltaPersonal extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel1)
+                                .addComponent(jlTipo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(133, 133, 133)
                                 .addComponent(jlbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -191,8 +204,8 @@ public class AltaPersonal extends javax.swing.JPanel {
                 .addComponent(jlbTitulo)
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlTipo)
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbNombre)
@@ -234,7 +247,7 @@ public class AltaPersonal extends javax.swing.JPanel {
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btCancelarActionPerformed
+    }
 
     private void jtfDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDireccionActionPerformed
         // TODO add your handling code here:
@@ -244,16 +257,51 @@ public class AltaPersonal extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfDNIActionPerformed
 
-    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btGuardarActionPerformed
+    private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {
+        if(compruebaDatos()){
+        	rellenaUsuario();
+        	control.altaUsuario(socio);
+        }
+        else JOptionPane.showMessageDialog(btGuardar, "Introduce los datos necesarios", "ERROR", ERROR);
+    }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Usuario rellenaUsuario() {
+    	String tipo = jcbTipo.getSelectedItem().toString();
+    	if(tipo.equalsIgnoreCase("Entrenador"))
+    		socio = new Entrenador();
+    	if(tipo.equalsIgnoreCase("Funcionario"))
+    		socio = new Funcionario();
+    	if(tipo.equalsIgnoreCase("Usuario"))
+    		socio = new Usuario();
+    	socio.setNombre(jtfNombre.getText());
+    	socio.setApellidos(jtfApellidos.getText());
+    	socio.setDNI(jtfDNI.getText());
+		socio.setNick(jtfUsuario.getText());
+		socio.setPass(jtfContraseña.getText());
+		socio.setTelefono(jtfTelefono.getText());
+		socio.setDireccion(jtfDireccion.getText());
+		socio.setEmail(jtfEmail.getText());
+		if(jrMaculino.isSelected() == true)
+			socio.setSexo("Maculino");
+		else if(jrFemenino.isSelected() == true)
+			socio.setSexo("Femenino");
+		return socio;
+		
+	}
+
+	private boolean compruebaDatos() {
+		return (!jtfNombre.getText().isEmpty()) && (!jtfApellidos.getText().isEmpty()) && (!jtfDNI.getText().isEmpty())
+				&& (!jtfUsuario.getText().isEmpty()) && (!jtfContraseña.getText().isEmpty()) && (!jtfTelefono.getText().isEmpty())
+				&& (!jtfEmail.getText().isEmpty()) && (!jtfDireccion.getText().isEmpty());
+	}
+
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btGuardar;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox jcbTipo;
+    private javax.swing.JLabel jlTipo;
     private javax.swing.JLabel jlbApellidos;
     private javax.swing.JLabel jlbContraseña;
     private javax.swing.JLabel jlbDNI;

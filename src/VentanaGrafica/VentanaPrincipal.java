@@ -16,15 +16,17 @@ public class VentanaPrincipal extends JFrame{
 	ControladorUsuarios controlUsuarios;
 	VentanaInicio login;
 	
+	
 	public VentanaPrincipal(ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
 			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu){
-		
-		login = new VentanaInicio();
+	
 		controlAlquilerCompra = controlAlqComp;
 		controlMateriales = controlMat;
 		controlClases = controlCla;
 		controlInstalaciones = controlInst;
 		controlUsuarios = controlUsu;
+		login = new VentanaInicio(controlUsuarios);
+		
 		this.add(login);
 		this.pack();
 	}
