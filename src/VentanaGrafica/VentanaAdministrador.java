@@ -6,16 +6,35 @@
 
 package VentanaGrafica;
 
+import Control.ControladorAlquilerCompra;
+import Control.ControladorClases;
+import Control.ControladorInstalaciones;
+import Control.ControladorMateriales;
+import Control.ControladorUsuarios;
+
 /**
  *
  * @author juanjose
  */
 public class VentanaAdministrador extends javax.swing.JPanel {
 
+	ControladorAlquilerCompra controlAlquilerCompra;
+	ControladorMateriales controlMateriales;
+	ControladorClases controlClases;
+	ControladorInstalaciones controlInstalaciones;
+	ControladorUsuarios controlUsuarios;
+	
     /**
      * Creates new form VentanaAdministrador
      */
-    public VentanaAdministrador() {
+    public VentanaAdministrador(ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
+			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu) {
+    	
+    	controlAlquilerCompra = controlAlqComp;
+		controlMateriales = controlMat;
+		controlClases = controlCla;
+		controlInstalaciones = controlInst;
+		controlUsuarios = controlUsu;
         initComponents();
     }
 
@@ -271,37 +290,45 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btVerUsersActionPerformed
 
-    private void btVerFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerFuncionariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btVerFuncionariosActionPerformed
+    private void btVerFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {
+        
+    }
 
-    private void btEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrenadoresActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btEntrenadoresActionPerformed
+    private void btEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {
+    
+    }
 
-    private void btVerMaterialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerMaterialesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btVerMaterialesActionPerformed
+    private void btVerMaterialesActionPerformed(java.awt.event.ActionEvent evt) {
+       
+    }
 
-    private void btVerInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerInstalacionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btVerInstalacionesActionPerformed
+    private void btVerInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {
+       
+    }
 
-    private void btAñadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAñadirUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAñadirUsuarioActionPerformed
+    private void btAñadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
+    	 AltaUsuario panelUsuario = new AltaUsuario(false, controlUsuarios);
+         Lista.setVisible(false);
+         PanelLista.add(panelUsuario);
+    }
 
-    private void btAniadirMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAniadirMaterialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAniadirMaterialActionPerformed
+    private void btAniadirMaterialActionPerformed(java.awt.event.ActionEvent evt) {
+    	 AltaMaterial panelMaterial = new AltaMaterial();
+         Lista.setVisible(false);
+         PanelLista.add(panelMaterial);
+    }
 
-    private void btAñadirPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAñadirPersonalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAñadirPersonalActionPerformed
+    private void btAñadirPersonalActionPerformed(java.awt.event.ActionEvent evt) {
+    	  AltaUsuario panelUsuario = new AltaUsuario(true, controlUsuarios);
+          Lista.setVisible(false);
+          PanelLista.add(panelUsuario);
+    }
 
-    private void btAñadirPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAñadirPistaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAñadirPistaActionPerformed
+    private void btAñadirPistaActionPerformed(java.awt.event.ActionEvent evt) {
+        AltaPista panelPista = new AltaPista();
+        Lista.setVisible(false);
+        PanelLista.add(panelPista);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
