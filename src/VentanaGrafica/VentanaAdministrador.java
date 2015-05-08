@@ -6,6 +6,16 @@
 
 package VentanaGrafica;
 
+import java.util.ArrayList;
+
+import javax.management.InstanceAlreadyExistsException;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
+import enums.UsuarioEnum;
+import transfers.Instalaciones;
+import transfers.Material;
+import transfers.Usuario;
 import Control.ControladorAlquilerCompra;
 import Control.ControladorClases;
 import Control.ControladorInstalaciones;
@@ -278,32 +288,88 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btSalirActionPerformed
 
-    private void btVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btVerActionPerformed
+    private void btVerActionPerformed(java.awt.event.ActionEvent evt) {
+    	 Object o = Lista.getSelectedValue();
+         if(o instanceof Usuario){
+        	 AltaUsuario panelUsuario = new AltaUsuario((Usuario)o, controlUsuarios);
+             Lista.setVisible(false);
+             PanelLista.add(panelUsuario);
+         }
+         else if(o instanceof Material){
+        	 AltaMaterial panelMaterial = new AltaMaterial();
+        	 Lista.setVisible(false);
+        	 PanelLista.add(panelMaterial);
+         }
+         else if(o instanceof Instalaciones){
+        	 AltaPista panelPista = new AltaPista();
+        	 Lista.setVisible(false);
+        	 PanelLista.add(panelPista);
+         }
+         else
+      	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
+    }
 
-    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btEliminarActionPerformed
+    private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+       Object o = Lista.getSelectedValue();
+       if(o instanceof Usuario)
+    	   controlUsuarios.borrarUsuario(o);
+       else if(o instanceof Material)
+    	   controlMateriales.borrarMaterial(o);
+       else if(o instanceof Instalaciones)
+    	   controlInstalaciones.borrarInstalacion(o);
+       else
+    	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
+    	   
+    }
 
-    private void btVerUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerUsersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btVerUsersActionPerformed
+    private void btVerUsersActionPerformed(java.awt.event.ActionEvent evt) {
+    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Socio);
+    	for(int i = 0; i < listaUsuarios.size(); i++){
+    		modeloLista.add(i, listaUsuarios.get(i));
+    	}
+    	Lista.removeAll();
+        Lista.setModel(modeloLista);
+    }
 
     private void btVerFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {
-        
+    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Funcionario);
+    	for(int i = 0; i < listaUsuarios.size(); i++){
+    		modeloLista.add(i, listaUsuarios.get(i));
+    	}
+    	Lista.removeAll();
+        Lista.setModel(modeloLista);
     }
 
     private void btEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {
-    
+    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Entrenador);
+    	for(int i = 0; i < listaUsuarios.size(); i++){
+    		modeloLista.add(i, listaUsuarios.get(i));
+    	}
+    	Lista.removeAll();
+        Lista.setModel(modeloLista);
     }
 
     private void btVerMaterialesActionPerformed(java.awt.event.ActionEvent evt) {
-       
+    	DefaultListModel<Material> modeloLista = new DefaultListModel<Material>();
+    	ArrayList<Material> listaMateriales = controlMateriales.listaMateriales();
+    	for(int i = 0; i < listaMateriales.size(); i++){
+    		modeloLista.add(i, listaMateriales.get(i));
+    	}
+    	Lista.removeAll();
+        Lista.setModel(modeloLista);
     }
 
     private void btVerInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {
-       
+    	DefaultListModel<Instalaciones> modeloLista = new DefaultListModel<Instalaciones>();
+    	ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.listaInstalaciones();
+    	for(int i = 0; i < listaInstalaciones.size(); i++){
+    		modeloLista.add(i, listaInstalaciones.get(i));
+    	}
+    	Lista.removeAll();
+        Lista.setModel(modeloLista);
     }
 
     private void btAñadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
