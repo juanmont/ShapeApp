@@ -284,9 +284,9 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btSalirActionPerformed
+    private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {
+       
+    }
 
     private void btVerActionPerformed(java.awt.event.ActionEvent evt) {
     	 Object o = Lista.getSelectedValue();
@@ -296,12 +296,12 @@ public class VentanaAdministrador extends javax.swing.JPanel {
              PanelLista.add(panelUsuario);
          }
          else if(o instanceof Material){
-        	 AltaMaterial panelMaterial = new AltaMaterial();
+        	 AltaMaterial panelMaterial = new AltaMaterial(controlMateriales);
         	 Lista.setVisible(false);
         	 PanelLista.add(panelMaterial);
          }
          else if(o instanceof Instalaciones){
-        	 AltaPista panelPista = new AltaPista();
+        	 AltaInstalacion panelPista = new AltaInstalacion(controlInstalaciones);
         	 Lista.setVisible(false);
         	 PanelLista.add(panelPista);
          }
@@ -363,10 +363,14 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {
-    	DefaultListModel<Instalaciones> modeloLista = new DefaultListModel<Instalaciones>();
+    	String[] s = null;
+    	DefaultListModel<String[]> modeloLista = new DefaultListModel<String[]>();
     	ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.listaInstalaciones();
     	for(int i = 0; i < listaInstalaciones.size(); i++){
-    		modeloLista.add(i, listaInstalaciones.get(i));
+    		Instalaciones ist = listaInstalaciones.get(i);
+    		s[0] = ist.getPista().toString();
+    		s[1] = ist.getTipo().toString();
+    		modeloLista.add(i, s);
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -379,7 +383,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btAniadirMaterialActionPerformed(java.awt.event.ActionEvent evt) {
-    	 AltaMaterial panelMaterial = new AltaMaterial();
+    	 AltaMaterial panelMaterial = new AltaMaterial(controlMateriales);
          Lista.setVisible(false);
          PanelLista.add(panelMaterial);
     }
@@ -391,7 +395,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btAñadirPistaActionPerformed(java.awt.event.ActionEvent evt) {
-        AltaPista panelPista = new AltaPista();
+        AltaInstalacion panelPista = new AltaInstalacion(controlInstalaciones);
         Lista.setVisible(false);
         PanelLista.add(panelPista);
     }

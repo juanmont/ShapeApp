@@ -6,16 +6,37 @@
 
 package VentanaGrafica;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+
+import transfers.Instalaciones;
+import Control.ControladorAlquilerCompra;
+import Control.ControladorClases;
+import Control.ControladorInstalaciones;
+import Control.ControladorMateriales;
+import Control.ControladorUsuarios;
+
 /**
  *
  * @author juanjose
  */
 public class VentanaFuncionario extends javax.swing.JPanel {
 
+	ControladorAlquilerCompra controlAlquilerCompra;
+	ControladorMateriales controlMateriales;
+	ControladorClases controlClases;
+	ControladorInstalaciones controlInstalaciones;
     /**
      * Creates new form VentanaFuncionario
      */
-    public VentanaFuncionario() {
+    public VentanaFuncionario(ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
+			ControladorClases controlCla, ControladorInstalaciones controlInst) {
+    	
+    	controlAlquilerCompra = controlAlqComp;
+		controlMateriales = controlMat;
+		controlClases = controlCla;
+		controlInstalaciones = controlInst;
         initComponents();
     }
 
@@ -218,21 +239,31 @@ public class VentanaFuncionario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_SalirActionPerformed
 
-    private void AlqPistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlqPistaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AlqPistaActionPerformed
+    private void AlqPistaActionPerformed(java.awt.event.ActionEvent evt) {
+    	AlquilerInstalacion panelInstalacion = new AlquilerInstalacion(controlAlquilerCompra);
+        panelInterno.removeAll();
+        panelInterno.add(panelInstalacion);
+    }
 
-    private void AlqMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlqMaterialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AlqMaterialActionPerformed
+    private void AlqMaterialActionPerformed(java.awt.event.ActionEvent evt) {
+    	AlquilerMaterial panelMaterial = new AlquilerMaterial(controlAlquilerCompra);
+        panelInterno.removeAll();
+        panelInterno.add(panelMaterial);
+    }
 
-    private void ContEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContEntrenadorActionPerformed
+    private void ContEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }//GEN-LAST:event_ContEntrenadorActionPerformed
+    }
 
-    private void btVerHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerHorasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btVerHorasActionPerformed
+    private void btVerHorasActionPerformed(java.awt.event.ActionEvent evt) {
+        ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.verHoras();
+        if(listaInstalaciones != null){
+        	DefaultListModel<String> modeloLista;
+        	for(Instalaciones i: listaInstalaciones){
+        		
+        	}
+        }
+    }
 
     private void CompraAbonoPiscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompraAbonoPiscActionPerformed
         // TODO add your handling code here:
