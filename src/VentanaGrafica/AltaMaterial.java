@@ -6,16 +6,19 @@
 
 package VentanaGrafica;
 
+import Control.ControladorMateriales;
+
 /**
  *
  * @author juanjose
  */
 public class AltaMaterial extends javax.swing.JPanel {
-
+	ControladorMateriales controlMateriales;
     /**
      * Creates new form AltaFuncionario
      */
-    public AltaMaterial() {
+    public AltaMaterial(ControladorMateriales controladorMat) {
+    	controlMateriales = controladorMat;
         initComponents();
     }
 
@@ -58,11 +61,7 @@ public class AltaMaterial extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jtDescripcion);
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Futbol", "Tenis", "Padel", "Piscina", "Entrenamiento", "Gimnasio", "Baloncesto" }));
-        jcbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbTipoActionPerformed(evt);
-            }
-        });
+        
 
         bGuardar.setText("Guardar");
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -134,13 +133,14 @@ public class AltaMaterial extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbTipoActionPerformed
-
-    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bGuardarActionPerformed
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {
+       	if(compruebaCampos())
+       		controlMateriales.AltaMaterial(jtfNombre.getText(), jtDescripcion.getText(), jcbTipo.getSelectedItem().toString());
+    }
+    
+    private boolean compruebaCampos(){
+    	return (jtDescripcion.getText() != "" && jtfNombre.getText() != "");
+    }
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         // TODO add your handling code here:

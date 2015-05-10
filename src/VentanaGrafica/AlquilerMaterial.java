@@ -6,6 +6,8 @@
 
 package VentanaGrafica;
 
+import javax.swing.JOptionPane;
+
 import Control.ControladorAlquilerCompra;
 
 /**
@@ -108,7 +110,10 @@ public class AlquilerMaterial extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAlquilarActionPerformed(java.awt.event.ActionEvent evt) {
-        control.alquilarMaterial(jcbTipo.getSelectedItem().toString(), jtxHoras.getText());
+        if(control.alquilarMaterial(jcbTipo.getSelectedItem().toString(), jtxHoras.getText()))
+        	JOptionPane.showConfirmDialog(bAlquilar, "Alquilado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
+        else 
+        	JOptionPane.showConfirmDialog(bAlquilar, "Error al alquilar el material", "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
