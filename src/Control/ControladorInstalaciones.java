@@ -2,6 +2,7 @@ package Control;
 
 import java.util.ArrayList;
 
+import enums.PistaEnum;
 import transfers.Instalaciones;
 
 public class ControladorInstalaciones {
@@ -11,9 +12,21 @@ public class ControladorInstalaciones {
 		return null;
 	}
 
-	public void borrarInstalacion(Object o) {
+	public boolean borrarInstalacion(Object o) {
+		return false;
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean AltaInstalacion(String text, String string, PistaEnum tipo) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ArrayList<Instalaciones> verHoras() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

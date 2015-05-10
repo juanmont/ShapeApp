@@ -2,12 +2,14 @@ package Control;
 
 public class ControladorAlquilerCompra {
 
-	public void alquilarInstalacion(String selectedItem, String text) {
+	public boolean alquilarInstalacion(String selectedItem, String text) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void alquilarMaterial(String string, String text) {
+	public boolean alquilarMaterial(String string, String text) {
+		return false;
 		// TODO Auto-generated method stub
 		
 	}

@@ -16,4 +16,9 @@ public class ControladorMateriales {
 		
 	}
 
+	public void AltaMaterial(String text, String text2, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
