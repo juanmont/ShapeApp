@@ -6,7 +6,13 @@
 
 package VentanaGrafica;
 
+import java.sql.Connection;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import Control.ControladorUsuarios;
+import Daos.Conexion;
 
 /**
  *
@@ -14,14 +20,31 @@ import Control.ControladorUsuarios;
  */
 public class VentanaInicio extends javax.swing.JPanel {
 	
+	private JFrame frame;
 	ControladorUsuarios control;
+	Connection c;
     /**
      * Creates new form VentanaInicio
      */
-    public VentanaInicio(ControladorUsuarios controlador) {
-    	control = controlador;
+    public VentanaInicio(Connection con) {
+    	c = con;
+    	control = new ControladorUsuarios(con);
         initComponents();
+        /*this.frame.add(panelLogin);
+        this.frame.setVisible(true);*/
     }
+    
+    public VentanaInicio(Connection con, ControladorUsuarios cont) {
+    	this.c = con;
+    	control = cont;
+        initComponents();
+        /*this.frame.add(panelLogin);
+        this.frame.setVisible(true);*/
+    }
+    
+   /* public void setFrame(boolean visible){
+    	this.frame.setVisible(visible);
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,7 +54,9 @@ public class VentanaInicio extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	/*this.frame = new JFrame("Ventana Login");
+		this.frame.setSize(400, 400);
+		this.frame.setResizable(false);*/
         panelLogin = new javax.swing.JPanel();
         jtfNombreUser = new javax.swing.JTextField();
         jlbUsuario = new javax.swing.JLabel();
@@ -46,7 +71,7 @@ public class VentanaInicio extends javax.swing.JPanel {
         panelLogin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         panelLogin.setForeground(new java.awt.Color(153, 153, 153));
 
-        jtfNombreUser.setText("NombreUsuario");
+        //jtfNombreUser.setText("NombreUsuario");
         jtfNombreUser.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jtfNombreUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +94,7 @@ public class VentanaInicio extends javax.swing.JPanel {
             }
         });
 
-        jtfContraseña.setText("0dxwauic");
+        //jtfContraseña.setText("0dxwauic");
 
         javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
         panelLogin.setLayout(panelLoginLayout);
@@ -138,8 +163,11 @@ public class VentanaInicio extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfNombreUserActionPerformed
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
-        if((!jtfNombreUser.getText().isEmpty()) && (!jtfContraseña.getText().isEmpty()))
-        	control.login(jtfNombreUser.getText(), jtfContraseña.getText());
+        if((!jtfNombreUser.getText().isEmpty()) && (!jtfContraseña.getText().isEmpty())) {
+          	control.login(jtfNombreUser.getText(), jtfContraseña.getText());
+        	this.setVisible(false);
+        }
+        else JOptionPane.showMessageDialog(null,  "Error: Tienes que rellenar ambos campos.","", JOptionPane.ERROR_MESSAGE);
     }
 
 

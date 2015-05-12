@@ -19,9 +19,9 @@ public class Conexion{
 	private static final String USER="is";
 	private static final String PASSWORD="is";
 
-    /** COnstructor de la conexiÃ³n
-    * @author Jaime Boixadós Martínez
-    * @since 11/05/2015
+    /** Constructor de la conexiÃ³n
+    * @author Jaime Boixadï¿½s Martï¿½nez
+    * @since 11/04/2015
     * @version 1.0
     */
 	private Conexion(){
@@ -48,7 +48,7 @@ public class Conexion{
 	
 	/**
 	 * MÃ©todo de clase que retorna la conexion a la BD
-	 * @author Jaime Boixadós Martínez
+	 * @author Jaime Boixadï¿½s Martï¿½nez
 	 * @date 11-04-2015
 	 * @return Connection, conexion a la BD
 	 */
@@ -77,8 +77,8 @@ public class Conexion{
 		
 	}
 	/** 
-    * @author Jaime Boixadós Martínez
-    * @since 11/04/2014
+    * @author Jaime Boixadï¿½s Martï¿½nez
+    * @since 11/04/2015
     * @version 1.0
     */
 	private static Connection getConnectionFromDataSource() {
@@ -98,17 +98,17 @@ public class Conexion{
 	}
 
      /**
-    * @author Carlos Casado GonzÃ¡lez
-    * @since 11/04/2014
+    * @author Jaime Boixadï¿½s Martï¿½nez
+    * @since 11/04/2015
     * @version 1.0
     */
 	public static void setDataSource(DataSource dataSource)
 	{
 		Conexion.dataSource = dataSource;
 	}
-    /** Busca un Comercial por nombre
-    * @author Carlos Casado GonzÃ¡lez
-    * @since 11/04/2014
+    /**
+    * @author Jaime Boixadï¿½s Martï¿½nez
+    * @since 11/04/2015
     * @version 1.0
     */
 	public static void freeConnection(Connection conn) 
