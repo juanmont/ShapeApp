@@ -16,7 +16,14 @@ public class VentanaPrincipal extends JFrame{
 	ControladorUsuarios controlUsuarios;
 	VentanaInicio login;
 	
-	
+	/**
+	 * Este es el contructor de la clase
+	 * @param controlAlqComp
+	 * @param controlMat
+	 * @param controlCla
+	 * @param controlInst
+	 * @param controlUsu
+	 */
 	public VentanaPrincipal(ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
 			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu){
 	
