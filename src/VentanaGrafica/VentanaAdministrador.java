@@ -80,7 +80,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         btSalir = new javax.swing.JButton();
         btAñadirUsuario = new javax.swing.JButton();
         btAñadirPersonal = new javax.swing.JButton();
-        btAñadirPista = new javax.swing.JButton();
+        btAñadirInstalacion = new javax.swing.JButton();
         btVerInstalaciones = new javax.swing.JButton();
         btAniadirMaterial = new javax.swing.JButton();
         PanelLista = new javax.swing.JPanel();
@@ -160,12 +160,12 @@ public class VentanaAdministrador extends javax.swing.JPanel {
             }
         });
 
-        btAñadirPista.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        btAñadirPista.setForeground(new java.awt.Color(102, 102, 102));
-        btAñadirPista.setText("Añadir Pista");
-        btAñadirPista.addActionListener(new java.awt.event.ActionListener() {
+        btAñadirInstalacion.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        btAñadirInstalacion.setForeground(new java.awt.Color(102, 102, 102));
+        btAñadirInstalacion.setText("Añadir Instalación");
+        btAñadirInstalacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAñadirPistaActionPerformed(evt);
+                btAñadirInstalacionActionPerformed(evt);
             }
         });
 
@@ -257,7 +257,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                         .addComponent(btVerInstalaciones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btVerUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAniadirMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAñadirPista, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAñadirInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btSalir))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,7 +290,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btAñadirPersonal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAñadirPista)
+                        .addComponent(btAñadirInstalacion)
                         .addGap(17, 17, 17)
                         .addComponent(btSalir))
                     .addComponent(PanelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -315,9 +315,9 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         	 PanelLista.add(panelMaterial);
          }
          else if(o instanceof Instalaciones){
-        	 AltaInstalacion panelPista = new AltaInstalacion(controlInstalaciones);
+        	 AltaInstalacion panelInstalacion = new AltaInstalacion(controlInstalaciones);
         	 Lista.setVisible(false);
-        	 PanelLista.add(panelPista);
+        	 PanelLista.add(panelInstalacion);
          }
          else
       	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
@@ -408,10 +408,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
           PanelLista.add(panelUsuario);
     }
 
-    private void btAñadirPistaActionPerformed(java.awt.event.ActionEvent evt) {
-        AltaInstalacion panelPista = new AltaInstalacion(controlInstalaciones);
+    private void btAñadirInstalacionActionPerformed(java.awt.event.ActionEvent evt) {
+        AltaInstalacion panelInstalacion = new AltaInstalacion(controlInstalaciones);
         Lista.setVisible(false);
-        PanelLista.add(panelPista);
+        PanelLista.add(panelInstalacion);
+        //this.
     }
 
 
@@ -420,7 +421,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private javax.swing.JPanel PanelLista;
     private javax.swing.JButton btAniadirMaterial;
     private javax.swing.JButton btAñadirPersonal;
-    private javax.swing.JButton btAñadirPista;
+    private javax.swing.JButton btAñadirInstalacion;
     private javax.swing.JButton btAñadirUsuario;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEntrenadores;

@@ -11,5 +11,5 @@ public interface IMaterialDao {
 	List<Material> findByTipo(Connection connection, String categoria);
 	int insertMaterial(Connection connection, Material material);
 	int borrarMaterial(Connection connection, int id);
-	
+	int modificarMaterial(Connection connection, Material material);
 }

@@ -63,32 +63,21 @@ public class ControladorUsuarios {
 
 	public void login(String user, String pass) {
 		
-		usuarios = new SubSistemaUsuarios();
+		usuarios = new SubSistemaUsuarios(c);
 		
 		tipo = usuarios.tipoUsuario(c, user, pass);
 		
 		if (tipo != null) {	
 			if(tipo == UsuarioEnum.Admin){
-				//this.v.cerrar();
 				
-				//this.vp.dispose();
-				//this.v.setFrame(false);
 				this.va = new VentanaAdministrador(c, controlAlquilerCompra, controlMateriales, controlClases, controlInstalaciones, this);
-				//this.frame = new JFrame("Ventana Administrador");
 				this.vp.setSize(600, 500);
 				this.vp.SetVisibleLogin(false);
 				this.vp.add(va);
 				this.vp.setVisible(true);
-				/*this.frame.setSize(600, 500);
-				this.frame.add(va);
-				this.frame.setVisible(true);*/
-				//va.setVisible(true);
 			
 			}else if(tipo == UsuarioEnum.Funcionario){
-				//this.v.cerrar();
-					
-				//this.v.setFrame(false);
-					
+				
 				this.vf = new VentanaFuncionario(c, controlAlquilerCompra, controlMateriales, controlClases, controlInstalaciones, this);
 				this.vp.setSize(600, 500);
 				this.vp.add(vf);
@@ -96,9 +85,6 @@ public class ControladorUsuarios {
 					
 			}else if(tipo == UsuarioEnum.Socio){
 				
-				//this.v.cerrar();
-					
-				//this.v.setVisible(false);
 				nombre = user;
 				this.vu = new VentanaUsuario(c, controlAlquilerCompra, controlMateriales, controlClases, controlInstalaciones, this);
 				this.vp.setSize(550, 400);

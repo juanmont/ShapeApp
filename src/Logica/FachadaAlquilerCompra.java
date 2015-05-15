@@ -1,22 +1,32 @@
 package Logica;
 
+import java.util.ArrayList;
+
+import transfers.Bono;
+import transfers.BonoUsuario;
+import transfers.ClaseSocio;
+import transfers.Clases;
+import transfers.InstalacionUsuario;
+import transfers.MaterialUsuario;
+import transfers.Entrenador;
+
 public interface FachadaAlquilerCompra {
 	
-	public void listaInstalaciones();
+	public ArrayList<InstalacionUsuario> listaInstalaciones();
 	
-	public void listaEntrenadores();
+	public ArrayList<Entrenador> listaEntrenadores();
 	
-	public void listaMateriales();
+	public ArrayList<MaterialUsuario> listaMateriales();
 	
-	public void alquilerInstalacion();
+	public void alquilerInstalacion(InstalacionUsuario inst);
 	
-	public void alquilerMaterial();
+	public void alquilerMaterial(MaterialUsuario mat);
 	
-	public void contratacionEntrenador();
+	public void contratacionEntrenador(ClaseSocio clase);
 	
-	public void contratacionClase();
+	public void contratacionClase(ClaseSocio clase);
 	
-	public void compraAbonoPis();
+	public void compraAbonoPis(BonoUsuario bono);
 	
-	public void compraAbonoGim();
+	public void compraAbonoGim(BonoUsuario bono);
 }

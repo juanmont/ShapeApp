@@ -26,13 +26,6 @@ public class VentanaInicio extends javax.swing.JPanel {
     /**
      * Creates new form VentanaInicio
      */
-    public VentanaInicio(Connection con) {
-    	c = con;
-    	control = new ControladorUsuarios(con);
-        initComponents();
-        /*this.frame.add(panelLogin);
-        this.frame.setVisible(true);*/
-    }
     
     public VentanaInicio(Connection con, ControladorUsuarios cont) {
     	this.c = con;

@@ -11,4 +11,5 @@ public interface IAdminDao {
 	int insertAdmin(Connection connection, Admin admin);
 	int borrarAdmin(Connection connection, String nick);
 	Admin findByNick(Connection connection, String nick);
+	int modificarAdmin(Connection connection, Admin admin);
 }

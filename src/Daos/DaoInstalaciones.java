@@ -77,6 +77,29 @@ public class DaoInstalaciones implements IInstalacionesDao{
 		}
 		return result;
 	}
+	
+	public int modificarInstalacion(Connection connection, Instalaciones instalacion){
+		PreparedStatement insertSocio=null;
+		int result=0;
+		try{
+			insertSocio=connection.prepareStatement("UPDATE instalaciones "
+					+ "SET pista = ?, tipo = ?, horario = ?"
+					+ " WHERE numero = ?");
+			//asociamos el valor que queremos buscar
+			insertSocio.setString(1, instalacion.getPista().toString());
+			insertSocio.setString(2, instalacion.getTipo().toString());
+			insertSocio.setString(3, instalacion.getDisponibilidad().toString());
+			insertSocio.setInt(4, instalacion.getNumero());
+			result=insertSocio.executeUpdate();
+			connection.commit();
+		} catch (TransferException e) {
+			e.printStackTrace();
+		}catch(SQLException e){
+			//throw new DaoException("Error en la Insercion");
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public int borrarInstalacion(Connection connection, int numero) {

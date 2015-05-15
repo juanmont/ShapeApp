@@ -11,4 +11,5 @@ public interface ISocioDao {
 	int insertSocio(Connection connection, Socio Socio);
 	int borrarSocio(Connection connection, String nick);
 	Socio findByNick(Connection connection, String nick);
+	public int modificarSocio(Connection connection, Socio socio);
 }

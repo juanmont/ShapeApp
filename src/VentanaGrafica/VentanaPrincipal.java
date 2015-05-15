@@ -25,7 +25,7 @@ public class VentanaPrincipal extends JFrame{
 		// TODO Auto-generated constructor stub
 		this.con = c;
 		controlUsuarios = new ControladorUsuarios(con, this);
-		controlInstalaciones = new ControladorInstalaciones();
+		controlInstalaciones = new ControladorInstalaciones(c);
 		controlClases = new ControladorClases();
 		controlMateriales = new ControladorMateriales();
 		controlAlquilerCompra = new ControladorAlquilerCompra();

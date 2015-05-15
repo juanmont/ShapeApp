@@ -11,4 +11,5 @@ public interface IInstalacionesDao {
 	int insertInstalacion(Connection connection, Instalaciones instalacion);
 	int borrarInstalacion(Connection connection, int numero);
 	Instalaciones findByNumero(Connection connection, int numero);
+	int modificarInstalacion(Connection connection, Instalaciones instalacion);
 }

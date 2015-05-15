@@ -1,16 +1,22 @@
 package Logica;
 
+import java.util.ArrayList;
+import java.util.Vector;
+
+import transfers.InstalacionUsuario;
+import transfers.Instalaciones;
+
 public interface FachadaInstalaciones {
 	
-	public void altaInstalacion();
+	public boolean altaInstalacion(Instalaciones insta);
 	
-	public void bajaInstalacion();
+	public boolean bajaInstalacion(Instalaciones insta);
 	
-	public void modificarInstalacion();
+	public boolean modificarInstalacion(Instalaciones insta);
 	
-	public void verInstalacion();
+	public Instalaciones verInstalacion(Instalaciones insta);
 	
-	public void listaInstalaciones();
-	
-	public void verHoras();
+	public ArrayList<Instalaciones> listaInstalaciones();
+
+	public boolean[] verHoras(Instalaciones insta);
 }

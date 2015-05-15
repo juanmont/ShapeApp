@@ -1,8 +1,8 @@
 package Logica;
 
-
-
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Vector;
 
 import enums.UsuarioEnum;
 import transfers.Admin;
@@ -14,42 +14,83 @@ import Daos.DaoFuncionario;
 import Daos.DaoSocio;
 
 public class SubSistemaUsuarios implements FachadaUsuarios {
+	private DaoAdmin adminDao;
+	private DaoFuncionario funDao;
+	private DaoSocio socDao;
+	private Connection con;
+	private ArrayList<Usuario> lista;
 
-	DaoAdmin adminDao = new DaoAdmin();
-	DaoFuncionario funDao = new DaoFuncionario();
-	DaoSocio socDao=new DaoSocio();
+	public SubSistemaUsuarios(Connection con){
+		adminDao = new DaoAdmin();
+		funDao = new DaoFuncionario();
+		socDao = new DaoSocio();
+		lista = new ArrayList<Usuario>();
+		this.con = con;
+	}
+	
+	
 	
 	@Override
-	public boolean altaUsuario(Usuario usuario) {
-		return false;
-		// TODO Auto-generated method stub
+	public boolean altaUsuario(Socio s, Admin ad, Funcionario f) {
+		if(s != null){
+			socDao.insertSocio(con, s);
+			lista.add(s);
+		}else if(ad != null){
+			adminDao.insertAdmin(con, ad);
+			lista.add(ad);
+		}else if(f != null){
+			funDao.insertAdmin(con, f);
+			lista.add(f);
+		}else
+			return false;	
+		return true;
+	}
+
+	@Override
+	public boolean modificarUsuario(Socio s, Admin ad, Funcionario f) {
+		if(s != null){
+			socDao.modificarSocio(con, s);
+		}else if(ad != null){
+			adminDao.modificarAdmin(con, ad);
+		}else if(f != null){
+			funDao.modificarFuncionario(con, f);
+		}else
+			return false;	
+		return true;
+	}
+
+	@Override
+	public boolean bajaUsuario(Socio s, Admin ad, Funcionario f) {
+		if(s != null){
+			socDao.borrarSocio(con, s.getNick());
+			lista.remove(s.getNick());
+		}else if(ad != null){
+			adminDao.borrarAdmin(con, ad.getNick());
+			lista.remove(ad.getNick());
+		}else if(f != null){
+			funDao.borrarAdmin(con, f.getNick());
+			lista.remove(f.getNick());
+		}else
+			return false;	
+		return true;
 		
 	}
 
 	@Override
-	public void modificarUsuario() {
-		// TODO Auto-generated method stub
-		
+	public Usuario verUsuario(Socio s, Admin ad, Funcionario f) {
+		if(s != null){
+			return socDao.findByNick(con, s.getNick());
+		}else if(ad != null){
+			return adminDao.findByNick(con, ad.getNick());
+		}else if(f != null){
+			return funDao.findByNick(con, f.getNick());
+		}else
+			return null;
 	}
 
 	@Override
-	public boolean bajaUsuario() {
-		return false;
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Usuario verUsuario() {
-		return null;
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void listaUsuarios() {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Usuario> listaUsuarios() {
+			return lista;
 	}
 
 	@Override
@@ -64,5 +105,4 @@ public class SubSistemaUsuarios implements FachadaUsuarios {
 			return null;
 		}
 	}
-
 }

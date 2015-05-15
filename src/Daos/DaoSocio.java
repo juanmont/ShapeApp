@@ -98,6 +98,35 @@ public class DaoSocio implements ISocioDao{
 		}
 		return result;
 	}
+	
+	public int modificarSocio(Connection connection, Socio socio){
+		PreparedStatement insertSocio=null;
+		int result=0;
+		try{
+			insertSocio=connection.prepareStatement("UPDATE usuario "
+					+ "SET nombre = ?, apellido = ?, tlf = ?,"
+					+ " DNI = ?, Pass = ?, sexo = ?, email = ?, direccion = ?"
+					+ " WHERE nick = ?");
+			//asociamos el valor que queremos buscar
+			insertSocio.setString(1, socio.getNombre());
+			insertSocio.setString(2, socio.getApellidos());
+			insertSocio.setString(3, socio.getTelefono());
+			insertSocio.setString(4, socio.getDNI());
+			insertSocio.setString(5, socio.getPass());
+			insertSocio.setString(6, socio.getSexo().toString());
+			insertSocio.setString(7, socio.getEmail());
+			insertSocio.setString(8, socio.getDireccion());
+			insertSocio.setString(9, socio.getNick());
+			result=insertSocio.executeUpdate();
+			connection.commit();
+		} catch (TransferException e) {
+			e.printStackTrace();
+		}catch(SQLException e){
+			//throw new DaoException("Error en la Insercion");
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public int borrarSocio(Connection connection, String nick) {
