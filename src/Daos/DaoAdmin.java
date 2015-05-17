@@ -60,6 +60,43 @@ public class DaoAdmin implements IAdminDao{
 		}
 		return adminList;
 	}
+	
+	public int modificarAdmin(Connection connection, Admin admin){
+		PreparedStatement updateUsuario=null;
+		PreparedStatement updateAdmin=null;
+		int result=0;
+		try{
+			updateUsuario=connection.prepareStatement("UPDATE usuario "
+					+ "SET nombre = ?, apellido = ?, tlf = ?,"
+					+ " DNI = ?, Pass = ?, sexo = ?, email = ?, direccion = ?"
+					+ " WHERE nick = ?");
+			//asociamos el valor que queremos buscar
+			updateUsuario.setString(1, admin.getNombre());
+			updateUsuario.setString(2, admin.getApellidos());
+			updateUsuario.setString(3, admin.getTelefono());
+			updateUsuario.setString(4, admin.getDNI());
+			updateUsuario.setString(5, admin.getPass());
+			updateUsuario.setString(6, admin.getSexo().toString());
+			updateUsuario.setString(7, admin.getEmail());
+			updateUsuario.setString(8, admin.getDireccion());
+			updateUsuario.setString(9, admin.getNick());
+			result=updateUsuario.executeUpdate();
+			connection.commit();
+			updateAdmin=connection.prepareStatement("UPDATE admin "
+					+ "SET entrada = ?, salida = ?, sueldo = ? "
+					+ "WHERE nick = ?");
+			updateAdmin.setString(1, admin.getHoraEntrada());
+			updateAdmin.setString(2, admin.getHoraSalida());
+			updateAdmin.setDouble(3, admin.getSueldo());
+			updateAdmin.setString(4, admin.getNick());
+		} catch (TransferException e) {
+			e.printStackTrace();
+		}catch(SQLException e){
+			//throw new DaoException("Error en la Insercion");
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public int insertAdmin(Connection connection, Admin admin) {

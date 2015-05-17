@@ -11,4 +11,5 @@ public interface IEntrenadorDao {
 	int insertEntrenador(Connection connection, Entrenador entrenador);
 	int borrarEntrenador(Connection connection, String nick);
 	Entrenador findByNick(Connection connection, String nick);
+	int modificarEntrenador(Connection connection, Entrenador entrenador);
 }

@@ -6,17 +6,44 @@
 
 package VentanaGrafica;
 
+import java.sql.Connection;
+
+import javax.swing.JFrame;
+
+import Control.ControladorAlquilerCompra;
+import Control.ControladorClases;
+import Control.ControladorInstalaciones;
+import Control.ControladorMateriales;
+import Control.ControladorUsuarios;
+
 /**
  *
  * @author juanjose
  */
 public class VentanaUsuario extends javax.swing.JPanel {
 
+	ControladorAlquilerCompra controlAlquilerCompra;
+	ControladorMateriales controlMateriales;
+	ControladorClases controlClases;
+	ControladorInstalaciones controlInstalaciones;
+	ControladorUsuarios controlUsuarios;
+	private JFrame frame;
+	private Connection con;
+	
     /**
-     * Creates new form PaginaPrincipal
+     * Creates new form VentanaUsuario
+     * @param c 
      */
-    public VentanaUsuario() {
+	public VentanaUsuario(Connection c, ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
+			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu) {
+    	con = c;
+    	controlUsuarios = controlUsu;
+    	controlAlquilerCompra = controlAlqComp;
+		controlMateriales = controlMat;
+		controlClases = controlCla;
+		controlInstalaciones = controlInst;
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -116,9 +143,11 @@ public class VentanaUsuario extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(listHoras);
 
+        String nombre = controlUsuarios.getNombre();
+        
         jlbNombreUsuario.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jlbNombreUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        jlbNombreUsuario.setText("NOMBRE DE USUARIO");
+        jlbNombreUsuario.setText(nombre);
 
         bVerHoras.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bVerHoras.setForeground(new java.awt.Color(102, 102, 102));
@@ -134,7 +163,7 @@ public class VentanaUsuario extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addGap(230, 230, 230)
                 .addComponent(jlbNombreUsuario)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -207,7 +236,7 @@ public class VentanaUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_btCompraAbonoPiscinaActionPerformed
 
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btSalirActionPerformed
 
 

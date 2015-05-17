@@ -12,4 +12,5 @@ public interface IFuncionarioDao {
 	int insertAdmin(Connection connection, Funcionario funcionario);
 	int borrarAdmin(Connection connection, String nick);
 	Funcionario findByNick(Connection connection, String nick);
+	int modificarFuncionario(Connection connection, Funcionario funcionario);
 }

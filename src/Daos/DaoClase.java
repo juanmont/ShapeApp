@@ -19,6 +19,7 @@ public class DaoClase implements IClaseDao{
 			clase.setId(objetoEncontrado.getInt("id"));
 			clase.setIdEntrenador(objetoEncontrado.getString("id_entrenador"));
 			clase.setTipo(objetoEncontrado.getString("clase"));
+			clase.setClase(objetoEncontrado.getString("tipo"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -59,12 +60,13 @@ public class DaoClase implements IClaseDao{
 		int result=0;
 		try{
 			insertClase=connection.prepareStatement("INSERT INTO clase"
-					+ "(id_entrenador, id, clase)"
-					+ " VALUES (?,?,?)");
+					+ "(id_entrenador, id, clase, tipo)"
+					+ " VALUES (?,?,?,?)");
 			//asociamos el valor que queremos buscar
 			insertClase.setString(1, clase.getIdEntrenador());
 			insertClase.setInt(2, clase.getId());
 			insertClase.setString(3, clase.getTipo().toString());
+			insertClase.setString(4, clase.getClase().toString());
 			result=insertClase.executeUpdate();
 			connection.commit();
 		} catch (TransferException e) {

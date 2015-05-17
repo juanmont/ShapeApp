@@ -126,6 +126,43 @@ public class DaoFuncionario implements IFuncionarioDao{
 		}
 		return result;
 	}
+	
+	public int modificarFuncionario(Connection connection, Funcionario funcionario){
+		PreparedStatement updateUsuario=null;
+		PreparedStatement updateAdmin=null;
+		int result=0;
+		try{
+			updateUsuario=connection.prepareStatement("UPDATE usuario "
+					+ "SET nombre = ?, apellido = ?, tlf = ?,"
+					+ " DNI = ?, Pass = ?, sexo = ?, email = ?, direccion = ?"
+					+ " WHERE nick = ?");
+			//asociamos el valor que queremos buscar
+			updateUsuario.setString(1, funcionario.getNombre());
+			updateUsuario.setString(2, funcionario.getApellidos());
+			updateUsuario.setString(3, funcionario.getTelefono());
+			updateUsuario.setString(4, funcionario.getDNI());
+			updateUsuario.setString(5, funcionario.getPass());
+			updateUsuario.setString(6, funcionario.getSexo().toString());
+			updateUsuario.setString(7, funcionario.getEmail());
+			updateUsuario.setString(8, funcionario.getDireccion());
+			updateUsuario.setString(9, funcionario.getNick());
+			result=updateUsuario.executeUpdate();
+			connection.commit();
+			updateAdmin=connection.prepareStatement("UPDATE funcionario "
+					+ "SET entrada = ?, salida = ?, sueldo = ? "
+					+ "WHERE nick = ?");
+			updateAdmin.setString(1, funcionario.getHoraEntrada());
+			updateAdmin.setString(2, funcionario.getHoraSalida());
+			updateAdmin.setDouble(3, funcionario.getSueldo());
+			updateAdmin.setString(4, funcionario.getNick());
+		} catch (TransferException e) {
+			e.printStackTrace();
+		}catch(SQLException e){
+			//throw new DaoException("Error en la Insercion");
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public Funcionario findByNick(Connection connection, String nick) {

@@ -7,8 +7,10 @@
 package VentanaGrafica;
 
 import javax.sound.midi.MidiDevice.Info;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 
+import transfers.Instalaciones;
 import enums.PistaEnum;
 import Control.ControladorInstalaciones;
 
@@ -17,13 +19,17 @@ import Control.ControladorInstalaciones;
  * @author juanjose
  */
 public class AltaInstalacion extends javax.swing.JPanel {
-	ControladorInstalaciones controlInstalaciones;
+	private ControladorInstalaciones controlInstalaciones;
+	private Instalaciones instalacion;
+	
     /** 
      * Creates new form AltaPista
      */
     public AltaInstalacion(ControladorInstalaciones controladorInst) {
     	controlInstalaciones = controladorInst;
+    	instalacion = new Instalaciones();
         initComponents();
+        this.setVisible(true);
     }
 
     /**
@@ -36,13 +42,13 @@ public class AltaInstalacion extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        jlbPista = new javax.swing.JLabel();
+        jlbInstalacion = new javax.swing.JLabel();
         jlbTipo = new javax.swing.JLabel();
         jlbNumero = new javax.swing.JLabel();
         chkCubierta = new javax.swing.JRadioButton();
         chkExterior = new javax.swing.JRadioButton();
         jcbTipo = new javax.swing.JComboBox();
-        jtfNumero = new javax.swing.JTextField();
+        jtfNumero = new JFormattedTextField();
         btGuardar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
 
@@ -50,8 +56,8 @@ public class AltaInstalacion extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(153, 204, 255));
 
-        jlbPista.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jlbPista.setText("PISTA");
+        jlbInstalacion.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jlbInstalacion.setText("Instalación:");
 
         jlbTipo.setText("Tipo");
 
@@ -65,7 +71,7 @@ public class AltaInstalacion extends javax.swing.JPanel {
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Futbol7", "Futbol11", "Baloncesto", "Tenis", "Padel" }));
 
-        jtfNumero.setText("0");
+        jtfNumero.setValue(0);
 
         btGuardar.setText("GUARDAR");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +93,7 @@ public class AltaInstalacion extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(178, 178, 178)
-                .addComponent(jlbPista)
+                .addComponent(jlbInstalacion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -113,7 +119,7 @@ public class AltaInstalacion extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbPista)
+                .addComponent(jlbInstalacion)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -143,9 +149,12 @@ public class AltaInstalacion extends javax.swing.JPanel {
     			tipo = PistaEnum.CUBIERTA;
     		else 
     			tipo = PistaEnum.EXTERIOR;
-    		if(controlInstalaciones.AltaInstalacion(jtfNumero.getText(), jcbTipo.getSelectedItem().toString(), tipo))
+    		if(controlInstalaciones.AltaInstalacion(jtfNumero.getText(), jcbTipo.getSelectedItem().toString(), tipo)) {
+    			instalacion.setTipo(jcbTipo.getSelectedItem().toString());
+    			instalacion.setNumero((int) jtfNumero.getValue());
+    			instalacion.setPista(tipo.toString());
     			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
-    		else
+    		} else
     			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar la instalacion", "ERROR", JOptionPane.ERROR_MESSAGE);		
     	}
     	else
@@ -169,8 +178,8 @@ public class AltaInstalacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox jcbTipo;
     private javax.swing.JLabel jlbNumero;
-    private javax.swing.JLabel jlbPista;
+    private javax.swing.JLabel jlbInstalacion;
     private javax.swing.JLabel jlbTipo;
-    private javax.swing.JTextField jtfNumero;
+    private javax.swing.JFormattedTextField jtfNumero;
     // End of variables declaration//GEN-END:variables
 }

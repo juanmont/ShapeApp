@@ -75,6 +75,29 @@ public class DaoMaterial implements IMaterialDao{
 		}
 		return claseList;
 	}
+	
+	public int modificarMaterial(Connection connection, Material material){
+		PreparedStatement insertSocio=null;
+		int result=0;
+		try{
+			insertSocio=connection.prepareStatement("UPDATE material "
+					+ "SET descripcion = ?, tipo = ?, nombre = ?"
+					+ " WHERE id = ?");
+			//asociamos el valor que queremos buscar
+			insertSocio.setString(1, material.getDescripcion());
+			insertSocio.setString(2, material.getTipo().toString());
+			insertSocio.setString(3, material.getNombre());
+			insertSocio.setInt(4, material.getId());
+			result=insertSocio.executeUpdate();
+			connection.commit();
+		} catch (TransferException e) {
+			e.printStackTrace();
+		}catch(SQLException e){
+			//throw new DaoException("Error en la Insercion");
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	@Override
 	public int insertMaterial(Connection connection, Material material) {
