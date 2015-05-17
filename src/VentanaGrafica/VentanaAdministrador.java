@@ -69,8 +69,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-    	
-    	panelAdmin = new JPanel();
+
         jLabel1 = new javax.swing.JLabel();
         jlbAdministrador = new javax.swing.JLabel();
         btVerUsers = new javax.swing.JButton();
@@ -80,7 +79,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         btSalir = new javax.swing.JButton();
         btAñadirUsuario = new javax.swing.JButton();
         btAñadirPersonal = new javax.swing.JButton();
-        btAñadirInstalacion = new javax.swing.JButton();
+        btAñadirPista = new javax.swing.JButton();
         btVerInstalaciones = new javax.swing.JButton();
         btAniadirMaterial = new javax.swing.JButton();
         PanelLista = new javax.swing.JPanel();
@@ -88,6 +87,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         Lista = new javax.swing.JList();
         btVer = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
+        bVerClases = new javax.swing.JButton();
+        bAnadirClase = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -160,12 +161,12 @@ public class VentanaAdministrador extends javax.swing.JPanel {
             }
         });
 
-        btAñadirInstalacion.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        btAñadirInstalacion.setForeground(new java.awt.Color(102, 102, 102));
-        btAñadirInstalacion.setText("Añadir Instalación");
-        btAñadirInstalacion.addActionListener(new java.awt.event.ActionListener() {
+        btAñadirPista.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        btAñadirPista.setForeground(new java.awt.Color(102, 102, 102));
+        btAñadirPista.setText("Añadir Pista");
+        btAñadirPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAñadirInstalacionActionPerformed(evt);
+                actionPerformed(evt);
             }
         });
 
@@ -241,24 +242,34 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
+        bVerClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        bVerClases.setForeground(new java.awt.Color(102, 102, 102));
+        bVerClases.setText("Ver Clases");
+
+        bAnadirClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        bAnadirClase.setForeground(new java.awt.Color(102, 102, 102));
+        bAnadirClase.setText("Añadir Clase");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btVerUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btAniadirMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(btAñadirPista, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                    .addComponent(btSalir)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(bVerClases, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btAñadirPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btVerMateriales, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btVerFuncionarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btEntrenadores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btAñadirUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btVerInstalaciones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btVerUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAniadirMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAñadirInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btSalir))
+                    .addComponent(bAnadirClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -270,10 +281,13 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jlbAdministrador)
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlbAdministrador)
+                        .addGap(17, 17, 17)
+                        .addComponent(PanelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
                         .addComponent(btVerUsers)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btVerFuncionarios)
@@ -283,17 +297,20 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                         .addComponent(btVerMateriales)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btVerInstalaciones)
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bVerClases)
+                        .addGap(8, 8, 8)
                         .addComponent(btAñadirUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAniadirMaterial)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAñadirPersonal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAñadirInstalacion)
-                        .addGap(17, 17, 17)
-                        .addComponent(btSalir))
-                    .addComponent(PanelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btAñadirPista)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bAnadirClase)
+                        .addGap(5, 5, 5)
+                        .addComponent(btSalir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -419,9 +436,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList Lista;
     private javax.swing.JPanel PanelLista;
+    private javax.swing.JButton bAnadirClase;
+    private javax.swing.JButton bVerClases;
     private javax.swing.JButton btAniadirMaterial;
     private javax.swing.JButton btAñadirPersonal;
-    private javax.swing.JButton btAñadirInstalacion;
+    private javax.swing.JButton btAñadirPista;
     private javax.swing.JButton btAñadirUsuario;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEntrenadores;
