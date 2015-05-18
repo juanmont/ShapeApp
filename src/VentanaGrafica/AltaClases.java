@@ -4,12 +4,12 @@ package VentanaGrafica;
  *
  * @author juanjose
  */
-public class PanelClases extends javax.swing.JPanel {
+public class AltaClases extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelClases
      */
-    public PanelClases() {
+    public AltaClases() {
         initComponents();
     }
 

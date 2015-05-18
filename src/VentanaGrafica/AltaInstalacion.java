@@ -50,7 +50,6 @@ public class AltaInstalacion extends javax.swing.JPanel {
         jcbTipo = new javax.swing.JComboBox();
         jtfNumero = new JFormattedTextField();
         btGuardar = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
 
         jLabel5.setText("jLabel5");
 
@@ -80,13 +79,6 @@ public class AltaInstalacion extends javax.swing.JPanel {
             }
         });
 
-        btCancelar.setText("CANCELAR");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,8 +103,7 @@ public class AltaInstalacion extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkExterior)
-                    .addComponent(chkCubierta)
-                    .addComponent(btCancelar))
+                    .addComponent(chkCubierta))
                 .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
@@ -133,8 +124,7 @@ public class AltaInstalacion extends javax.swing.JPanel {
                             .addComponent(chkExterior))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btGuardar)
-                            .addComponent(btCancelar)))
+                            .addComponent(btGuardar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(chkCubierta)))
@@ -169,9 +159,6 @@ public class AltaInstalacion extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btCancelarActionPerformed
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCancelar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JRadioButton chkCubierta;
     private javax.swing.JRadioButton chkExterior;

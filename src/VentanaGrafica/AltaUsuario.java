@@ -81,7 +81,6 @@ public class AltaUsuario extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void initComponents() {
 
-        btCancelar = new javax.swing.JButton();
         jlbApellidos = new javax.swing.JLabel();
         jrMaculino = new javax.swing.JRadioButton();
         jlbDNI = new javax.swing.JLabel();
@@ -107,13 +106,6 @@ public class AltaUsuario extends javax.swing.JPanel {
         jcbTipo = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(153, 204, 255));
-
-        btCancelar.setText("CANCELAR");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
-            }
-        });
 
         jlbApellidos.setText("Apellidos");
 
@@ -172,9 +164,7 @@ public class AltaUsuario extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
                                 .addComponent(btGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                                .addComponent(btCancelar)
-                                .addGap(66, 66, 66))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -266,8 +256,7 @@ public class AltaUsuario extends javax.swing.JPanel {
                     .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btGuardar)
-                    .addComponent(btCancelar))
+                    .addComponent(btGuardar))
                 .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -329,7 +318,6 @@ public class AltaUsuario extends javax.swing.JPanel {
 
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCancelar;
     private javax.swing.JButton btGuardar;
     private javax.swing.JComboBox jcbTipo;
     private javax.swing.JLabel jlTipo;

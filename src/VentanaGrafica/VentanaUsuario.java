@@ -22,11 +22,11 @@ import Control.ControladorUsuarios;
  */
 public class VentanaUsuario extends javax.swing.JPanel {
 
-	ControladorAlquilerCompra controlAlquilerCompra;
-	ControladorMateriales controlMateriales;
-	ControladorClases controlClases;
-	ControladorInstalaciones controlInstalaciones;
-	ControladorUsuarios controlUsuarios;
+	private ControladorAlquilerCompra controlAlquilerCompra;
+	private ControladorMateriales controlMateriales;
+	private ControladorClases controlClases;
+	private ControladorInstalaciones controlInstalaciones;
+	private ControladorUsuarios controlUsuarios;
 	private JFrame frame;
 	private Connection con;
 	

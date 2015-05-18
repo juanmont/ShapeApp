@@ -40,7 +40,6 @@ public class AltaMaterial extends javax.swing.JPanel {
         jtfNombre = new javax.swing.JTextField();
         jcbTipo = new javax.swing.JComboBox();
         bGuardar = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -67,13 +66,6 @@ public class AltaMaterial extends javax.swing.JPanel {
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bGuardarActionPerformed(evt);
-            }
-        });
-
-        btCancelar.setText("Cancelar");
-        btCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCancelarActionPerformed(evt);
             }
         });
 
@@ -105,8 +97,6 @@ public class AltaMaterial extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(bGuardar)
-                .addGap(78, 78, 78)
-                .addComponent(btCancelar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,8 +117,7 @@ public class AltaMaterial extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bGuardar)
-                    .addComponent(btCancelar))
+                    .addComponent(bGuardar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -149,7 +138,6 @@ public class AltaMaterial extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bGuardar;
-    private javax.swing.JButton btCancelar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbTipo;
     private javax.swing.JLabel jlbDescripcion;

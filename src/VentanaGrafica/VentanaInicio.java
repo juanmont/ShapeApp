@@ -23,11 +23,13 @@ public class VentanaInicio extends javax.swing.JPanel {
 	private JFrame frame;
 	ControladorUsuarios control;
 	Connection c;
+	VentanaPrincipal ventanaPricipal;
     /**
      * Creates new form VentanaInicio
      */
     
-    public VentanaInicio(Connection con, ControladorUsuarios cont) {
+    public VentanaInicio(VentanaPrincipal vPrincipal, Connection con, ControladorUsuarios cont) {
+    	ventanaPricipal = vPrincipal;
     	this.c = con;
     	control = cont;
         initComponents();
@@ -35,9 +37,6 @@ public class VentanaInicio extends javax.swing.JPanel {
         this.frame.setVisible(true);*/
     }
     
-   /* public void setFrame(boolean visible){
-    	this.frame.setVisible(visible);
-    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,11 +65,6 @@ public class VentanaInicio extends javax.swing.JPanel {
 
         //jtfNombreUser.setText("NombreUsuario");
         jtfNombreUser.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jtfNombreUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreUserActionPerformed(evt);
-            }
-        });
 
         jlbUsuario.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         jlbUsuario.setText("USUARIO");
@@ -150,10 +144,6 @@ public class VentanaInicio extends javax.swing.JPanel {
                 .addGap(71, 71, 71))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jtfNombreUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNombreUserActionPerformed
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
         if((!jtfNombreUser.getText().isEmpty()) && (!jtfContraseña.getText().isEmpty())) {
