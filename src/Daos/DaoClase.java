@@ -79,7 +79,7 @@ public class DaoClase implements IClaseDao{
 	}
 
 	@Override
-	public int borrarClase(Connection connection, String id) {
+	public int borrarClase(Connection connection, int id) {
 		// TODO Auto-generated method stub
 		PreparedStatement borrarClase=null;
 		int result=0;
@@ -88,7 +88,7 @@ public class DaoClase implements IClaseDao{
 					+ "delete from clase "
 					+ "where id = ?");
 			//asociamos el valor que queremos buscar
-			borrarClase.setString(1, id);
+			borrarClase.setInt(1, id);
 			//ejecutamos la consulta
 			result=borrarClase.executeUpdate();
 			connection.commit();
@@ -126,5 +126,56 @@ public class DaoClase implements IClaseDao{
 		}
 		return clase;
 	}
+	
+	
 
+	@Override
+	public List<Clases> findAll(Connection connection) {
+		// TODO Auto-generated method stub
+		Clases clase=null;
+		List<Clases> claseList=new ArrayList<Clases>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from clase");
+			//asociamos el valor que queremos buscar
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+				clase=fillClase(objetoEncontrado);
+				claseList.add(clase);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return claseList;
+	}
+
+	@Override
+	public List<Clases> findByIndividualGrupo(Connection connection, String individual) {
+		Clases clase=null;
+		List<Clases> claseList=new ArrayList<Clases>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from clase where tipo like ?");
+			//asociamos el valor que queremos buscar
+			buscarName.setString(1,individual);
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+				clase=fillClase(objetoEncontrado);
+				claseList.add(clase);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return claseList;
+	}
 }
