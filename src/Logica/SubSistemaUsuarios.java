@@ -92,17 +92,16 @@ public class SubSistemaUsuarios implements FachadaUsuarios {
 	public ArrayList<Usuario> listaUsuarios() {
 			return lista;
 	}
-
-	@Override
-	public UsuarioEnum tipoUsuario(Connection c, String user, String pass) {
-		if(adminDao.findByNick(c, user) != null && adminDao.findByNick(c, user).getPass().equalsIgnoreCase(pass)) {
-			return UsuarioEnum.Admin;
-		} else if (funDao.findByNick(c, user) != null && funDao.findByNick(c, user).getPass().equalsIgnoreCase(pass)) {
-			return UsuarioEnum.Funcionario;
-		} else if (socDao.findByNick(c, user) != null && socDao.findByNick(c, user).getPass().equalsIgnoreCase(pass)) {
-			return UsuarioEnum.Socio;
-		} else {
-			return null;
-		}
+	
+	public Socio tipoUsuarioSocio(Connection c, String user, String pass){
+		return socDao.findByNick(c, user);
+	}
+	
+	public Admin tipoUsuarioAdmin(Connection c, String user, String pass){
+		return adminDao.findByNick(c, user);
+	}
+	
+	public Funcionario tipoUsuarioFuncionario(Connection c, String user, String pass){
+		return funDao.findByNick(c, user);
 	}
 }

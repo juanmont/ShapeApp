@@ -15,8 +15,12 @@ public interface FachadaUsuarios {
 		
 	public ArrayList<Usuario> listaUsuarios();
 	
-	public UsuarioEnum tipoUsuario(Connection con, String user, String pass);
+	public Funcionario tipoUsuarioFuncionario(Connection c, String user, String pass);
 
+	public Socio tipoUsuarioSocio(Connection c, String user, String pass);
+	
+	public Admin tipoUsuarioAdmin(Connection c, String user, String pass);
+	
 	public boolean altaUsuario(Socio s, Admin ad, Funcionario f);
 
 	public Usuario verUsuario(Socio s, Admin ad, Funcionario f);
