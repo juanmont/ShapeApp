@@ -25,10 +25,10 @@ public class VentanaPrincipal extends JFrame{
 	public VentanaPrincipal(Connection c) {
 		// TODO Auto-generated constructor stub
 		this.con = c;
-		controlUsuarios = new ControladorUsuarios(con);
+		controlUsuarios = new ControladorUsuarios(c);
 		controlInstalaciones = new ControladorInstalaciones(c);
 		controlClases = new ControladorClases();
-		controlMateriales = new ControladorMateriales();
+		controlMateriales = new ControladorMateriales(c);
 		controlAlquilerCompra = new ControladorAlquilerCompra();
 		login = new VentanaInicio(this,con, controlUsuarios);
 		this.setLayout(new BorderLayout());

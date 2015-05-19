@@ -140,9 +140,6 @@ public class AltaInstalacion extends javax.swing.JPanel {
     		else 
     			tipo = PistaEnum.EXTERIOR;
     		if(controlInstalaciones.AltaInstalacion(jtfNumero.getText(), jcbTipo.getSelectedItem().toString(), tipo)) {
-    			instalacion.setTipo(jcbTipo.getSelectedItem().toString());
-    			instalacion.setNumero((int) jtfNumero.getValue());
-    			instalacion.setPista(tipo.toString());
     			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
     		} else
     			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar la instalacion", "ERROR", JOptionPane.ERROR_MESSAGE);		
@@ -154,10 +151,6 @@ public class AltaInstalacion extends javax.swing.JPanel {
     private boolean compruebaCampos(){
     	return jtfNumero.getText() != "" && chkCubierta.isSelected() || chkExterior.isSelected();
     }
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCancelarActionPerformed
 
     private javax.swing.JButton btGuardar;
     private javax.swing.JRadioButton chkCubierta;

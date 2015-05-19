@@ -8,6 +8,7 @@ package VentanaGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 
 import enums.UsuarioEnum;
 import transfers.Admin;
+import transfers.Clases;
 import transfers.Entrenador;
 import transfers.Funcionario;
 import transfers.Instalaciones;
@@ -61,6 +63,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 		panelUsuario = null;
 		panelMaterial = null;
 		panelInstalacion = null;
+		panelClases = null;
         initComponents();
         /*this.frame.add(this);
         this.frame.setVisible(true);*/
@@ -174,7 +177,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 
         btAñadirPista.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         btAñadirPista.setForeground(new java.awt.Color(102, 102, 102));
-        btAñadirPista.setText("Añadir Pista");
+        btAñadirPista.setText("Añadir Instalacion");
         btAñadirPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAñadirInstalacionActionPerformed(evt);
@@ -202,10 +205,21 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         bVerClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bVerClases.setForeground(new java.awt.Color(102, 102, 102));
         bVerClases.setText("Ver Clases");
+        bVerClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bVerClasesActionPerformed(evt);
+            }
+        });
+
 
         bAnadirClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bAnadirClase.setForeground(new java.awt.Color(102, 102, 102));
         bAnadirClase.setText("Añadir Clase");
+        bAnadirClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bAnadirClaseActionPerformed(evt);
+            }
+        });
 
         panelInterno.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -348,6 +362,34 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }
+    
+    private void bAnadirClaseActionPerformed(ActionEvent evt) {
+    	panelClases = new AltaClases();
+   	 	PanelLista.setVisible(false);
+   	 	quitaPaneles();
+        panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelClases.setPreferredSize(new Dimension(400,300));
+        panelInterno.add(panelClases, BorderLayout.CENTER);
+        panelClases.setVisible(true);
+		
+	}
+    
+    private void bVerClasesActionPerformed(ActionEvent evt) {
+    	quitaPaneles();
+    	panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);
+    	PanelLista.setVisible(true);    	
+    	DefaultListModel<Clases> modeloLista = new DefaultListModel<Clases>();
+    	ArrayList<Clases> listaUsuarios = controlClases.listaClases();
+    	for(int i = 0; i < listaUsuarios.size(); i++){
+    		modeloLista.add(i, listaUsuarios.get(i));
+    	}
+    	Lista.removeAll();
+        Lista.setModel(modeloLista);
+		
+	}
 
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {
     	System.exit(0);
@@ -399,7 +441,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	panelInterno.setLayout(new BorderLayout());
         panelInterno.setSize(600, 600);
         panelInterno.add(PanelLista, BorderLayout.CENTER);
-    	PanelLista.setVisible(true);    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	PanelLista.setVisible(true);    	
+    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
     	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Socio);
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
@@ -413,7 +456,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	panelInterno.setLayout(new BorderLayout());
         panelInterno.setSize(600, 600);
         panelInterno.add(PanelLista, BorderLayout.CENTER);
-    	PanelLista.setVisible(true);    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	PanelLista.setVisible(true);    	
+    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
     	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Funcionario);
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
@@ -427,7 +471,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	panelInterno.setLayout(new BorderLayout());
         panelInterno.setSize(600, 600);
         panelInterno.add(PanelLista, BorderLayout.CENTER);
-    	PanelLista.setVisible(true);    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	PanelLista.setVisible(true);    	
+    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
     	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Entrenador);
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
@@ -517,6 +562,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     		panelMaterial.setVisible(false);
     	if(panelInstalacion != null)
     		panelInstalacion.setVisible(false);
+    	if(panelClases != null)
+    		panelClases.setVisible(false);
     }
 
 
@@ -544,5 +591,6 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private AltaInstalacion panelInstalacion;
     private AltaUsuario panelUsuario;
     private AltaMaterial panelMaterial;
+    private AltaClases panelClases;
     // End of variables declaration//GEN-END:variables
 }

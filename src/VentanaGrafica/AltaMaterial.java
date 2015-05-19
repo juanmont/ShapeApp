@@ -6,6 +6,9 @@
 
 package VentanaGrafica;
 
+import javax.sound.sampled.Line.Info;
+import javax.swing.JOptionPane;
+
 import Control.ControladorMateriales;
 
 /**
@@ -123,17 +126,19 @@ public class AltaMaterial extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {
-       	if(compruebaCampos())
-       		controlMateriales.AltaMaterial(jtfNombre.getText(), jtDescripcion.getText(), jcbTipo.getSelectedItem().toString());
+       	if(compruebaCampos()){
+       		if(controlMateriales.AltaMaterial(jtfNombre.getText(), jtDescripcion.getText(), jcbTipo.getSelectedItem().toString()))
+       			JOptionPane.showMessageDialog(bGuardar, "Guardado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
+       		else
+       			JOptionPane.showMessageDialog(bGuardar, "Error al dar de alta el material", "ERROR", JOptionPane.ERROR_MESSAGE);
+       	}
+       	else
+   			JOptionPane.showMessageDialog(bGuardar, "Introduce todos los datos", "ERROR", JOptionPane.ERROR_MESSAGE);		
     }
     
     private boolean compruebaCampos(){
     	return (jtDescripcion.getText() != "" && jtfNombre.getText() != "");
     }
-
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

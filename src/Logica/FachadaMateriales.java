@@ -1,14 +1,18 @@
 package Logica;
 
+import java.util.ArrayList;
+
+import transfers.Material;
+
 public interface FachadaMateriales {
 
-	public void altaMaterial();
+	public boolean altaMaterial(Material mat);
 	
-	public void bajaMaterial();
+	public boolean bajaMaterial(Material mat);
 	
-	public void modificarMaterial();
+	public boolean modificarMaterial(Material mat);
 	
-	public void verMaterial();
+	public Material verMaterial(Material mat);
 	
-	public void listaMateriales();
+	public ArrayList<Material> listaMateriales();
 }

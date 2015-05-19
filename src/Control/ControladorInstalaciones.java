@@ -14,8 +14,10 @@ public class ControladorInstalaciones {
 	FachadaInstalaciones instalaciones;
 	Instalaciones ins;
 	
-	public ControladorInstalaciones(Instalaciones insta) {
+	public ControladorInstalaciones(Instalaciones insta, Connection con) {
+		this.c = con;
 		this.ins = insta;
+		instalaciones = new SubSistemaInstalaciones(c);
 	}
 	
 	public ControladorInstalaciones(Connection con) {
@@ -33,12 +35,11 @@ public class ControladorInstalaciones {
 		
 	}
 
-	public boolean AltaInstalacion(String text, String string, PistaEnum tipo) {
-		if (text != null && string != null && tipo != null) {
-			instalaciones.altaInstalacion(ins);
-			return true;
-		} else
-			return false;
+	public boolean AltaInstalacion(String numero, String tipoDeporte, PistaEnum tipoPista) {
+		ins.setNumero(Integer.parseInt(numero));
+		ins.setTipo(tipoDeporte);
+		ins.setPista(tipoPista.toString());
+		return instalaciones.altaInstalacion(ins);
 	}
 
 	public ArrayList<Instalaciones> verHoras() {
