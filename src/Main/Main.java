@@ -8,9 +8,6 @@ import Daos.Conexion;
 
 public class Main {
 	
-	static VentanaInicio login;
-	Connection con;
-	
 	public static void main(String[] args){
 		Connection con = Conexion.obtenerConexion();
 		new VentanaPrincipal(con);

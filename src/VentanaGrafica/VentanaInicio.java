@@ -11,6 +11,7 @@ import java.sql.Connection;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import enums.UsuarioEnum;
 import Control.ControladorUsuarios;
 import Daos.Conexion;
 
@@ -147,8 +148,18 @@ public class VentanaInicio extends javax.swing.JPanel {
 
     private void btEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntrarActionPerformed
         if((!jtfNombreUser.getText().isEmpty()) && (!jtfContraseña.getText().isEmpty())) {
-          	control.login(jtfNombreUser.getText(), jtfContraseña.getText());
-        	this.setVisible(false);
+          	UsuarioEnum tipo = control.login(jtfNombreUser.getText(), jtfContraseña.getText());
+          	if(tipo != null){
+          		
+          		if(tipo == UsuarioEnum.Admin)
+          			ventanaPricipal.cambiaVentanaAdmin();
+          		else if(tipo == UsuarioEnum.Socio)
+          			ventanaPricipal.cambiaVentanaSocio();
+          		else if(tipo == UsuarioEnum.Funcionario)
+          			ventanaPricipal.cambiaVentanaFuncionario();
+          	}
+          	else
+          		JOptionPane.showMessageDialog(null,  "Error en nombre de usuario o contraseña.","ERROR", JOptionPane.ERROR_MESSAGE);
         }
         else JOptionPane.showMessageDialog(null,  "Error: Tienes que rellenar ambos campos.","", JOptionPane.ERROR_MESSAGE);
     }

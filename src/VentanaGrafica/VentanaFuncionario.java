@@ -33,12 +33,15 @@ public class VentanaFuncionario extends javax.swing.JPanel {
 	ControladorUsuarios controlUsuarios;
 	private JFrame frame;
 	private Connection con;
+	private String nick;
 	
     /**
      * Creates new form VentanaFuncionario
+     * @param nick 
      */
     public VentanaFuncionario(Connection c, ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
-			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu) {
+			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu, String nick) {
+		this.nick = nick;
     	con = c;
     	controlUsuarios = controlUsu;
     	controlAlquilerCompra = controlAlqComp;
@@ -65,6 +68,7 @@ public class VentanaFuncionario extends javax.swing.JPanel {
         ContEntrenador = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
         panelInterno = new javax.swing.JPanel();
+        panelListas = new javax.swing.JPanel();
         scrListaDeportes = new javax.swing.JScrollPane();
         listaDeportes = new javax.swing.JList();
         scrListaHoras = new javax.swing.JScrollPane();
@@ -131,6 +135,8 @@ public class VentanaFuncionario extends javax.swing.JPanel {
 
         panelInterno.setBackground(new java.awt.Color(153, 204, 255));
 
+        panelListas.setBackground(new java.awt.Color(153, 204, 255));
+
         listaDeportes.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Futbol7", "Futbol11", "Baloncesto", "Tenis", "Padel" };
             public int getSize() { return strings.length; }
@@ -162,41 +168,63 @@ public class VentanaFuncionario extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout panelInternoLayout = new javax.swing.GroupLayout(panelInterno);
-        panelInterno.setLayout(panelInternoLayout);
-        panelInternoLayout.setHorizontalGroup(
-            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInternoLayout.createSequentialGroup()
-                .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInternoLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelListasLayout = new javax.swing.GroupLayout(panelListas);
+        panelListas.setLayout(panelListasLayout);
+        panelListasLayout.setHorizontalGroup(
+            panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelListasLayout.createSequentialGroup()
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelListasLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(Deportes)
+                        .addGap(91, 91, 91)
+                        .addComponent(HorasLibre))
+                    .addGroup(panelListasLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(scrListaDeportes, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(scrListaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(btVerHoras))
-                    .addGroup(panelInternoLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(Deportes)
-                        .addGap(91, 91, 91)
-                        .addComponent(HorasLibre)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addComponent(btVerHoras)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
-        panelInternoLayout.setVerticalGroup(
-            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInternoLayout.createSequentialGroup()
+        panelListasLayout.setVerticalGroup(
+            panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelListasLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(btVerHoras)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInternoLayout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
-                .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelListasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Deportes)
                     .addComponent(HorasLibre))
-                .addGap(5, 5, 5)
-                .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(scrListaHoras)
-                    .addComponent(scrListaDeportes)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrListaDeportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrListaHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 30, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelInternoLayout = new javax.swing.GroupLayout(panelInterno);
+        panelInterno.setLayout(panelInternoLayout);
+        panelInternoLayout.setHorizontalGroup(
+            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 498, Short.MAX_VALUE)
+            .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelInternoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        panelInternoLayout.setVerticalGroup(
+            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 217, Short.MAX_VALUE)
+            .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelInternoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -206,24 +234,25 @@ public class VentanaFuncionario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(CompraAbonoPisc, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(CompraAbonoGym, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Salir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(AlqPista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(AlqMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ContEntrenador)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addComponent(CompraAbonoPisc, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(CompraAbonoGym, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Salir))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(AlqPista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(AlqMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ContEntrenador)
+                            .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,9 +262,9 @@ public class VentanaFuncionario extends javax.swing.JPanel {
                     .addComponent(AlqPista)
                     .addComponent(AlqMaterial)
                     .addComponent(ContEntrenador))
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
                 .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CompraAbonoPisc)
                     .addComponent(CompraAbonoGym)
@@ -296,6 +325,7 @@ public class VentanaFuncionario extends javax.swing.JPanel {
     private javax.swing.JList listaDeportes;
     private javax.swing.JList listaHoras;
     private javax.swing.JPanel panelInterno;
+    private javax.swing.JPanel panelListas;
     private javax.swing.JScrollPane scrListaDeportes;
     private javax.swing.JScrollPane scrListaHoras;
     // End of variables declaration//GEN-END:variables

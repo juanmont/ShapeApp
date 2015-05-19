@@ -6,6 +6,8 @@
 
 package VentanaGrafica;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -39,18 +41,23 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 	ControladorUsuarios controlUsuarios;
 	private JFrame frame;
 	private Connection con;
-	
+	private String nick;
     /**
      * Creates new form VentanaAdministrador
+     * @param nick 
      */
     public VentanaAdministrador(Connection c, ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
-			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu) {
+			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu, String nick) {
+    	this.nick = nick;
     	con = c;
     	controlAlquilerCompra = controlAlqComp;
 		controlMateriales = controlMat;
 		controlClases = controlCla;
 		controlInstalaciones = controlInst;
 		controlUsuarios = controlUsu;
+		panelUsuario = null;
+		panelMaterial = null;
+		panelInstalacion = null;
         initComponents();
         /*this.frame.add(this);
         this.frame.setVisible(true);*/
@@ -82,13 +89,14 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         btAñadirPista = new javax.swing.JButton();
         btVerInstalaciones = new javax.swing.JButton();
         btAniadirMaterial = new javax.swing.JButton();
+        bVerClases = new javax.swing.JButton();
+        bAnadirClase = new javax.swing.JButton();
+        panelInterno = new javax.swing.JPanel();
         PanelLista = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Lista = new javax.swing.JList();
         btVer = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
-        bVerClases = new javax.swing.JButton();
-        bAnadirClase = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -166,7 +174,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         btAñadirPista.setText("Añadir Pista");
         btAñadirPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actionPerformed(evt);
+                btAñadirInstalacionActionPerformed(evt);
             }
         });
 
@@ -187,6 +195,16 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                 btAniadirMaterialActionPerformed(evt);
             }
         });
+
+        bVerClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        bVerClases.setForeground(new java.awt.Color(102, 102, 102));
+        bVerClases.setText("Ver Clases");
+
+        bAnadirClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        bAnadirClase.setForeground(new java.awt.Color(102, 102, 102));
+        bAnadirClase.setText("Añadir Clase");
+
+        panelInterno.setBackground(new java.awt.Color(153, 204, 255));
 
         PanelLista.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -220,21 +238,23 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         PanelListaLayout.setHorizontalGroup(
             PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelListaLayout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
-                .addComponent(btVer, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(btEliminar)
-                .addGap(59, 59, 59))
-            .addGroup(PanelListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGroup(PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelListaLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelListaLayout.createSequentialGroup()
+                        .addGap(0, 201, Short.MAX_VALUE)
+                        .addComponent(btVer, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(btEliminar)
+                        .addGap(59, 59, 59))))
         );
         PanelListaLayout.setVerticalGroup(
             PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminar)
@@ -242,13 +262,26 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                 .addGap(20, 20, 20))
         );
 
-        bVerClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        bVerClases.setForeground(new java.awt.Color(102, 102, 102));
-        bVerClases.setText("Ver Clases");
-
-        bAnadirClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        bAnadirClase.setForeground(new java.awt.Color(102, 102, 102));
-        bAnadirClase.setText("Añadir Clase");
+        javax.swing.GroupLayout panelInternoLayout = new javax.swing.GroupLayout(panelInterno);
+        panelInterno.setLayout(panelInternoLayout);
+        panelInternoLayout.setHorizontalGroup(
+            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 488, Short.MAX_VALUE)
+            .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelInternoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(11, 11, 11)))
+        );
+        panelInternoLayout.setVerticalGroup(
+            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelInternoLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(PanelLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -261,33 +294,31 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                     .addComponent(btAniadirMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(btAñadirPista, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(btSalir)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(bVerClases, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btAñadirPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btVerMateriales, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btVerFuncionarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEntrenadores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btAñadirUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btVerInstalaciones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bVerClases, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btAñadirPersonal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btVerMateriales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btVerFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btEntrenadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btAñadirUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btVerInstalaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bAnadirClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlbAdministrador)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(PanelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(85, 85, 85)
+                        .addComponent(jlbAdministrador))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jlbAdministrador)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlbAdministrador)
-                        .addGap(17, 17, 17)
-                        .addComponent(PanelLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
                         .addComponent(btVerUsers)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btVerFuncionarios)
@@ -313,7 +344,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                         .addComponent(btSalir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {
     	System.exit(0);
@@ -354,7 +385,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerUsersActionPerformed(java.awt.event.ActionEvent evt) {
-    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	quitaPaneles();
+    	panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);
+    	PanelLista.setVisible(true);    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
     	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Socio);
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
@@ -364,7 +399,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {
-    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	quitaPaneles();
+    	panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);
+    	PanelLista.setVisible(true);    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
     	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Funcionario);
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
@@ -374,7 +413,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {
-    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
+    	quitaPaneles();
+    	panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);
+    	PanelLista.setVisible(true);    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
     	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Entrenador);
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
@@ -384,6 +427,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerMaterialesActionPerformed(java.awt.event.ActionEvent evt) {
+    	quitaPaneles();
+    	panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);
+    	PanelLista.setVisible(true);
     	DefaultListModel<Material> modeloLista = new DefaultListModel<Material>();
     	ArrayList<Material> listaMateriales = controlMateriales.listaMateriales();
     	for(int i = 0; i < listaMateriales.size(); i++){
@@ -394,42 +442,71 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {
-    	String[] s = null;
-    	DefaultListModel<String[]> modeloLista = new DefaultListModel<String[]>();
+    	quitaPaneles();
+    	panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);
+    	PanelLista.setVisible(true);
+    	DefaultListModel<Instalaciones> modeloLista = new DefaultListModel<Instalaciones>();
     	ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.listaInstalaciones();
     	for(int i = 0; i < listaInstalaciones.size(); i++){
     		Instalaciones ist = listaInstalaciones.get(i);
-    		s[0] = ist.getPista().toString();
-    		s[1] = ist.getTipo().toString();
-    		modeloLista.add(i, s);
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
     }
 
     private void btAñadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
-    	 AltaUsuario panelUsuario = new AltaUsuario(false, controlUsuarios);
-         Lista.setVisible(false);
-         PanelLista.add(panelUsuario);
+    	 panelUsuario = new AltaUsuario(false, controlUsuarios);
+         PanelLista.setVisible(false);
+         quitaPaneles();
+         panelInterno.setLayout(new BorderLayout());
+         panelInterno.setSize(600, 600);
+         panelUsuario.setPreferredSize(new Dimension(400,300));
+         panelInterno.add(panelUsuario, BorderLayout.CENTER);
+         panelUsuario.setVisible(true);
     }
 
     private void btAniadirMaterialActionPerformed(java.awt.event.ActionEvent evt) {
-    	 AltaMaterial panelMaterial = new AltaMaterial(controlMateriales);
-         Lista.setVisible(false);
-         PanelLista.add(panelMaterial);
+    	 panelMaterial = new AltaMaterial(controlMateriales);
+    	 PanelLista.setVisible(false);
+    	 quitaPaneles();
+         panelInterno.setLayout(new BorderLayout());
+         panelInterno.setSize(600, 600);
+         panelMaterial.setPreferredSize(new Dimension(400,300));
+         panelInterno.add(panelMaterial, BorderLayout.CENTER);
+         panelMaterial.setVisible(true);
     }
 
     private void btAñadirPersonalActionPerformed(java.awt.event.ActionEvent evt) {
-    	  AltaUsuario panelUsuario = new AltaUsuario(true, controlUsuarios);
-          Lista.setVisible(false);
-          PanelLista.add(panelUsuario);
+    	  panelUsuario = new AltaUsuario(true, controlUsuarios);
+    	  PanelLista.setVisible(false);
+    	  quitaPaneles();
+          panelInterno.setLayout(new BorderLayout());
+          panelInterno.setSize(600, 600);
+          panelUsuario.setPreferredSize(new Dimension(400,300));
+          panelInterno.add(panelUsuario, BorderLayout.CENTER);
+          panelUsuario.setVisible(true);
     }
 
     private void btAñadirInstalacionActionPerformed(java.awt.event.ActionEvent evt) {
-        AltaInstalacion panelInstalacion = new AltaInstalacion(controlInstalaciones);
-        Lista.setVisible(false);
-        PanelLista.add(panelInstalacion);
-        //this.
+        panelInstalacion = new AltaInstalacion(controlInstalaciones);
+        PanelLista.setVisible(false);
+        quitaPaneles();
+        panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInstalacion.setPreferredSize(new Dimension(400,300));
+        panelInterno.add(panelInstalacion, BorderLayout.CENTER);
+        panelInstalacion.setVisible(true);
+    }
+    
+    private void quitaPaneles(){
+    	if(panelUsuario != null)
+    		panelUsuario.setVisible(false);
+    	if(panelMaterial != null)
+    		panelMaterial.setVisible(false);
+    	if(panelInstalacion != null)
+    		panelInstalacion.setVisible(false);
     }
 
 
@@ -453,6 +530,9 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlbAdministrador;
-    private JPanel panelAdmin;
+    private javax.swing.JPanel panelInterno;
+    private AltaInstalacion panelInstalacion;
+    private AltaUsuario panelUsuario;
+    private AltaMaterial panelMaterial;
     // End of variables declaration//GEN-END:variables
 }

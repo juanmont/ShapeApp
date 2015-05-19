@@ -29,13 +29,16 @@ public class VentanaUsuario extends javax.swing.JPanel {
 	private ControladorUsuarios controlUsuarios;
 	private JFrame frame;
 	private Connection con;
+	private String nick;
 	
     /**
      * Creates new form VentanaUsuario
      * @param c 
+     * @param nick 
      */
 	public VentanaUsuario(Connection c, ControladorAlquilerCompra controlAlqComp, ControladorMateriales controlMat,
-			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu) {
+			ControladorClases controlCla, ControladorInstalaciones controlInst, ControladorUsuarios controlUsu, String nick) {
+		this.nick = nick;
     	con = c;
     	controlUsuarios = controlUsu;
     	controlAlquilerCompra = controlAlqComp;
