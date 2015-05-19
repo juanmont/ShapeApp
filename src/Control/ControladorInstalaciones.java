@@ -21,6 +21,7 @@ public class ControladorInstalaciones {
 	}
 	
 	public ControladorInstalaciones(Connection con) {
+		ins = new Instalaciones();
 		this.c = con;
 	}
 
