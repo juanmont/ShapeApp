@@ -31,10 +31,6 @@ public class ControladorUsuarios {
 	private VentanaAdministrador va;
 	private VentanaFuncionario vf;
 	private VentanaUsuario vu;
-	private ControladorAlquilerCompra controlAlquilerCompra;
-	private ControladorMateriales controlMateriales;
-	private ControladorClases controlClases;
-	private ControladorInstalaciones controlInstalaciones;
 	private UsuarioEnum tipo;
 	private String nombre;
 	private String nick;
@@ -54,14 +50,8 @@ public class ControladorUsuarios {
 	}
 	
 
-	public void altaUsuario(Usuario socio, UsuarioEnum tipo) {
-		if(tipo == UsuarioEnum.Socio)
-			usuarios.altaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null));
-		else if(tipo == UsuarioEnum.Admin)
-			usuarios.altaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null));
-		else if(tipo == UsuarioEnum.Funcionario)
-			usuarios.altaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio));
-		
+	public void altaUsuario(Socio socio, Admin admin, Funcionario funcionario, Entrenador entrenador) {
+		usuarios.altaUsuario(socio, admin, funcionario, entrenador);
 	}
 
 	public UsuarioEnum login(String user, String pass) {

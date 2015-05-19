@@ -17,7 +17,8 @@ public class Socio extends Usuario{
 				+ getNombre() + ", getApellidos()=" + getApellidos()
 				+ ", getDNI()=" + getDNI() + ", getTelefono()=" + getTelefono()
 				+ ", getSexo()=" + getSexo() + ", getUsuario()=" + getNick()
-				+ ", getContraseña()=" + getPass() + ", getEmail()="
+				+ ", getContraseï¿½a()=" + getPass() + ", getEmail()="
 				+ getEmail() + ", getDireccion()=" + getDireccion() + "]";
 	}
+	
 }

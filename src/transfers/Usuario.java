@@ -94,4 +94,16 @@ public class Usuario {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	
+	public void rellenaDatos(Usuario user){
+		this.direccion = user.direccion;
+		this.apellidos = user.direccion;
+		this.DNI = user.DNI;
+		this.email = user.email;
+		this.nick = user.nick;
+		this.pass = user.pass;
+		this.sexo = user.sexo;
+		this.telefono = user.telefono;
+		this.nombre = user.nombre;
+	}
 }

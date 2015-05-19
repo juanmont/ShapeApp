@@ -83,8 +83,8 @@ public class DaoSocio implements ISocioDao{
 			connection.commit();
 			
 			insertSocio=connection.prepareStatement("INSERT INTO socio"
-			+ "(nick, nick_entrenador) VALUES "
-			+ "(?,?)");
+			+ "(nick) VALUES "
+			+ "(?)");
 			insertSocio.setString(1, socio.getNick());
 
 			//ejecutamos la consulta

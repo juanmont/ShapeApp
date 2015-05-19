@@ -6,10 +6,12 @@ import java.util.Vector;
 
 import enums.UsuarioEnum;
 import transfers.Admin;
+import transfers.Entrenador;
 import transfers.Funcionario;
 import transfers.Socio;
 import transfers.Usuario;
 import Daos.DaoAdmin;
+import Daos.DaoEntrenador;
 import Daos.DaoFuncionario;
 import Daos.DaoSocio;
 
@@ -17,6 +19,7 @@ public class SubSistemaUsuarios implements FachadaUsuarios {
 	private DaoAdmin adminDao;
 	private DaoFuncionario funDao;
 	private DaoSocio socDao;
+	private DaoEntrenador entDao;
 	private Connection con;
 	private ArrayList<Usuario> lista;
 
@@ -24,6 +27,7 @@ public class SubSistemaUsuarios implements FachadaUsuarios {
 		adminDao = new DaoAdmin();
 		funDao = new DaoFuncionario();
 		socDao = new DaoSocio();
+		entDao = new DaoEntrenador();
 		lista = new ArrayList<Usuario>();
 		this.con = con;
 	}
@@ -31,7 +35,7 @@ public class SubSistemaUsuarios implements FachadaUsuarios {
 	
 	
 	@Override
-	public boolean altaUsuario(Socio s, Admin ad, Funcionario f) {
+	public boolean altaUsuario(Socio s, Admin ad, Funcionario f, Entrenador entrenador) {
 		if(s != null){
 			socDao.insertSocio(con, s);
 			lista.add(s);
@@ -41,6 +45,9 @@ public class SubSistemaUsuarios implements FachadaUsuarios {
 		}else if(f != null){
 			funDao.insertAdmin(con, f);
 			lista.add(f);
+		}else if(entrenador != null){
+			entDao.insertEntrenador(con, entrenador);
+			lista.add(entrenador);
 		}else
 			return false;	
 		return true;

@@ -493,8 +493,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	  PanelLista.setVisible(false);
     	  quitaPaneles();
           panelInterno.setLayout(new BorderLayout());
-          panelInterno.setSize(600, 600);
-          panelUsuario.setPreferredSize(new Dimension(400,300));
+          panelInterno.setSize(500, 500);
+          panelUsuario.setPreferredSize(new Dimension(500,500));
           panelInterno.add(panelUsuario, BorderLayout.CENTER);
           panelUsuario.setVisible(true);
     }

@@ -13,6 +13,7 @@ import enums.UsuarioEnum;
 import Control.ControladorUsuarios;
 import transfers.Entrenador;
 import transfers.Funcionario;
+import transfers.Socio;
 import transfers.Usuario;
 
 /**
@@ -30,7 +31,14 @@ public class AltaUsuario extends javax.swing.JPanel {
         if(!personal){
         	jlTipo.setVisible(false);
         	jcbTipo.setVisible(false);
+        	jtSueldo.setVisible(false);
+        	jlSueldo.setVisible(false);
+        	jtHoraEntrada.setVisible(false);
+        	jlHoraEntrada.setVisible(false);
+        	jtHoraSalida.setVisible(false);
+        	jlHoraSalida.setVisible(false);
         }
+        
     }
     
     public AltaUsuario(Usuario socio, ControladorUsuarios controlador){
@@ -104,6 +112,12 @@ public class AltaUsuario extends javax.swing.JPanel {
         jtfTelefono = new javax.swing.JTextField();
         jlTipo = new javax.swing.JLabel();
         jcbTipo = new javax.swing.JComboBox();
+        jlSueldo = new javax.swing.JLabel();
+        jtSueldo = new javax.swing.JTextField();
+        jlHoraEntrada = new javax.swing.JLabel();
+        jtHoraEntrada = new javax.swing.JTextField();
+        jlHoraSalida = new javax.swing.JLabel();
+        jtHoraSalida = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -111,9 +125,9 @@ public class AltaUsuario extends javax.swing.JPanel {
 
         jrMaculino.setBackground(new java.awt.Color(153, 204, 255));
         jrMaculino.setText("Masculino");
-        
+
         jlbDNI.setText("DNI");
-        
+
         jlbTelefono.setText("Telefono");
 
         btGuardar.setText("GUARDAR");
@@ -141,9 +155,17 @@ public class AltaUsuario extends javax.swing.JPanel {
         jlbTitulo.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jlbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlbTitulo.setText("Usuario");
+
+
         jlTipo.setText("Tipo");
 
-        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Entrenador", "Funcionario", "Socio" }));
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Entrenador", "Funcionario" }));
+
+        jlSueldo.setText("Sueldo");
+
+        jlHoraEntrada.setText("Hora entrada:");
+
+        jlHoraSalida.setText("Hora salida:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,19 +174,19 @@ public class AltaUsuario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jrMaculino)
+                                .addContainerGap()
+                                .addComponent(jlTipo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jrFemenino)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(btGuardar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE))
+                                .addGap(133, 133, 133)
+                                .addComponent(jlbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -195,24 +217,34 @@ public class AltaUsuario extends javax.swing.JPanel {
                                             .addComponent(jtfTelefono)
                                             .addComponent(jtfContraseña)))))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtfEmail))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlbDireccion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jtfDireccion))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jlbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtfEmail))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jlTipo)
+                                .addComponent(jrMaculino)
                                 .addGap(18, 18, 18)
-                                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jrFemenino))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(133, 133, 133)
-                                .addComponent(jlbTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jlSueldo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlHoraEntrada)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btGuardar))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                                .addComponent(jlHoraSalida)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -246,24 +278,28 @@ public class AltaUsuario extends javax.swing.JPanel {
                     .addComponent(jlbContraseña)
                     .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlbEmail)
-                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbDireccion)
                     .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btGuardar))
-                .addGap(21, 21, 21))
+                    .addComponent(jlSueldo)
+                    .addComponent(jtSueldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlHoraEntrada)
+                    .addComponent(jtHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlHoraSalida))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btGuardar)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        // TODO add your handling code here:
-    }
 
     /**
      * boton para guardar un usuario, se comprueba que todos los campos esten introducidos
@@ -273,16 +309,36 @@ public class AltaUsuario extends javax.swing.JPanel {
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {
         if(compruebaDatos()){
         	UsuarioEnum tipoU = null;
-        	socio = new Usuario();
-        	rellenaUsuario();
+        	if(jcbTipo.isVisible()){
         	String tipo = jcbTipo.getSelectedItem().toString();
-        	if(tipo.equalsIgnoreCase("Entrenador"))
-        		tipoU = UsuarioEnum.Entrenador;
-        	if(tipo.equalsIgnoreCase("Funcionario"))
-        		tipoU = UsuarioEnum.Funcionario;
-        	if(tipo.equalsIgnoreCase("Usuario"))
-        		tipoU = UsuarioEnum.Socio;
-        	control.altaUsuario(socio, tipoU);
+        	if(tipo.equalsIgnoreCase("Entrenador")){
+        		Entrenador ent = new Entrenador();
+        		ent.rellenaDatos(rellenaUsuario());
+        		if(compruebaDatosPersona()){
+        			ent = rellenaEntrenador(ent);
+        			control.altaUsuario(null, null, null, ent);
+        			}
+        		else
+        			JOptionPane.showMessageDialog(btGuardar, "Debe asignar datos especificos de personal", "ERROR", ERROR);
+        	}
+        	if(tipo.equalsIgnoreCase("Funcionario")){
+        		Funcionario func = new Funcionario();
+        		func.rellenaDatos(rellenaUsuario());
+        		if(compruebaDatosPersona()){
+        			func = rellenaFuncionario(func);
+        			control.altaUsuario(null, null ,func, null);
+        			}
+        		else
+        			JOptionPane.showMessageDialog(btGuardar, "Debe asignar datos especificos de personal", "ERROR", ERROR);
+        		
+        	}
+        	}
+        	else{
+        		Socio socio = new Socio();
+        		socio.rellenaDatos(rellenaUsuario());
+        		control.altaUsuario(socio, null, null, null);
+        	}
+        	
         }
         else JOptionPane.showMessageDialog(btGuardar, "Introduce los datos necesarios", "ERROR", ERROR);
     }
@@ -291,7 +347,8 @@ public class AltaUsuario extends javax.swing.JPanel {
      * rellena los datos del usuario con los parametros introducidos en los JTextField.
      * @return usuario con los datos rellenados.
      */
-    private void rellenaUsuario() {
+    private Usuario rellenaUsuario() {
+    	Usuario socio = new Usuario();
     	socio.setNombre(jtfNombre.getText());
     	socio.setApellidos(jtfApellidos.getText());
     	socio.setDNI(jtfDNI.getText());
@@ -304,8 +361,27 @@ public class AltaUsuario extends javax.swing.JPanel {
 			socio.setSexo("MASCULINO");
 		else if(jrFemenino.isSelected() == true)
 			socio.setSexo("FEMENINO");
+		return socio;
 		
 	}
+    
+   private Funcionario rellenaFuncionario(Funcionario func){
+	   func.setSueldo(Integer.parseInt(jtSueldo.getText()));
+	   func.setHoraEntrada(jtHoraEntrada.getText());
+	   func.setHoraSalida(jtHoraSalida.getText());
+	   return func;
+   }
+   
+   private boolean compruebaDatosPersona(){
+	   return jtSueldo.getText() != "" && jtHoraEntrada.getText() != "" && jtHoraSalida.getText() != "";
+   }
+   
+   private Entrenador rellenaEntrenador(Entrenador ent){
+	   ent.setSueldo(Integer.parseInt(jtSueldo.getText()));
+	   ent.setHoraEntrada(jtHoraEntrada.getText());
+	   ent.setHoraSalida(jtHoraSalida.getText());
+	   return ent;
+   }
 
     /**
      * comprueba que todos los campos tengan algo introducido.
@@ -319,9 +395,12 @@ public class AltaUsuario extends javax.swing.JPanel {
 
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btGuardar;
+	private javax.swing.JButton btGuardar;
     private javax.swing.JComboBox jcbTipo;
     private javax.swing.JLabel jlTipo;
+    private javax.swing.JLabel jlHoraEntrada;
+    private javax.swing.JLabel jlHoraSalida;
+    private javax.swing.JLabel jlSueldo;
     private javax.swing.JLabel jlbApellidos;
     private javax.swing.JLabel jlbContraseña;
     private javax.swing.JLabel jlbDNI;
@@ -334,6 +413,9 @@ public class AltaUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jlbUsuario;
     private javax.swing.JRadioButton jrFemenino;
     private javax.swing.JRadioButton jrMaculino;
+    private javax.swing.JTextField jtHoraEntrada;
+    private javax.swing.JTextField jtHoraSalida;
+    private javax.swing.JTextField jtSueldo;
     private javax.swing.JTextField jtfApellidos;
     private javax.swing.JTextField jtfContraseña;
     private javax.swing.JTextField jtfDNI;

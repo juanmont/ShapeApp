@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import enums.UsuarioEnum;
 import transfers.Admin;
+import transfers.Entrenador;
 import transfers.Funcionario;
 import transfers.Socio;
 import transfers.Usuario;
@@ -21,7 +22,7 @@ public interface FachadaUsuarios {
 	
 	public Admin tipoUsuarioAdmin(Connection c, String user, String pass);
 	
-	public boolean altaUsuario(Socio s, Admin ad, Funcionario f);
+	public boolean altaUsuario(Socio s, Admin ad, Funcionario f, Entrenador entrenador);
 
 	public Usuario verUsuario(Socio s, Admin ad, Funcionario f);
 
