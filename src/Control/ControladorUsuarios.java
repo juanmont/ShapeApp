@@ -18,6 +18,7 @@ import VentanaGrafica.VentanaPrincipal;
 import VentanaGrafica.VentanaUsuario;
 import enums.UsuarioEnum;
 import transfers.Admin;
+import transfers.Entrenador;
 import transfers.Funcionario;
 import transfers.Socio;
 import transfers.Usuario;
@@ -53,8 +54,13 @@ public class ControladorUsuarios {
 	}
 	
 
-	public void altaUsuario(Usuario socio) {
-		// TODO Auto-generated method stub
+	public void altaUsuario(Usuario socio, UsuarioEnum tipo) {
+		if(tipo == UsuarioEnum.Socio)
+			usuarios.altaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null));
+		else if(tipo == UsuarioEnum.Admin)
+			usuarios.altaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null));
+		else if(tipo == UsuarioEnum.Funcionario)
+			usuarios.altaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio));
 		
 	}
 
@@ -81,7 +87,13 @@ public class ControladorUsuarios {
 		return null;
 	}
 
-	public void borrarUsuario(Object o) {
+	public void borrarUsuario(Usuario socio, UsuarioEnum tipo) {
+		if(tipo == UsuarioEnum.Socio)
+			usuarios.bajaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null));
+		else if(tipo == UsuarioEnum.Admin)
+			usuarios.bajaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null));
+		else if(tipo == UsuarioEnum.Funcionario)
+			usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio));
 		// TODO Auto-generated method stub
 		
 	}
