@@ -64,13 +64,15 @@ public class VentanaUsuario extends javax.swing.JPanel {
         btCompraAbonoPiscina = new javax.swing.JButton();
         btCompraAbonoGym = new javax.swing.JButton();
         btSalir = new javax.swing.JButton();
-        jlbDeportes = new javax.swing.JLabel();
-        jlbHoras = new javax.swing.JLabel();
+        jlbNombreUsuario = new javax.swing.JLabel();
+        panelInterno = new javax.swing.JPanel();
+        panelListas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listDeportes = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
         listHoras = new javax.swing.JList();
-        jlbNombreUsuario = new javax.swing.JLabel();
+        jlbDeportes = new javax.swing.JLabel();
+        jlbHoras = new javax.swing.JLabel();
         bVerHoras = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
@@ -124,13 +126,13 @@ public class VentanaUsuario extends javax.swing.JPanel {
             }
         });
 
-        jlbDeportes.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jlbDeportes.setForeground(new java.awt.Color(102, 102, 102));
-        jlbDeportes.setText("Deportes Ofertados");
+        jlbNombreUsuario.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jlbNombreUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        jlbNombreUsuario.setText("NOMBRE DE USUARIO");
 
-        jlbHoras.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jlbHoras.setForeground(new java.awt.Color(102, 102, 102));
-        jlbHoras.setText("Horas Libres");
+        panelInterno.setBackground(new java.awt.Color(153, 204, 255));
+
+        panelListas.setBackground(new java.awt.Color(153, 204, 255));
 
         listDeportes.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Futbol7", "Futbol11", "Baloncesto", "Tenis", "Padel" };
@@ -146,11 +148,13 @@ public class VentanaUsuario extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(listHoras);
 
-        String nombre = controlUsuarios.getNombre();
-        
-        jlbNombreUsuario.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jlbNombreUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        jlbNombreUsuario.setText(nombre);
+        jlbDeportes.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        jlbDeportes.setForeground(new java.awt.Color(102, 102, 102));
+        jlbDeportes.setText("Deportes Ofertados");
+
+        jlbHoras.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        jlbHoras.setForeground(new java.awt.Color(102, 102, 102));
+        jlbHoras.setText("Horas Libres");
 
         bVerHoras.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bVerHoras.setForeground(new java.awt.Color(102, 102, 102));
@@ -161,46 +165,87 @@ public class VentanaUsuario extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout panelListasLayout = new javax.swing.GroupLayout(panelListas);
+        panelListas.setLayout(panelListasLayout);
+        panelListasLayout.setHorizontalGroup(
+            panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelListasLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlbDeportes))
+                .addGap(32, 32, 32)
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bVerHoras)
+                    .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlbHoras)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelListasLayout.setVerticalGroup(
+            panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelListasLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlbDeportes)
+                    .addComponent(jlbHoras))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelListasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bVerHoras)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelInternoLayout = new javax.swing.GroupLayout(panelInterno);
+        panelInterno.setLayout(panelInternoLayout);
+        panelInternoLayout.setHorizontalGroup(
+            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelInternoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelListas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelInternoLayout.setVerticalGroup(
+            panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInternoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelListas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(jlbNombreUsuario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(btSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCompraAbonoGym, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btContratacionMonitor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btAlquilerPista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btMaterial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btCompraAbonoPiscina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlbDeportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bVerHoras)
-                    .addComponent(jlbHoras)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(84, 84, 84))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jlbNombreUsuario))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btCompraAbonoGym, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btContratacionMonitor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btAlquilerPista, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btMaterial, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btCompraAbonoPiscina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jlbNombreUsuario)
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAlquilerPista)
-                    .addComponent(jlbDeportes)
-                    .addComponent(jlbHoras))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btAlquilerPista)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btContratacionMonitor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btMaterial)
@@ -209,12 +254,12 @@ public class VentanaUsuario extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btCompraAbonoPiscina)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btSalir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bVerHoras)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btSalir)
+                        .addGap(39, 39, 39))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,5 +303,7 @@ public class VentanaUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jlbNombreUsuario;
     private javax.swing.JList listDeportes;
     private javax.swing.JList listHoras;
+    private javax.swing.JPanel panelInterno;
+    private javax.swing.JPanel panelListas;
     // End of variables declaration//GEN-END:variables
 }

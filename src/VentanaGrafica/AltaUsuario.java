@@ -9,6 +9,7 @@ package VentanaGrafica;
 import javax.swing.JOptionPane;
 
 import enums.SexoEnum;
+import enums.UsuarioEnum;
 import Control.ControladorUsuarios;
 import transfers.Entrenador;
 import transfers.Funcionario;
@@ -19,7 +20,6 @@ import transfers.Usuario;
  * @author juanjose
  */
 public class AltaUsuario extends javax.swing.JPanel {
-	private Usuario socio;
 	private ControladorUsuarios control;
     /**
      * Creates new form AltaMaterial
@@ -272,8 +272,17 @@ public class AltaUsuario extends javax.swing.JPanel {
      */
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {
         if(compruebaDatos()){
-        	socio = rellenaUsuario();
-        	control.altaUsuario(socio);
+        	UsuarioEnum tipoU = null;
+        	socio = new Usuario();
+        	rellenaUsuario();
+        	String tipo = jcbTipo.getSelectedItem().toString();
+        	if(tipo.equalsIgnoreCase("Entrenador"))
+        		tipoU = UsuarioEnum.Entrenador;
+        	if(tipo.equalsIgnoreCase("Funcionario"))
+        		tipoU = UsuarioEnum.Funcionario;
+        	if(tipo.equalsIgnoreCase("Usuario"))
+        		tipoU = UsuarioEnum.Socio;
+        	control.altaUsuario(socio, tipoU);
         }
         else JOptionPane.showMessageDialog(btGuardar, "Introduce los datos necesarios", "ERROR", ERROR);
     }
@@ -282,14 +291,7 @@ public class AltaUsuario extends javax.swing.JPanel {
      * rellena los datos del usuario con los parametros introducidos en los JTextField.
      * @return usuario con los datos rellenados.
      */
-    private Usuario rellenaUsuario() {
-    	String tipo = jcbTipo.getSelectedItem().toString();
-    	if(tipo.equalsIgnoreCase("Entrenador"))
-    		socio = new Entrenador();
-    	if(tipo.equalsIgnoreCase("Funcionario"))
-    		socio = new Funcionario();
-    	if(tipo.equalsIgnoreCase("Usuario"))
-    		socio = new Usuario();
+    private void rellenaUsuario() {
     	socio.setNombre(jtfNombre.getText());
     	socio.setApellidos(jtfApellidos.getText());
     	socio.setDNI(jtfDNI.getText());
@@ -299,10 +301,9 @@ public class AltaUsuario extends javax.swing.JPanel {
 		socio.setDireccion(jtfDireccion.getText());
 		socio.setEmail(jtfEmail.getText());
 		if(jrMaculino.isSelected() == true)
-			socio.setSexo("Maculino");
+			socio.setSexo("MASCULINO");
 		else if(jrFemenino.isSelected() == true)
-			socio.setSexo("Femenino");
-		return socio;
+			socio.setSexo("FEMENINO");
 		
 	}
 
@@ -341,5 +342,6 @@ public class AltaUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfTelefono;
     private javax.swing.JTextField jtfUsuario;
+    private Usuario socio;
     // End of variables declaration//GEN-END:variables
 }

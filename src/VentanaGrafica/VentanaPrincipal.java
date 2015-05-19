@@ -34,6 +34,7 @@ public class VentanaPrincipal extends JFrame{
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		this.add(login, BorderLayout.CENTER);
+		this.setResizable(false);
 		this.pack();
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -47,27 +48,33 @@ public class VentanaPrincipal extends JFrame{
 		VentanaAdministrador vAdmin = new VentanaAdministrador(con, controlAlquilerCompra, controlMateriales, 
 				controlClases, controlInstalaciones, controlUsuarios, controlUsuarios.getNick());
 		login.setVisible(false);
+		this.setResizable(true);
 		this.setSize(800, 500);
 		this.add(vAdmin, BorderLayout.CENTER);
 		vAdmin.setVisible(true);
+		this.setResizable(false);
 	}
 	
 	public void cambiaVentanaFuncionario(){
 		VentanaFuncionario vFuncionario = new VentanaFuncionario(con, controlAlquilerCompra, controlMateriales, 
 				controlClases, controlInstalaciones, controlUsuarios, controlUsuarios.getNick());
 		login.setVisible(false);
-		this.setSize(800, 500);
+		this.setResizable(true);
+		this.setSize(600, 450);
 		this.add(vFuncionario, BorderLayout.CENTER);
 		vFuncionario.setVisible(true);
+		this.setResizable(false);
 	}
 	
 	public void cambiaVentanaSocio(){
 		VentanaUsuario vUsuario = new VentanaUsuario(con, controlAlquilerCompra, controlMateriales, 
 				controlClases, controlInstalaciones, controlUsuarios, controlUsuarios.getNick());
 		login.setVisible(false);
+		this.setResizable(true);
 		this.setSize(800, 500);
 		this.add(vUsuario, BorderLayout.CENTER);
 		vUsuario.setVisible(true);
+		this.setResizable(false);
 	}
 	
 

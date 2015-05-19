@@ -19,8 +19,11 @@ import javax.swing.JPanel;
 
 import enums.UsuarioEnum;
 import transfers.Admin;
+import transfers.Entrenador;
+import transfers.Funcionario;
 import transfers.Instalaciones;
 import transfers.Material;
+import transfers.Socio;
 import transfers.Usuario;
 import Control.ControladorAlquilerCompra;
 import Control.ControladorClases;
@@ -373,12 +376,19 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {
        Object o = Lista.getSelectedValue();
-       if(o instanceof Usuario)
-    	   controlUsuarios.borrarUsuario(o);
+       if(o instanceof Usuario){
+    	   if(o instanceof Socio)
+    		   controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Socio);
+    	   if(o instanceof Funcionario)
+    		   controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Funcionario);
+    	   if(o instanceof Entrenador)
+    		   controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Entrenador);
+       }
+    	   
        else if(o instanceof Material)
-    	   controlMateriales.borrarMaterial(o);
+    	   controlMateriales.borrarMaterial(((Material)o));
        else if(o instanceof Instalaciones)
-    	   controlInstalaciones.borrarInstalacion(o);
+    	   controlInstalaciones.borrarInstalacion(((Instalaciones)o));
        else
     	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
     	   
