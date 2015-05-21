@@ -23,6 +23,8 @@ public class ControladorInstalaciones {
 	public ControladorInstalaciones(Connection con) {
 		ins = new Instalaciones();
 		this.c = con;
+		instalaciones = new SubSistemaInstalaciones(c);
+		
 	}
 
 	public ArrayList<Instalaciones> listaInstalaciones() {
@@ -35,10 +37,10 @@ public class ControladorInstalaciones {
 		
 	}
 
-	public boolean AltaInstalacion(String numero, String tipoDeporte, PistaEnum tipoPista) {
+	public boolean AltaInstalacion(String numero, String tipoDeporte, String tipo) {
 		ins.setNumero(Integer.parseInt(numero));
 		ins.setTipo(tipoDeporte);
-		ins.setPista(tipoPista.toString());
+		ins.setPista(tipo);
 		return instalaciones.altaInstalacion(ins);
 	}
 

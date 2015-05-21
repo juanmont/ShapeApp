@@ -38,5 +38,8 @@ public class Entrenador extends Usuario{
 		this.horaSalida = horaSalida;
 	}
 	
-	
+	public String toString(){
+		return "Usuario: " + getNick() + " , Nombre: " + getNombre() + " , apellidos: "+ getApellidos() +
+				" , Sueldo: " + getSueldo();	
+	}
 }

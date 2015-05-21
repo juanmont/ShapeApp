@@ -68,7 +68,7 @@ public class AltaInstalacion extends javax.swing.JPanel {
         chkExterior.setBackground(new java.awt.Color(153, 204, 255));
         chkExterior.setText("Exterior");
 
-        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Futbol7", "Futbol11", "Baloncesto", "Tenis", "Padel" }));
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FUTBOL7", "FUTBOL11", "BALONCESTO", "TENIS", "PADEL" }));
 
         jtfNumero.setValue(0);
 
@@ -134,11 +134,11 @@ public class AltaInstalacion extends javax.swing.JPanel {
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {
     	if(compruebaCampos()){
-    		PistaEnum tipo = null;
+    		String tipo = "";
     		if(chkCubierta.isSelected())
-    			tipo = PistaEnum.CUBIERTA;
+    			tipo = "CUBIERTA";
     		else 
-    			tipo = PistaEnum.EXTERIOR;
+    			tipo = "EXTERIOR";
     		if(controlInstalaciones.AltaInstalacion(jtfNumero.getText(), jcbTipo.getSelectedItem().toString(), tipo)) {
     			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
     		} else

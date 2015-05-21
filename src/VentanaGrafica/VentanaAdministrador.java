@@ -61,9 +61,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 		controlInstalaciones = controlInst;
 		controlUsuarios = controlUsu;
 		panelUsuario = null;
+		panelPersonal = null;
 		panelMaterial = null;
 		panelInstalacion = null;
 		panelClases = null;
+		panelMaterial = null;
         initComponents();
         /*this.frame.add(this);
         this.frame.setVisible(true);*/
@@ -177,7 +179,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 
         btAñadirPista.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         btAñadirPista.setForeground(new java.awt.Color(102, 102, 102));
-        btAñadirPista.setText("Añadir Instalacion");
+        btAñadirPista.setText("Añadir Pista");
         btAñadirPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAñadirInstalacionActionPerformed(evt);
@@ -220,7 +222,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         PanelLista.setBackground(new java.awt.Color(153, 204, 255));
 
         Lista.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Usuario1", "Usuario2", "Usuario3", "Usuario4" };
+            String[] strings = { "" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -252,20 +254,17 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelListaLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelListaLayout.createSequentialGroup()
-                        .addGap(0, 201, Short.MAX_VALUE)
                         .addComponent(btVer, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(btEliminar)
-                        .addGap(59, 59, 59))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEliminar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         PanelListaLayout.setVerticalGroup(
             PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelListaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelListaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btEliminar)
@@ -277,7 +276,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         panelInterno.setLayout(panelInternoLayout);
         panelInternoLayout.setHorizontalGroup(
             panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 541, Short.MAX_VALUE)
             .addGroup(panelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelInternoLayout.createSequentialGroup()
                     .addContainerGap()
@@ -299,7 +298,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btAniadirMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(btAñadirPista, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
@@ -319,8 +318,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                         .addComponent(jlbAdministrador))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,21 +389,19 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerActionPerformed(java.awt.event.ActionEvent evt) {
+    	quitaPaneles();
     	 Object o = Lista.getSelectedValue();
          if(o instanceof Usuario){
-        	 AltaUsuario panelUsuario = new AltaUsuario((Usuario)o, controlUsuarios);
-             Lista.setVisible(false);
-             PanelLista.add(panelUsuario);
+        	 panelUsuario = new AltaUsuario((Usuario)o, controlUsuarios);
+             panelInterno.add(panelUsuario, BorderLayout.CENTER);
          }
          else if(o instanceof Material){
-        	 AltaMaterial panelMaterial = new AltaMaterial(controlMateriales);
-        	 Lista.setVisible(false);
-        	 PanelLista.add(panelMaterial);
+        	 panelMaterial = new AltaMaterial((Material)o,controlMateriales);
+        	 panelInterno.add(panelMaterial, BorderLayout.CENTER);
          }
          else if(o instanceof Instalaciones){
-        	 AltaInstalacion panelInstalacion = new AltaInstalacion(controlInstalaciones);
-        	 Lista.setVisible(false);
-        	 PanelLista.add(panelInstalacion);
+        	 panelInstalacion = new AltaInstalacion(controlInstalaciones);
+        	 panelInterno.add(panelInstalacion, BorderLayout.CENTER);;
          }
          else
       	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
@@ -435,8 +431,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	quitaPaneles();	
     	DefaultListModel<Socio> modeloLista = new DefaultListModel<Socio>();
     	ArrayList<Socio> listaUsuarios = controlUsuarios.listaSocios();
+    	if(!listaUsuarios.isEmpty()){
     	for(int i = 0; i < listaUsuarios.size(); i++){
-    		modeloLista.addElement(listaUsuarios.get(i));
+    		Socio s = listaUsuarios.get(i);
+    		modeloLista.addElement(s);
+    	}
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -454,8 +453,10 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	PanelLista.setVisible(true);    	
     	DefaultListModel<Funcionario> modeloLista = new DefaultListModel<Funcionario>();
     	ArrayList<Funcionario> listaUsuarios = controlUsuarios.listaFuncionarios();
+    	if(!listaUsuarios.isEmpty()){
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.addElement(listaUsuarios.get(i));
+    	}
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -469,8 +470,10 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	PanelLista.setVisible(true);    	
     	DefaultListModel<Entrenador> modeloLista = new DefaultListModel<Entrenador>();
     	ArrayList<Entrenador> listaUsuarios = controlUsuarios.listaEntrenador();
+    	if(!listaUsuarios.isEmpty()){
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.addElement(listaUsuarios.get(i));
+    	}
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -482,10 +485,12 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         panelInterno.setSize(600, 600);
         panelInterno.add(PanelLista, BorderLayout.CENTER);
     	PanelLista.setVisible(true);
-    	DefaultListModel<Material> modeloLista = new DefaultListModel<Material>();
+    	DefaultListModel modeloLista = new DefaultListModel();
     	ArrayList<Material> listaMateriales = controlMateriales.listaMateriales();
+    	if(!listaMateriales.isEmpty()){
     	for(int i = 0; i < listaMateriales.size(); i++){
     		modeloLista.addElement(listaMateriales.get(i));
+    	}
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -499,8 +504,10 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	PanelLista.setVisible(true);
     	DefaultListModel<Instalaciones> modeloLista = new DefaultListModel<Instalaciones>();
     	ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.listaInstalaciones();
+    	if(!listaInstalaciones.isEmpty()){
     	for(int i = 0; i < listaInstalaciones.size(); i++){
     		modeloLista.addElement(listaInstalaciones.get(i));
+    	}
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -529,14 +536,14 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btAñadirPersonalActionPerformed(java.awt.event.ActionEvent evt) {
-    	  panelUsuario = new AltaUsuario(true, controlUsuarios);
-    	  PanelLista.setVisible(false);
-    	  quitaPaneles();
-          panelInterno.setLayout(new BorderLayout());
-          panelInterno.setSize(500, 500);
-          panelUsuario.setPreferredSize(new Dimension(500,500));
-          panelInterno.add(panelUsuario, BorderLayout.CENTER);
-          panelUsuario.setVisible(true);
+    	panelPersonal = new AltaUsuario(true, controlUsuarios);
+    	PanelLista.setVisible(false);
+    	quitaPaneles();
+        panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(500, 500);
+        panelPersonal.setPreferredSize(new Dimension(500,500));
+        panelInterno.add(panelPersonal, BorderLayout.CENTER);
+        panelPersonal.setVisible(true);
     }
 
     private void btAñadirInstalacionActionPerformed(java.awt.event.ActionEvent evt) {
@@ -553,12 +560,15 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private void quitaPaneles(){
     	if(panelUsuario != null)
     		panelUsuario.setVisible(false);
+    	if(panelPersonal != null)
+    		panelPersonal.setVisible(false);
     	if(panelMaterial != null)
     		panelMaterial.setVisible(false);
     	if(panelInstalacion != null)
     		panelInstalacion.setVisible(false);
     	if(panelClases != null)
     		panelClases.setVisible(false);
+    	PanelLista.setVisible(false);
     }
 
 
@@ -584,6 +594,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private javax.swing.JLabel jlbAdministrador;
     private javax.swing.JPanel panelInterno;
     private AltaInstalacion panelInstalacion;
+    private AltaUsuario panelPersonal;
     private AltaUsuario panelUsuario;
     private AltaMaterial panelMaterial;
     private AltaClases panelClases;

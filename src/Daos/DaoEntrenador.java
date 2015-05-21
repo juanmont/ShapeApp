@@ -35,19 +35,48 @@ public class DaoEntrenador implements IEntrenadorDao{
 		return entrenador;
 	}
 	
+	private Entrenador fillEntrenador2(ResultSet objetoEncontrado, ResultSet objetoEncontrado2){
+		Entrenador ent = new Entrenador();
+		try {
+			ent.setApellidos(objetoEncontrado2.getString("apellido"));
+			ent.setDireccion(objetoEncontrado2.getString("direccion"));
+			ent.setDNI(objetoEncontrado2.getString("DNI"));
+			ent.setEmail(objetoEncontrado2.getString("email"));
+			ent.setNombre(objetoEncontrado2.getString("nombre"));
+			ent.setPass(objetoEncontrado2.getString("pass"));
+			ent.setSexo(objetoEncontrado2.getString("sexo"));
+			ent.setTelefono(objetoEncontrado2.getString("tlf"));
+			ent.setNick(objetoEncontrado.getString("nick"));
+			ent.setHoraEntrada(objetoEncontrado.getString("entrada"));
+			ent.setHoraSalida(objetoEncontrado.getString("salida"));
+			ent.setSueldo(objetoEncontrado.getDouble("sueldo"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ent;
+	}
+	
 	public List<Entrenador> findAll(Connection connection) {
 		// TODO Auto-generated method stub
 		Entrenador entrenador=null;
 		List<Entrenador> entrenadorList=new ArrayList<Entrenador>();
 		PreparedStatement buscarName=null;
+		PreparedStatement buscarUsuario=null;
 		ResultSet objetoEncontrado=null;
+		ResultSet objetoEncontrado2=null;
 		try{
 			buscarName=connection.prepareStatement("select * from entrenador");
 			//ejecutamos la consulta
 			objetoEncontrado=buscarName.executeQuery();
 			while (objetoEncontrado.next()){
-			   entrenador=fillEntrenador(objetoEncontrado);
-			   entrenadorList.add(entrenador);
+			   buscarUsuario=connection.prepareStatement("select * from usuario where nick = ?");
+			   buscarUsuario.setString(1, objetoEncontrado.getString("nick"));
+			   objetoEncontrado2=buscarUsuario.executeQuery();
+			   if(objetoEncontrado2.next()){
+				   entrenador=fillEntrenador2(objetoEncontrado, objetoEncontrado2);
+				   entrenadorList.add(entrenador);
+			   }
 			}
 		} catch (TransferException e) {
 			// TODO Auto-generated catch block
@@ -64,7 +93,9 @@ public class DaoEntrenador implements IEntrenadorDao{
 		Entrenador entrenador=null;
 		List<Entrenador> entrenadorList=new ArrayList<Entrenador>();
 		PreparedStatement buscarName=null;
+		PreparedStatement buscarUsuario=null;
 		ResultSet objetoEncontrado=null;
+		ResultSet objetoEncontrado2=null;
 		try{
 			buscarName=connection.prepareStatement("select * from entrenador where nombre like ?");
 			//asociamos el valor que queremos buscar
@@ -72,8 +103,13 @@ public class DaoEntrenador implements IEntrenadorDao{
 			//ejecutamos la consulta
 			objetoEncontrado=buscarName.executeQuery();
 			while (objetoEncontrado.next()){
-			   entrenador=fillEntrenador(objetoEncontrado);
-			   entrenadorList.add(entrenador);
+			   buscarUsuario=connection.prepareStatement("select * from usuario where nick = ?");
+			   buscarUsuario.setString(1, objetoEncontrado.getString("nick"));
+			   objetoEncontrado2=buscarUsuario.executeQuery();
+			   if(objetoEncontrado2.next()){
+				   entrenador=fillEntrenador2(objetoEncontrado, objetoEncontrado2);
+				   entrenadorList.add(entrenador);
+			   }
 			}
 		} catch (TransferException e) {
 			// TODO Auto-generated catch block

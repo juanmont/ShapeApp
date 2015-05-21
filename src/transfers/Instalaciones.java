@@ -43,4 +43,8 @@ public class Instalaciones {
 	public void setDisponibilidad(String disponibilidad) {
 		this.disponibilidad = DisponibilidadEnum.valueOf(disponibilidad);
 	}
+	
+	public String toString(){
+		return "Numero: " + numero + " , tipo: " + tipo.toString();	
+	}
 }

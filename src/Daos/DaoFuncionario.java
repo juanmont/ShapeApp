@@ -35,18 +35,47 @@ public class DaoFuncionario implements IFuncionarioDao{
 		return admin;
 	}
 	
+	private Funcionario fillAdmin2(ResultSet objetoEncontrado, ResultSet objetoEncontrado2){
+		Funcionario admin = new Funcionario();
+		try {
+			admin.setApellidos(objetoEncontrado2.getString("apellido"));
+			admin.setDireccion(objetoEncontrado2.getString("direccion"));
+			admin.setDNI(objetoEncontrado2.getString("DNI"));
+			admin.setEmail(objetoEncontrado2.getString("email"));
+			admin.setNombre(objetoEncontrado2.getString("nombre"));
+			admin.setPass(objetoEncontrado2.getString("pass"));
+			admin.setSexo(objetoEncontrado2.getString("sexo"));
+			admin.setTelefono(objetoEncontrado2.getString("tlf"));
+			admin.setNick(objetoEncontrado.getString("nick"));
+			admin.setHoraEntrada(objetoEncontrado.getString("entrada"));
+			admin.setHoraSalida(objetoEncontrado.getString("salida"));
+			admin.setSueldo(objetoEncontrado.getDouble("sueldo"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return admin;
+	}
+	
 	public List<Funcionario> findAll(Connection connection){
 		Funcionario admin=null;
 		List<Funcionario> adminList=new ArrayList<Funcionario>();
 		PreparedStatement buscarName=null;
+		PreparedStatement buscarUsuario=null;
 		ResultSet objetoEncontrado=null;
+		ResultSet objetoEncontrado2=null;
 		try{
 			buscarName=connection.prepareStatement("select * from funcionario");
 			//ejecutamos la consulta
 			objetoEncontrado=buscarName.executeQuery();
 			while (objetoEncontrado.next()){
-			   admin=fillAdmin(objetoEncontrado);
-			   adminList.add(admin);
+			   buscarUsuario=connection.prepareStatement("select * from usuario where nick = ?");
+			   buscarUsuario.setString(1, objetoEncontrado.getString("nick"));
+			   objetoEncontrado2=buscarUsuario.executeQuery();
+			   if(objetoEncontrado2.next()){
+				   admin=fillAdmin2(objetoEncontrado, objetoEncontrado2);
+				   adminList.add(admin);
+			   }
 			}
 		} catch (TransferException e) {
 			// TODO Auto-generated catch block
@@ -63,7 +92,9 @@ public class DaoFuncionario implements IFuncionarioDao{
 		Funcionario admin=null;
 		List<Funcionario> adminList=new ArrayList<Funcionario>();
 		PreparedStatement buscarName=null;
+		PreparedStatement buscarUsuario=null;
 		ResultSet objetoEncontrado=null;
+		ResultSet objetoEncontrado2=null;
 		try{
 			buscarName=connection.prepareStatement("select * from funcionario where nombre like ?");
 			//asociamos el valor que queremos buscar
@@ -71,8 +102,13 @@ public class DaoFuncionario implements IFuncionarioDao{
 			//ejecutamos la consulta
 			objetoEncontrado=buscarName.executeQuery();
 			while (objetoEncontrado.next()){
-			   admin=fillAdmin(objetoEncontrado);
-			   adminList.add(admin);
+			   buscarUsuario=connection.prepareStatement("select * from usuario where nick = ?");
+			   buscarUsuario.setString(1, objetoEncontrado.getString("nick"));
+			   objetoEncontrado2=buscarUsuario.executeQuery();
+			   if(objetoEncontrado2.next()){
+				   admin=fillAdmin2(objetoEncontrado, objetoEncontrado2);
+				   adminList.add(admin);
+			   }
 			}
 		} catch (TransferException e) {
 			// TODO Auto-generated catch block

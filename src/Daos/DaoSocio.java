@@ -32,19 +32,45 @@ public class DaoSocio implements ISocioDao{
 		return socio;
 	}
 	
+	private Socio fillSocio2(ResultSet objetoEncontrado, ResultSet objetoEncontrado2){
+		Socio socio = new Socio();
+		try {
+			socio.setApellidos(objetoEncontrado2.getString("apellido"));
+			socio.setDireccion(objetoEncontrado2.getString("direccion"));
+			socio.setDNI(objetoEncontrado2.getString("DNI"));
+			socio.setEmail(objetoEncontrado2.getString("email"));
+			socio.setNombre(objetoEncontrado2.getString("nombre"));
+			socio.setPass(objetoEncontrado2.getString("pass"));
+			socio.setSexo(objetoEncontrado2.getString("sexo"));
+			socio.setTelefono(objetoEncontrado2.getString("tlf"));
+			socio.setNick(objetoEncontrado.getString("nick"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return socio;
+	}
+	
 	public List<Socio> findAll(Connection connection) {
 		// TODO Auto-generated method stub
 		Socio SocioName=null;
 		List<Socio> SocioList=new ArrayList<Socio>();
 		PreparedStatement buscarName=null;
+		PreparedStatement buscarUsuario=null;
 		ResultSet objetoEncontrado=null;
+		ResultSet objetoEncontrado2=null;
 		try{
-			buscarName=connection.prepareStatement("select * from Socio");
+			buscarName=connection.prepareStatement("select * from socio");
 			//ejecutamos la consulta
 			objetoEncontrado=buscarName.executeQuery();
 			while (objetoEncontrado.next()){
-			   SocioName=fillSocio(objetoEncontrado);
-			   SocioList.add(SocioName);
+			   buscarUsuario=connection.prepareStatement("select * from usuario where nick = ?");
+			   buscarUsuario.setString(1, objetoEncontrado.getString("nick"));
+			   objetoEncontrado2=buscarUsuario.executeQuery();
+			   if(objetoEncontrado2.next()){
+				   SocioName=fillSocio2(objetoEncontrado, objetoEncontrado2);
+				   SocioList.add(SocioName);
+			   }
 			}
 		} catch (TransferException e) {
 			// TODO Auto-generated catch block
@@ -61,7 +87,9 @@ public class DaoSocio implements ISocioDao{
 		Socio SocioName=null;
 		List<Socio> SocioList=new ArrayList<Socio>();
 		PreparedStatement buscarName=null;
+		PreparedStatement buscarUsuario=null;
 		ResultSet objetoEncontrado=null;
+		ResultSet objetoEncontrado2=null;
 		try{
 			buscarName=connection.prepareStatement("select * from Socio where nombre like ?");
 			//asociamos el valor que queremos buscar
@@ -69,8 +97,13 @@ public class DaoSocio implements ISocioDao{
 			//ejecutamos la consulta
 			objetoEncontrado=buscarName.executeQuery();
 			while (objetoEncontrado.next()){
-			   SocioName=fillSocio(objetoEncontrado);
-			   SocioList.add(SocioName);
+			   buscarUsuario=connection.prepareStatement("select * from usuario where nick = ?");
+			   buscarUsuario.setString(1, objetoEncontrado.getString("nick"));
+			   objetoEncontrado2=buscarUsuario.executeQuery();
+			   if(objetoEncontrado2.next()){
+				   SocioName=fillSocio2(objetoEncontrado, objetoEncontrado2);
+				   SocioList.add(SocioName);
+			   }
 			}
 		} catch (TransferException e) {
 			// TODO Auto-generated catch block

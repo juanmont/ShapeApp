@@ -13,12 +13,7 @@ public class Socio extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Socio, getNombre()="
-				+ getNombre() + ", getApellidos()=" + getApellidos()
-				+ ", getDNI()=" + getDNI() + ", getTelefono()=" + getTelefono()
-				+ ", getSexo()=" + getSexo() + ", getUsuario()=" + getNick()
-				+ ", getContrase�a()=" + getPass() + ", getEmail()="
-				+ getEmail() + ", getDireccion()=" + getDireccion() + "]";
+		return "Usuario: " + getNick() + " , Nombre: " + getNombre() + " , apellidos: "+ getApellidos();				
 	}
 	
 }

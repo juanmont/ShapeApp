@@ -9,6 +9,7 @@ package VentanaGrafica;
 import javax.sound.sampled.Line.Info;
 import javax.swing.JOptionPane;
 
+import transfers.Material;
 import Control.ControladorMateriales;
 
 /**
@@ -23,6 +24,14 @@ public class AltaMaterial extends javax.swing.JPanel {
     public AltaMaterial(ControladorMateriales controladorMat) {
     	controlMateriales = controladorMat;
         initComponents();
+    }
+    
+    public AltaMaterial(Material m,ControladorMateriales controladorMat) {
+    	controlMateriales = controladorMat;
+        initComponents();
+        jtDescripcion.setText(m.getDescripcion());
+        jtfNombre.setText(m.getNombre());
+        jcbTipo.setSelectedItem(m.getTipo());
     }
 
     /**
@@ -62,7 +71,7 @@ public class AltaMaterial extends javax.swing.JPanel {
         jtDescripcion.setRows(5);
         jScrollPane1.setViewportView(jtDescripcion);
 
-        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Futbol", "Tenis", "Padel", "Piscina", "Entrenamiento", "Gimnasio", "Baloncesto" }));
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FUTBOL7", "FUTBOL11", "BALONCESTO", "TENIS", "PADEL"}));
         
 
         bGuardar.setText("Guardar");

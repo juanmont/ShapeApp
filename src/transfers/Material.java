@@ -19,8 +19,8 @@ public class Material {
 
 	@Override
 	public String toString() {
-		return "TransferMaterial [nombre=" + nombre + ", id=" + id + ", tipo="
-				+ tipo + ", descripcion=" + descripcion + "]";
+		return "Nombre: " + nombre +" , tipo: "
+				+ tipo;
 	}
 
 	public TipoEnum getTipo() {
