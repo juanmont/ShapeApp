@@ -12,19 +12,27 @@ import transfers.Usuario;
 
 public interface FachadaUsuarios {
 		
-	public boolean bajaUsuario(Socio s, Admin ad, Funcionario f);
+	public boolean bajaUsuario(Socio s, Admin ad, Funcionario f, Entrenador e);
 		
-	public ArrayList<Usuario> listaUsuarios();
+	public ArrayList<Admin> getListaAdmin();
 	
+	public ArrayList<Socio> getListaSocio();
+	
+	public ArrayList<Funcionario> getListaFuncionario();
+	
+	public ArrayList<Entrenador> getListaEntrenador();
+	
+	public UsuarioEnum tipoUsuario(Connection con, String user, String pass);
+
+	public boolean altaUsuario(Socio s, Admin ad, Funcionario f, Entrenador e);
+
+	public Usuario verUsuario(Socio s, Admin ad, Funcionario f, Entrenador e);
+
+	public boolean modificarUsuario(Socio s, Admin ad, Funcionario f, Entrenador e);
+
 	public Funcionario tipoUsuarioFuncionario(Connection c, String user, String pass);
 
 	public Socio tipoUsuarioSocio(Connection c, String user, String pass);
-	
+
 	public Admin tipoUsuarioAdmin(Connection c, String user, String pass);
-	
-	public boolean altaUsuario(Socio s, Admin ad, Funcionario f, Entrenador entrenador);
-
-	public Usuario verUsuario(Socio s, Admin ad, Funcionario f);
-
-	public boolean modificarUsuario(Socio s, Admin ad, Funcionario f);
 }

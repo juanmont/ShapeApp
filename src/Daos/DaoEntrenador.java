@@ -35,6 +35,29 @@ public class DaoEntrenador implements IEntrenadorDao{
 		return entrenador;
 	}
 	
+	public List<Entrenador> findAll(Connection connection) {
+		// TODO Auto-generated method stub
+		Entrenador entrenador=null;
+		List<Entrenador> entrenadorList=new ArrayList<Entrenador>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from entrenador");
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+			   entrenador=fillEntrenador(objetoEncontrado);
+			   entrenadorList.add(entrenador);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return entrenadorList;
+	}
+	
 	@Override
 	public List<Entrenador> findByName(Connection connection, String nombre) {
 		// TODO Auto-generated method stub

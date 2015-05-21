@@ -7,6 +7,7 @@ import transfers.Instalaciones;
 
 public interface IInstalacionesDao {
 
+	public List<Instalaciones> findAll(Connection connection);
 	List<Instalaciones> findByTipo(Connection connection, String tipo);
 	int insertInstalacion(Connection connection, Instalaciones instalacion);
 	int borrarInstalacion(Connection connection, int numero);

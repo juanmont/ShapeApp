@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.jdbc2.optional.SuspendableXAConnection;
+
 import Daos.DaoAdmin;
 import Daos.DaoFuncionario;
 import Daos.DaoSocio;
@@ -72,18 +74,31 @@ public class ControladorUsuarios {
 		return nombre;
 	}
 	
-	public ArrayList<Usuario> listaUsuario(UsuarioEnum tipo) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Entrenador> listaEntrenador() {
+			return usuarios.getListaEntrenador();
+	}
+	
+	public ArrayList<Socio> listaSocios() {
+		return usuarios.getListaSocio();
+	}
+	
+	public ArrayList<Funcionario> listaFuncionarios() {
+		return usuarios.getListaFuncionario();
+	}
+	
+	public ArrayList<Admin> listaAdmin() {
+		return usuarios.getListaAdmin();
 	}
 
 	public void borrarUsuario(Usuario socio, UsuarioEnum tipo) {
 		if(tipo == UsuarioEnum.Socio)
-			usuarios.bajaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null));
+			usuarios.bajaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null), ((Entrenador)null));
 		else if(tipo == UsuarioEnum.Admin)
-			usuarios.bajaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null));
+			usuarios.bajaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null), ((Entrenador)null));
 		else if(tipo == UsuarioEnum.Funcionario)
-			usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio));
+			usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio), ((Entrenador)null));
+		else if(tipo == UsuarioEnum.Entrenador)
+			usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)null), ((Entrenador)socio));
 		// TODO Auto-generated method stub
 		
 	}

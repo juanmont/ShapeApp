@@ -6,7 +6,8 @@ import java.util.List;
 import transfers.Bono;
 
 public interface IBonoDao {
-
+	
+	List<Bono> findAll(Connection connection);
 	List<Bono> findByTipo(Connection connection, String tipo);
 	int insertBono(Connection connection, Bono bono);
 	int borrarBono(Connection connection, int id);

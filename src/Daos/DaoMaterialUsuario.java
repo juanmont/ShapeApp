@@ -61,7 +61,7 @@ public class DaoMaterialUsuario implements IMaterialUsuarioDao{
 		try{
 			insertClase=connection.prepareStatement("INSERT INTO material_usuario"
 					+ "(id_materiales, dia, horario, nick)"
-					+ " VALUES (?,?,?)");
+					+ " VALUES (?,?,?,?)");
 			//asociamos el valor que queremos buscar
 			insertClase.setInt(1, materialUsuario.getIdMateriales());
 			insertClase.setDate(2, materialUsuario.getDia());

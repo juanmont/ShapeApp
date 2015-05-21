@@ -7,6 +7,7 @@ import transfers.Socio;
 
 public interface ISocioDao {
 
+	public List<Socio> findAll(Connection connection);
 	List<Socio> findByName(Connection connection, String nombre);
 	int insertSocio(Connection connection, Socio Socio);
 	int borrarSocio(Connection connection, String nick);

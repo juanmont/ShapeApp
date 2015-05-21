@@ -7,6 +7,7 @@ import transfers.Entrenador;
 
 public interface IEntrenadorDao {
 
+	public List<Entrenador> findAll(Connection connection);
 	List<Entrenador> findByName(Connection connection, String nombre);
 	int insertEntrenador(Connection connection, Entrenador entrenador);
 	int borrarEntrenador(Connection connection, String nick);

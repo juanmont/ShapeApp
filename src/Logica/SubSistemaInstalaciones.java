@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Vector;
 import java.util.Date;
 
+import transfers.Admin;
 import transfers.InstalacionUsuario;
 import transfers.Instalaciones;
 import Daos.DaoInstalacionUsuario;
@@ -31,35 +32,44 @@ public class SubSistemaInstalaciones implements FachadaInstalaciones {
 	
 	public boolean altaInstalacion(Instalaciones insta) {
 		if (insta != null) {
-			instalaciones.insertInstalacion(this.c, insta);
-			lista.add(insta);
+			int a = instalaciones.insertInstalacion(this.c, insta);
+			if (a == 1) {
+				lista.add(insta);
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
-		
-		return true;
 	}
 
 	@Override
 	public boolean bajaInstalacion(Instalaciones insta) {
 		if (insta != null) {
-			instalaciones.borrarInstalacion(this.c, insta.getNumero());
-			lista.remove(insta.getNumero());
+			int a = instalaciones.borrarInstalacion(this.c, insta.getNumero());
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
-		
-		return true;
 	}
 
 	@Override
 	public boolean modificarInstalacion(Instalaciones insta) {
 		if (insta != null) {
-			instalaciones.modificarInstalacion(this.c, insta);
+			int a = instalaciones.modificarInstalacion(this.c, insta);
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
-		return true;
 	}
 
 	@Override
@@ -73,6 +83,7 @@ public class SubSistemaInstalaciones implements FachadaInstalaciones {
 
 	@Override
 	public ArrayList<Instalaciones> listaInstalaciones() {
+		lista = (ArrayList<Instalaciones>) instalaciones.findAll(c);
 		return lista;
 	}
 

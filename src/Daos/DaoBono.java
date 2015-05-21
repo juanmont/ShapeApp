@@ -27,6 +27,28 @@ public class DaoBono implements IBonoDao{
 		return bono;
 	}
 	
+	public List<Bono> findAll(Connection connection){
+		Bono clase=null;
+		List<Bono> claseList=new ArrayList<Bono>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from bono");
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+				clase=fillBono(objetoEncontrado);
+				claseList.add(clase);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return claseList;
+	}
+	
 	@Override
 	public List<Bono> findByTipo(Connection connection, String tipo) {
 		// TODO Auto-generated method stub

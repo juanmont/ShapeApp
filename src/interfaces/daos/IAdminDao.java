@@ -7,6 +7,7 @@ import transfers.Admin;
 
 public interface IAdminDao {
 
+	public List<Admin> findAll(Connection connection);
 	List<Admin> findByName(Connection connection, String nombre);
 	int insertAdmin(Connection connection, Admin admin);
 	int borrarAdmin(Connection connection, String nick);

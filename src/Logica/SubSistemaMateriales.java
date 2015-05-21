@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Daos.DaoMaterial;
 import Daos.DaoMaterialUsuario;
+import transfers.Clases;
 import transfers.Material;
 
 public class SubSistemaMateriales implements FachadaMateriales {
@@ -23,40 +24,50 @@ public class SubSistemaMateriales implements FachadaMateriales {
 	
 	@Override
 	public ArrayList<Material> listaMateriales() {
+		lista = (ArrayList<Material>) materiales.findAll(c);
 		return lista;		
 	}
 
 	@Override
 	public boolean altaMaterial(Material mat) {
 		if(mat != null) {
-			materiales.insertMaterial(this.c, mat);
-			lista.add(mat);
+			int a = materiales.insertMaterial(this.c, mat);
+			if(a == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
-		
-		return true;
 	}
 
 	@Override
 	public boolean bajaMaterial(Material mat) {
 		if (mat != null) {
-			materiales.borrarMaterial(this.c, mat.getId());
-			lista.remove(mat.getId());
+			int a = materiales.borrarMaterial(this.c, mat.getId());
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
-		return true;
 	}
 
 	@Override
 	public boolean modificarMaterial(Material mat) {
 		if (mat != null) {
-			materiales.modificarMaterial(this.c, mat);
+			int a = materiales.modificarMaterial(this.c, mat);
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}
-		return true;
 	}
 
 	@Override

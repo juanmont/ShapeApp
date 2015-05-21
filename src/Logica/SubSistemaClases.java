@@ -1,38 +1,56 @@
 package Logica;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import transfers.Clases;
 import Daos.DaoClase;
 
-import com.mysql.jdbc.Connection;
 
 public class SubSistemaClases implements FachadaClases {
 
 	private Connection con;
 	private DaoClase clas;
+	private ArrayList<Clases> lista;
 	
 	public SubSistemaClases(Connection con){
 		this.con = con;
 		clas = new DaoClase();
+		lista = new ArrayList<Clases>();
 	}
 
 	@Override
 	public ArrayList<Clases> listaClases() {
-		// TODO Auto-generated method stub
-		return (ArrayList<Clases>) clas.findAll(this.con);
+		lista = (ArrayList<Clases>) clas.findAll(con);
+		return lista;
 	}
 
 	@Override
-	public int altaClase(Clases clase) {
-		// TODO Auto-generated method stub 
-		return clas.insertClase(this.con, clase);
+	public boolean altaClase(Clases clase) {
+		if(clase != null){
+			int a = clas.insertClase(con, clase);
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 	@Override
-	public int bajaClase(Clases clase) {
-		// TODO Auto-generated method stub
-		return clas.borrarClase(this.con, clase.getId());
+	public boolean bajaClase(Clases clase) {
+		if(clase != null){
+			int a = clas.borrarClase(con, clase.getId());
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 }

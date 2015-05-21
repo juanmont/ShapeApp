@@ -27,6 +27,29 @@ public class DaoInstalaciones implements IInstalacionesDao{
 		return instalacion;
 	}
 	
+	public List<Instalaciones> findAll(Connection connection) {
+		// TODO Auto-generated method stub
+		Instalaciones clase=null;
+		List<Instalaciones> claseList=new ArrayList<Instalaciones>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from instalaciones");
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+				clase=fillInstalacion(objetoEncontrado);
+				claseList.add(clase);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return claseList;
+	}
+	
 	@Override
 	public List<Instalaciones> findByTipo(Connection connection, String categoria) {
 		// TODO Auto-generated method stub

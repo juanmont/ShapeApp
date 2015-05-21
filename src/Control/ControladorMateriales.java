@@ -15,8 +15,7 @@ public class ControladorMateriales {
 	}
 
 	public ArrayList<Material> listaMateriales() {
-		// TODO Auto-generated method stub
-		return null;
+		return materiales.listaMateriales();
 	}
 
 	public void borrarMaterial(Object o) {

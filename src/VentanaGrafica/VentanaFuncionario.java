@@ -67,7 +67,7 @@ public class VentanaFuncionario extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    	bAlqInstalacion = new javax.swing.JButton();
+        AlqPista = new javax.swing.JButton();
         AlqMaterial = new javax.swing.JButton();
         ContEntrenador = new javax.swing.JButton();
         panelInterno = new javax.swing.JPanel();
@@ -81,15 +81,16 @@ public class VentanaFuncionario extends javax.swing.JPanel {
         btVerHoras = new javax.swing.JButton();
         CompraAbonoPisc = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
+        bVerInstalaciones = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
-        bAlqInstalacion.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        bAlqInstalacion.setForeground(new java.awt.Color(102, 102, 102));
-        bAlqInstalacion.setText("Alquiler Instalacion");
-        bAlqInstalacion.addActionListener(new java.awt.event.ActionListener() {
+        AlqPista.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        AlqPista.setForeground(new java.awt.Color(102, 102, 102));
+        AlqPista.setText("Alquiler Instalacion");
+        AlqPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bAlqInstalacionActionPerformed(evt);
+                bAlqInstalacionActionPerformed(evt);
             }
         });
 
@@ -220,6 +221,10 @@ public class VentanaFuncionario extends javax.swing.JPanel {
             }
         });
 
+        bVerInstalaciones.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        bVerInstalaciones.setForeground(new java.awt.Color(102, 102, 102));
+        bVerInstalaciones.setText("Ver Instalaciones");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,13 +233,15 @@ public class VentanaFuncionario extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bAlqInstalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AlqPista, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AlqMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ContEntrenador))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CompraAbonoPisc, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CompraAbonoPisc, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bVerInstalaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Salir))
                     .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -245,7 +252,7 @@ public class VentanaFuncionario extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bAlqInstalacion)
+                    .addComponent(AlqPista)
                     .addComponent(AlqMaterial)
                     .addComponent(ContEntrenador))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -253,7 +260,8 @@ public class VentanaFuncionario extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Salir)
-                    .addComponent(CompraAbonoPisc))
+                    .addComponent(CompraAbonoPisc)
+                    .addComponent(bVerInstalaciones))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -331,13 +339,14 @@ public class VentanaFuncionario extends javax.swing.JPanel {
 		
 	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AlqMaterial;
-    private javax.swing.JButton bAlqInstalacion;
+	private javax.swing.JButton AlqMaterial;
+    private javax.swing.JButton AlqPista;
     private javax.swing.JButton CompraAbonoPisc;
     private javax.swing.JButton ContEntrenador;
     private javax.swing.JLabel Deportes;
     private javax.swing.JLabel HorasLibre;
     private javax.swing.JButton Salir;
+    private javax.swing.JButton bVerInstalaciones;
     private javax.swing.JButton btVerHoras;
     private javax.swing.JList listaDeportes;
     private javax.swing.JList listaHoras;

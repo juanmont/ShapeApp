@@ -69,58 +69,108 @@ public class SubSistemaAlquilerCompra implements FachadaAlquilerCompra {
 	}
 
 	@Override
-	public void alquilerInstalacion(InstalacionUsuario insta) {
+	public boolean alquilerInstalacion(InstalacionUsuario insta) {
 		if(insta != null) {
-			this.insta.insertInstalacionUsuario(c, insta);
+			int a = this.insta.insertInstalacionUsuario(c, insta);
+			if(a == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
 	}
 
 	@Override
-	public void alquilerMaterial(MaterialUsuario alqui) {
+	public boolean alquilerMaterial(MaterialUsuario alqui) {
 		if(alqui != null) {
-			this.mat.insertMaterialUsuario(c, alqui);
+			int a = this.mat.insertMaterialUsuario(c, alqui);
+			if (a == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
 		
 	}
 
 	@Override
-	public void contratacionEntrenador(ClaseSocio claseU) {
+	public boolean contratacionEntrenador(ClaseSocio claseU) {
 		if(claseU != null){
 			Clases cla = this.clase.findById(c, claseU.getId_clase());
 			if(cla.getClase() == ClaseEnum.INDIVIDUAL) {
-				this.claseS.insertClaseSocio(c, claseU);
+				int a = this.claseS.insertClaseSocio(c, claseU);
+				if (a == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
 			}
+		} else {
+			return false;
 		}
 		
 	}
 
 	@Override
-	public void contratacionClase(ClaseSocio claseU) {
+	public boolean contratacionClase(ClaseSocio claseU) {
 		if(claseU != null){
 			Clases cla = this.clase.findById(c, claseU.getId_clase());
 			if(cla.getClase() == ClaseEnum.GRUPO) {
-				this.claseS.insertClaseSocio(c, claseU);
+				int a = this.claseS.insertClaseSocio(c, claseU);
+				if (a == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
 			}
+		} else {
+			return false;
 		}
 	}
 
 	@Override
-	public void compraAbonoPis(BonoUsuario bonoU) {
+	public boolean compraAbonoPis(BonoUsuario bonoU) {
 		if(bonoU != null) {
 			Bono b = this.bono.findById(c, bonoU.getBonoId());
 			if(b.getBono() == BonoEnum.PISCINA) {
-				this.bonoU.insertBonoUsuario(c, bonoU);
+				int a = this.bonoU.insertBonoUsuario(c, bonoU);
+				if (a == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
 			}
+		} else {
+			return false;
 		}
 	}
 
 	@Override
-	public void compraAbonoGim(BonoUsuario bonoU) {
+	public boolean compraAbonoGim(BonoUsuario bonoU) {
 		if(bonoU != null) {
 			Bono b = this.bono.findById(c, bonoU.getBonoId());
 			if(b.getBono() == BonoEnum.GIMNASIO) {
-				this.bonoU.insertBonoUsuario(c, bonoU);
+				int a = this.bonoU.insertBonoUsuario(c, bonoU);
+				if (a == 1) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
 			}
+		} else {
+			return false;
 		}
 	}
 

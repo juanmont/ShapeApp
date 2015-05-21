@@ -32,6 +32,29 @@ public class DaoSocio implements ISocioDao{
 		return socio;
 	}
 	
+	public List<Socio> findAll(Connection connection) {
+		// TODO Auto-generated method stub
+		Socio SocioName=null;
+		List<Socio> SocioList=new ArrayList<Socio>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from Socio");
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+			   SocioName=fillSocio(objetoEncontrado);
+			   SocioList.add(SocioName);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return SocioList;
+	}
+	
 	@Override
 	public List<Socio> findByName(Connection connection, String nombre) {
 		// TODO Auto-generated method stub

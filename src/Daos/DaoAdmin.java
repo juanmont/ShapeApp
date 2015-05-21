@@ -61,6 +61,29 @@ public class DaoAdmin implements IAdminDao{
 		return adminList;
 	}
 	
+	public List<Admin> findAll(Connection connection){
+		// TODO Auto-generated method stub
+		Admin admin=null;
+		List<Admin> adminList=new ArrayList<Admin>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from admin");
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+			   admin=fillAdmin(objetoEncontrado);
+			   adminList.add(admin);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return adminList;
+	}
+	
 	public int modificarAdmin(Connection connection, Admin admin){
 		PreparedStatement updateUsuario=null;
 		PreparedStatement updateAdmin=null;

@@ -18,15 +18,15 @@ public interface FachadaAlquilerCompra {
 	
 	public ArrayList<MaterialUsuario> listaMateriales();
 	
-	public void alquilerInstalacion(InstalacionUsuario inst);
+	public boolean alquilerInstalacion(InstalacionUsuario inst);
 	
-	public void alquilerMaterial(MaterialUsuario mat);
+	public boolean alquilerMaterial(MaterialUsuario mat);
 	
-	public void contratacionEntrenador(ClaseSocio clase);
+	public boolean contratacionEntrenador(ClaseSocio clase);
 	
-	public void contratacionClase(ClaseSocio clase);
+	public boolean contratacionClase(ClaseSocio clase);
 	
-	public void compraAbonoPis(BonoUsuario bono);
+	public boolean compraAbonoPis(BonoUsuario bono);
 	
-	public void compraAbonoGim(BonoUsuario bono);
+	public boolean compraAbonoGim(BonoUsuario bono);
 }

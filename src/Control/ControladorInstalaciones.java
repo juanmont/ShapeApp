@@ -26,7 +26,6 @@ public class ControladorInstalaciones {
 	}
 
 	public ArrayList<Instalaciones> listaInstalaciones() {
-		// TODO Auto-generated method stub
 		return instalaciones.listaInstalaciones();
 	}
 

@@ -205,19 +205,13 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         bVerClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bVerClases.setForeground(new java.awt.Color(102, 102, 102));
         bVerClases.setText("Ver Clases");
-        bVerClases.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bVerClasesActionPerformed(evt);
-            }
-        });
-
 
         bAnadirClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bAnadirClase.setForeground(new java.awt.Color(102, 102, 102));
         bAnadirClase.setText("Añadir Clase");
         bAnadirClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	bAnadirClaseActionPerformed(evt);
+                bAnadirClaseActionPerformed(evt);
             }
         });
 
@@ -307,7 +301,6 @@ public class VentanaAdministrador extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btVerUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btAniadirMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(btAñadirPista, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                     .addComponent(btSalir)
@@ -318,7 +311,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                     .addComponent(btEntrenadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btAñadirUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btVerInstalaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bAnadirClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(bAnadirClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btVerUsers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
@@ -336,6 +330,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(btVerUsers)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btVerFuncionarios)
@@ -347,17 +342,17 @@ public class VentanaAdministrador extends javax.swing.JPanel {
                         .addComponent(btVerInstalaciones)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bVerClases)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAñadirUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAniadirMaterial)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAñadirPersonal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btAniadirMaterial)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAñadirPista)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bAnadirClase)
-                        .addGap(5, 5, 5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btSalir)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -437,18 +432,18 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
 
     private void btVerUsersActionPerformed(java.awt.event.ActionEvent evt) {
-    	quitaPaneles();
-    	panelInterno.setLayout(new BorderLayout());
-        panelInterno.setSize(600, 600);
-        panelInterno.add(PanelLista, BorderLayout.CENTER);
-    	PanelLista.setVisible(true);    	
-    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
-    	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Socio);
+    	quitaPaneles();	
+    	DefaultListModel<Socio> modeloLista = new DefaultListModel<Socio>();
+    	ArrayList<Socio> listaUsuarios = controlUsuarios.listaSocios();
     	for(int i = 0; i < listaUsuarios.size(); i++){
-    		modeloLista.add(i, listaUsuarios.get(i));
+    		modeloLista.addElement(listaUsuarios.get(i));
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
+        PanelLista.setVisible(true);  
+        panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(600, 600);
+        panelInterno.add(PanelLista, BorderLayout.CENTER);  
     }
 
     private void btVerFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,10 +452,10 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         panelInterno.setSize(600, 600);
         panelInterno.add(PanelLista, BorderLayout.CENTER);
     	PanelLista.setVisible(true);    	
-    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
-    	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Funcionario);
+    	DefaultListModel<Funcionario> modeloLista = new DefaultListModel<Funcionario>();
+    	ArrayList<Funcionario> listaUsuarios = controlUsuarios.listaFuncionarios();
     	for(int i = 0; i < listaUsuarios.size(); i++){
-    		modeloLista.add(i, listaUsuarios.get(i));
+    		modeloLista.addElement(listaUsuarios.get(i));
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -472,10 +467,10 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         panelInterno.setSize(600, 600);
         panelInterno.add(PanelLista, BorderLayout.CENTER);
     	PanelLista.setVisible(true);    	
-    	DefaultListModel<Usuario> modeloLista = new DefaultListModel<Usuario>();
-    	ArrayList<Usuario> listaUsuarios = controlUsuarios.listaUsuario(UsuarioEnum.Entrenador);
+    	DefaultListModel<Entrenador> modeloLista = new DefaultListModel<Entrenador>();
+    	ArrayList<Entrenador> listaUsuarios = controlUsuarios.listaEntrenador();
     	for(int i = 0; i < listaUsuarios.size(); i++){
-    		modeloLista.add(i, listaUsuarios.get(i));
+    		modeloLista.addElement(listaUsuarios.get(i));
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -490,7 +485,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	DefaultListModel<Material> modeloLista = new DefaultListModel<Material>();
     	ArrayList<Material> listaMateriales = controlMateriales.listaMateriales();
     	for(int i = 0; i < listaMateriales.size(); i++){
-    		modeloLista.add(i, listaMateriales.get(i));
+    		modeloLista.addElement(listaMateriales.get(i));
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -505,7 +500,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	DefaultListModel<Instalaciones> modeloLista = new DefaultListModel<Instalaciones>();
     	ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.listaInstalaciones();
     	for(int i = 0; i < listaInstalaciones.size(); i++){
-    		Instalaciones ist = listaInstalaciones.get(i);
+    		modeloLista.addElement(listaInstalaciones.get(i));
     	}
     	Lista.removeAll();
         Lista.setModel(modeloLista);
@@ -592,5 +587,6 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private AltaUsuario panelUsuario;
     private AltaMaterial panelMaterial;
     private AltaClases panelClases;
+    private AltaBono panelBono;
     // End of variables declaration//GEN-END:variables
 }
