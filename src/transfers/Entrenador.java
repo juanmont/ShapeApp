@@ -39,6 +39,7 @@ public class Entrenador extends Usuario{
 	}
 	
 	public String toString(){
-		return "Usuario: " + getNick() + " , Nombre: " + getNombre() + " , apellidos: "+ getApellidos();
+		return "Usuario: " + getNick() + " , Nombre: " + getNombre() + " , apellidos: "+ getApellidos() +
+				" , Sueldo: " + getSueldo();	
 	}
 }

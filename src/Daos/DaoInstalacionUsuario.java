@@ -54,6 +54,31 @@ public class DaoInstalacionUsuario implements IInstalacionUsuarioDao{
 		}
 		return claseList;
 	}
+	
+	public List<InstalacionUsuario> findByClase(Connection connection, int claseId) {
+		// TODO Auto-generated method stub
+		InstalacionUsuario clase=null;
+		List<InstalacionUsuario> claseList=new ArrayList<InstalacionUsuario>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from instalacion_usuario where id_clase = ?");
+			//asociamos el valor que queremos buscar
+			buscarName.setInt(1,claseId);
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+				clase=fillMaterialUsuario(objetoEncontrado);
+				claseList.add(clase);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return claseList;
+	}
 
 	@Override
 	public int insertInstalacionUsuario(Connection connection, InstalacionUsuario instalacionUsuario) {

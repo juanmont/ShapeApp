@@ -9,7 +9,8 @@ public interface IBonoDao {
 	
 	List<Bono> findAll(Connection connection);
 	List<Bono> findByTipo(Connection connection, String tipo);
-	int insertBono(Connection connection, Bono bono);
-	int borrarBono(Connection connection, int id);
 	Bono findById(Connection connection, int id);
+	Bono findByNickAndBono(Connection connection, Bono bono);
+	int borrarBonoUsuario(Connection connection, Bono bonoUsuario);
+	int insertBonoUsuario(Connection connection, Bono bono);
 }

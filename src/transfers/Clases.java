@@ -35,8 +35,4 @@ public class Clases {
 	public void setId(int pista) {
 		this.id = pista;
 	}
-	
-	public String toString(){
-		return "Entrenador: " + getIdEntrenador() + " , tipo: " + getTipo();
-	}
 }

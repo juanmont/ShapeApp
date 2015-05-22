@@ -7,7 +7,14 @@ public class Bono {
 	private BonoEnum bono;
 	private int meses;
 	private double precio;
+	private String nick;
 	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public int getId() {
 		return id;
 	}

@@ -20,6 +20,7 @@ public class DaoBono implements IBonoDao{
 			bono.setBono(objetoEncontrado.getString("tipo"));
 			bono.setMeses(objetoEncontrado.getInt("meses"));
 			bono.setPrecio(objetoEncontrado.getDouble("precio"));
+			bono.setNick(objetoEncontrado.getString("nick"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,19 +77,70 @@ public class DaoBono implements IBonoDao{
 	}
 
 	@Override
-	public int insertBono(Connection connection, Bono bono) {
+	public Bono findById(Connection connection, int id) {
+		// TODO Auto-generated method stub
+		Bono clase=null;
+		PreparedStatement buscarID=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarID=connection.prepareStatement(""
+					+"select * "
+					+ "from bono "
+					+ "where id = ?");
+			//asociamos el valor que queremos buscar
+			buscarID.setInt(1, id);
+			//ejecutamos la consulta
+			objetoEncontrado=buscarID.executeQuery();
+			if (objetoEncontrado.next())
+				clase=fillBono(objetoEncontrado);
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return clase;
+	}
+	
+	public List<Bono> findByNick(Connection connection, String nick) {
+		// TODO Auto-generated method stub
+		Bono clase=null;
+		List<Bono> claseList=new ArrayList<Bono>();
+		PreparedStatement buscarName=null;
+		ResultSet objetoEncontrado=null;
+		try{
+			buscarName=connection.prepareStatement("select * from bono where nick like ?");
+			//asociamos el valor que queremos buscar
+			buscarName.setString(1,nick);
+			//ejecutamos la consulta
+			objetoEncontrado=buscarName.executeQuery();
+			while (objetoEncontrado.next()){
+				clase=fillBono(objetoEncontrado);
+				claseList.add(clase);
+			}
+		} catch (TransferException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch(SQLException e){
+			//	throw new DaoException("Error en la busqueda de ...", e)
+		}
+		return claseList;
+	}
+
+	@Override
+	public int insertBonoUsuario(Connection connection, Bono bono) {
 		// TODO Auto-generated method stub
 		PreparedStatement insertClase=null;
 		int result=0;
 		try{
 			insertClase=connection.prepareStatement("INSERT INTO bono"
-					+ "(id, tipo, meses, precio)"
-					+ " VALUES (?,?,?,?)");
-			//asociamos el valor que queremos buscar
-			insertClase.setInt(1, bono.getId());
-			insertClase.setString(2, bono.getBono().toString());
-			insertClase.setInt(3, bono.getMeses());
-			insertClase.setDouble(4, bono.getPrecio());
+					+ "(nick, meses, precio, tipo)"
+					+ " VALUES (?, ?, ?, ?)");
+			//asociamos el valor que queremos busca
+			insertClase.setString(1, bono.getNick());
+			insertClase.setInt(2, bono.getMeses());
+			insertClase.setDouble(3, bono.getPrecio());
+			insertClase.setString(4, bono.getBono().toString());
 			result=insertClase.executeUpdate();
 			connection.commit();
 		} catch (TransferException e) {
@@ -101,16 +153,17 @@ public class DaoBono implements IBonoDao{
 	}
 
 	@Override
-	public int borrarBono(Connection connection, int id) {
+	public int borrarBonoUsuario(Connection connection, Bono bonoUsuario) {
 		// TODO Auto-generated method stub
 		PreparedStatement borrarClase=null;
 		int result=0;
 		try{
 			borrarClase=connection.prepareStatement(""
-					+ "delete from bono "
-					+ "where id = ?");
+					+ "delete from usuario_bono "
+					+ "where id = ? AND nick = ?");
 			//asociamos el valor que queremos buscar
-			borrarClase.setInt(1, id);
+			borrarClase.setInt(1, bonoUsuario.getId());
+			borrarClase.setString(2, bonoUsuario.getNick());
 			//ejecutamos la consulta
 			result=borrarClase.executeUpdate();
 			connection.commit();
@@ -124,7 +177,7 @@ public class DaoBono implements IBonoDao{
 	}
 
 	@Override
-	public Bono findById(Connection connection, int id) {
+	public Bono findByNickAndBono(Connection connection, Bono bono) {
 		// TODO Auto-generated method stub
 		Bono clase=null;
 		PreparedStatement buscarID=null;
@@ -133,9 +186,10 @@ public class DaoBono implements IBonoDao{
 			buscarID=connection.prepareStatement(""
 					+"select * "
 					+ "from bono "
-					+ "where id = ?");
+					+ "where id = ? AND nick = ?");
 			//asociamos el valor que queremos buscar
-			buscarID.setInt(1, id);
+			buscarID.setInt(1, bono.getId());
+			buscarID.setString(2, bono.getNick());
 			//ejecutamos la consulta
 			objetoEncontrado=buscarID.executeQuery();
 			if (objetoEncontrado.next())
