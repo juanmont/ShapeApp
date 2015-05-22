@@ -316,7 +316,10 @@ public class AltaUsuario extends javax.swing.JPanel {
         		ent.rellenaDatos(rellenaUsuario());
         		if(compruebaDatosPersona()){
         			ent = rellenaEntrenador(ent);
-        			control.altaUsuario(null, null, null, ent);
+        			if(control.altaUsuario(null, null, null, ent))
+        				JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
+        			else
+            			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar el entrenador", "ERROR", JOptionPane.ERROR_MESSAGE);
         			}
         		else
         			JOptionPane.showMessageDialog(btGuardar, "Debe asignar datos especificos de personal", "ERROR", ERROR);
@@ -326,7 +329,11 @@ public class AltaUsuario extends javax.swing.JPanel {
         		func.rellenaDatos(rellenaUsuario());
         		if(compruebaDatosPersona()){
         			func = rellenaFuncionario(func);
-        			control.altaUsuario(null, null ,func, null);
+        			if(control.altaUsuario(null, null ,func, null))
+        				JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
+        			else
+            			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar el funcionario", "ERROR", JOptionPane.ERROR_MESSAGE);
+        			
         			}
         		else
         			JOptionPane.showMessageDialog(btGuardar, "Debe asignar datos especificos de personal", "ERROR", ERROR);
@@ -336,7 +343,10 @@ public class AltaUsuario extends javax.swing.JPanel {
         	else{
         		Socio socio = new Socio();
         		socio.rellenaDatos(rellenaUsuario());
-        		control.altaUsuario(socio, null, null, null);
+        		if(control.altaUsuario(socio, null, null, null))
+        			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
+        		else
+        			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar el socio", "ERROR", JOptionPane.ERROR_MESSAGE);
         	}
         	
         }

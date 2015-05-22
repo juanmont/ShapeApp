@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Logica.FachadaInstalaciones;
 import Logica.SubSistemaInstalaciones;
+import enums.DisponibilidadEnum;
 import enums.PistaEnum;
 import transfers.Instalaciones;
 
@@ -37,10 +38,10 @@ public class ControladorInstalaciones {
 		
 	}
 
-	public boolean AltaInstalacion(String numero, String tipoDeporte, String tipo) {
-		ins.setNumero(Integer.parseInt(numero));
+	public boolean AltaInstalacion(String Disponibilidad, String tipoDeporte, PistaEnum tipo) {
+		ins.setDisponibilidad(Disponibilidad);
 		ins.setTipo(tipoDeporte);
-		ins.setPista(tipo);
+		ins.setPista(tipo.toString());
 		return instalaciones.altaInstalacion(ins);
 	}
 

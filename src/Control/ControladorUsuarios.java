@@ -52,8 +52,8 @@ public class ControladorUsuarios {
 	}
 	
 
-	public void altaUsuario(Socio socio, Admin admin, Funcionario funcionario, Entrenador entrenador) {
-		usuarios.altaUsuario(socio, admin, funcionario, entrenador);
+	public boolean altaUsuario(Socio socio, Admin admin, Funcionario funcionario, Entrenador entrenador) {
+		return usuarios.altaUsuario(socio, admin, funcionario, entrenador);
 	}
 
 	public UsuarioEnum login(String user, String pass) {
@@ -90,15 +90,17 @@ public class ControladorUsuarios {
 		return usuarios.getListaAdmin();
 	}
 
-	public void borrarUsuario(Usuario socio, UsuarioEnum tipo) {
+	public boolean borrarUsuario(Usuario socio, UsuarioEnum tipo) {
 		if(tipo == UsuarioEnum.Socio)
-			usuarios.bajaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null), ((Entrenador)null));
+			return usuarios.bajaUsuario(((Socio)socio), ((Admin)null), ((Funcionario)null), ((Entrenador)null));
 		else if(tipo == UsuarioEnum.Admin)
-			usuarios.bajaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null), ((Entrenador)null));
+			return usuarios.bajaUsuario(((Socio)null), ((Admin)socio), ((Funcionario)null), ((Entrenador)null));
 		else if(tipo == UsuarioEnum.Funcionario)
-			usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio), ((Entrenador)null));
+			return usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)socio), ((Entrenador)null));
 		else if(tipo == UsuarioEnum.Entrenador)
-			usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)null), ((Entrenador)socio));
+			return usuarios.bajaUsuario(((Socio)null), ((Admin)null), ((Funcionario)null), ((Entrenador)socio));
+		else 
+			return false;
 		// TODO Auto-generated method stub
 		
 	}

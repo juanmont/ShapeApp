@@ -179,7 +179,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
 
         btAñadirPista.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         btAñadirPista.setForeground(new java.awt.Color(102, 102, 102));
-        btAñadirPista.setText("Añadir Pista");
+        btAñadirPista.setText("Añadir instalacion");
         btAñadirPista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAñadirInstalacionActionPerformed(evt);
@@ -207,6 +207,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         bVerClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bVerClases.setForeground(new java.awt.Color(102, 102, 102));
         bVerClases.setText("Ver Clases");
+        bVerClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	bVerClasesActionPerformed(evt);
+            }
+        });
 
         bAnadirClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         bAnadirClase.setForeground(new java.awt.Color(102, 102, 102));
@@ -357,9 +362,8 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     }
     
     private void bAnadirClaseActionPerformed(ActionEvent evt) {
-    	panelClases = new AltaClases();
-   	 	PanelLista.setVisible(false);
    	 	quitaPaneles();
+    	panelClases = new AltaClases(controlUsuarios, controlClases);
         panelInterno.setLayout(new BorderLayout());
         panelInterno.setSize(600, 600);
         panelClases.setPreferredSize(new Dimension(400,300));
@@ -401,7 +405,11 @@ public class VentanaAdministrador extends javax.swing.JPanel {
          }
          else if(o instanceof Instalaciones){
         	 panelInstalacion = new AltaInstalacion(controlInstalaciones);
-        	 panelInterno.add(panelInstalacion, BorderLayout.CENTER);;
+        	 panelInterno.add(panelInstalacion, BorderLayout.CENTER);
+         }
+         else if(o instanceof Clases){
+        	 panelClases = new AltaClases(controlUsuarios,controlClases);
+        	 panelInterno.add(panelClases, BorderLayout.CENTER);
          }
          else
       	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
@@ -410,18 +418,43 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {
        Object o = Lista.getSelectedValue();
        if(o instanceof Usuario){
-    	   if(o instanceof Socio)
-    		   controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Socio);
-    	   if(o instanceof Funcionario)
-    		   controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Funcionario);
-    	   if(o instanceof Entrenador)
-    		   controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Entrenador);
+    	   if(o instanceof Socio){
+    		   if(controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Socio))
+    			   JOptionPane.showConfirmDialog(null, "Socio borrado Correctamente", "OK", JOptionPane.OK_OPTION);
+    		   else
+       			JOptionPane.showConfirmDialog(null, "Error al borrar el socio", "ERROR", JOptionPane.ERROR_MESSAGE);
+    	   }
+    	   if(o instanceof Funcionario){
+    		   if(controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Funcionario))
+    			   JOptionPane.showConfirmDialog(null, "Funcionario borrado Correctamente", "OK", JOptionPane.OK_OPTION);
+    		   else
+          			JOptionPane.showConfirmDialog(null, "Error al borrar el funcionario", "ERROR", JOptionPane.ERROR_MESSAGE);
+    	   }
+    	   if(o instanceof Entrenador){
+    		   if(controlUsuarios.borrarUsuario(((Usuario)o), UsuarioEnum.Entrenador))
+    			   JOptionPane.showConfirmDialog(null, "Entrenador borrado Correctamente", "OK", JOptionPane.OK_OPTION);
+    		   else
+          			JOptionPane.showConfirmDialog(null, "Error al borrar el entrenador", "ERROR", JOptionPane.ERROR_MESSAGE);
+    	   }
+       }   
+       else if(o instanceof Material){
+    	   if(controlMateriales.borrarMaterial(((Material)o)))
+    		   JOptionPane.showConfirmDialog(null, "clase borrada Correctamente", "OK", JOptionPane.OK_OPTION);
+    	   else
+      			JOptionPane.showConfirmDialog(null, "Error al borrar el material", "ERROR", JOptionPane.ERROR_MESSAGE);
        }
-    	   
-       else if(o instanceof Material)
-    	   controlMateriales.borrarMaterial(((Material)o));
-       else if(o instanceof Instalaciones)
-    	   controlInstalaciones.borrarInstalacion(((Instalaciones)o));
+       else if(o instanceof Instalaciones){
+    	   if(controlInstalaciones.borrarInstalacion(((Instalaciones)o)))
+    		   JOptionPane.showConfirmDialog(null, "clase borrada Correctamente", "OK", JOptionPane.OK_OPTION);
+    	   else
+      			JOptionPane.showConfirmDialog(null, "Error al borrar la instalacion", "ERROR", JOptionPane.ERROR_MESSAGE);
+       }
+       else if(o instanceof Clases){
+    	   if(controlClases.borrarClase(((Clases)o)))
+    		   JOptionPane.showConfirmDialog(null, "clase borrada Correctamente", "OK", JOptionPane.OK_OPTION);
+    	   else
+      			JOptionPane.showConfirmDialog(null, "Error al borrar la clase", "ERROR", JOptionPane.ERROR_MESSAGE);
+       }
        else
     	   JOptionPane.showMessageDialog(Lista, "elemento no reconocido", "ERROR", ERROR);
     	   

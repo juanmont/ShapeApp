@@ -27,7 +27,7 @@ public class VentanaPrincipal extends JFrame{
 		this.con = c;
 		controlUsuarios = new ControladorUsuarios(c);
 		controlInstalaciones = new ControladorInstalaciones(c);
-		controlClases = new ControladorClases();
+		controlClases = new ControladorClases(c);
 		controlMateriales = new ControladorMateriales(c);
 		controlAlquilerCompra = new ControladorAlquilerCompra();
 		login = new VentanaInicio(this,con, controlUsuarios);
@@ -49,7 +49,7 @@ public class VentanaPrincipal extends JFrame{
 				controlClases, controlInstalaciones, controlUsuarios, controlUsuarios.getNick());
 		login.setVisible(false);
 		this.setResizable(true);
-		this.setSize(800, 500);
+		this.setSize(700, 500);
 		this.add(vAdmin, BorderLayout.CENTER);
 		vAdmin.setVisible(true);
 		this.setResizable(false);
