@@ -43,11 +43,10 @@ public class AltaUsuario extends javax.swing.JPanel {
         
     }
     
-    public AltaUsuario(Usuario socio, ControladorUsuarios controlador, boolean personal){
+    public AltaUsuario(Socio socio, ControladorUsuarios controlador){
     	modificar = true;
     	control = controlador;
     	initComponents();
-    	if(!personal){
         	jlTipo.setVisible(false);
         	jcbTipo.setVisible(false);
         	jtSueldo.setVisible(false);
@@ -56,17 +55,46 @@ public class AltaUsuario extends javax.swing.JPanel {
         	jlHoraEntrada.setVisible(false);
         	jtHoraSalida.setVisible(false);
         	jlHoraSalida.setVisible(false);
-        }
-    	jtfUsuario.setEditable(false);
-    	jtfDNI.setEditable(false);
     	rellenaDatos(socio);
     	inhabilitaCampos();
     }
 
-    /**
+    public AltaUsuario(Funcionario socio, ControladorUsuarios controlador){
+    	modificar = true;
+    	control = controlador;
+    	initComponents();
+    	rellenaDatosFuncionario(socio);
+    	inhabilitaCampos();
+    }
+    
+    private void rellenaDatosFuncionario(Funcionario socio2) {
+		rellenaDatos(socio2);
+		jtSueldo.setText(String.valueOf(socio2.getSueldo()));
+		jtHoraEntrada.setText(socio2.getHoraEntrada());
+		jtHoraSalida.setText(socio2.getHoraSalida());
+		
+	}
+
+	public AltaUsuario(Entrenador socio, ControladorUsuarios controlador){
+    	modificar = true;
+    	control = controlador;
+    	initComponents();
+    	rellenaDatosEntrenador(socio);
+    	inhabilitaCampos();
+    }
+    private void rellenaDatosEntrenador(Entrenador socio2) {
+		rellenaDatos(socio2);
+		jtSueldo.setText(String.valueOf(socio2.getSueldo()));
+		jtHoraEntrada.setText(socio2.getHoraEntrada());
+		jtHoraSalida.setText(socio2.getHoraSalida());
+		
+	}
+
+	/**
      * Inhabilita los JTextField de Nombre, Apellidos y DNI para que no puedan ser editados.
      */
     private void inhabilitaCampos() {
+    	jtfUsuario.setEditable(false);
     	jtfNombre.setEditable(false);
 		jtfApellidos.setEditable(false);
 		jtfDNI.setEditable(false);

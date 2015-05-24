@@ -396,7 +396,12 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	quitaPaneles();
     	 Object o = Lista.getSelectedValue();
          if(o instanceof Usuario){
-        	 panelUsuario = new AltaUsuario((Usuario)o, controlUsuarios, true);
+        	 if(o instanceof Socio)
+        		 panelUsuario = new AltaUsuario((Socio)o, controlUsuarios);
+        	 if(o instanceof Funcionario)
+            	 panelUsuario = new AltaUsuario((Funcionario)o, controlUsuarios);
+        	 if(o instanceof Entrenador)
+            	 panelUsuario = new AltaUsuario((Entrenador)o, controlUsuarios);
              panelInterno.add(panelUsuario, BorderLayout.CENTER);
          }
          else if(o instanceof Material){
