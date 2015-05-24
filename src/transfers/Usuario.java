@@ -97,7 +97,7 @@ public class Usuario {
 	
 	public void rellenaDatos(Usuario user){
 		this.direccion = user.direccion;
-		this.apellidos = user.direccion;
+		this.apellidos = user.apellidos;
 		this.DNI = user.DNI;
 		this.email = user.email;
 		this.nick = user.nick;

@@ -17,16 +17,19 @@ import Control.ControladorMateriales;
  * @author juanjose
  */
 public class AltaMaterial extends javax.swing.JPanel {
-	ControladorMateriales controlMateriales;
+	private ControladorMateriales controlMateriales;
+	private boolean modificar;
     /**
      * Creates new form AltaFuncionario
      */
     public AltaMaterial(ControladorMateriales controladorMat) {
+    	modificar = false;
     	controlMateriales = controladorMat;
         initComponents();
     }
     
     public AltaMaterial(Material m,ControladorMateriales controladorMat) {
+    	modificar = true;
     	controlMateriales = controladorMat;
         initComponents();
         jtDescripcion.setText(m.getDescripcion());
@@ -136,10 +139,17 @@ public class AltaMaterial extends javax.swing.JPanel {
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {
        	if(compruebaCampos()){
+       		if(!modificar){
        		if(controlMateriales.AltaMaterial(jtfNombre.getText(), jtDescripcion.getText(), jcbTipo.getSelectedItem().toString()))
        			JOptionPane.showMessageDialog(bGuardar, "Guardado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
        		else
        			JOptionPane.showMessageDialog(bGuardar, "Error al dar de alta el material", "ERROR", JOptionPane.ERROR_MESSAGE);
+       		}
+       		else
+       			if(controlMateriales.modificarMaterial(jtfNombre.getText(), jtDescripcion.getText(), jcbTipo.getSelectedItem().toString()))
+       				JOptionPane.showMessageDialog(bGuardar, "Modificado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
+       			else 
+    				JOptionPane.showMessageDialog(bGuardar, "No se ha podido modificar", "ERROR", ERROR);
        	}
        	else
    			JOptionPane.showMessageDialog(bGuardar, "Introduce todos los datos", "ERROR", JOptionPane.ERROR_MESSAGE);		

@@ -24,6 +24,7 @@ public class CompraBono extends javax.swing.JPanel {
 	private ControladorAlquilerCompra controlAlquilerCompra;
 	private ControladorUsuarios controlUsuarios;
 	private ArrayList<Socio> listaSocios;
+	private boolean muestraLista;
 	
     /**
      * Creates new form CompraBono
@@ -175,15 +176,28 @@ public class CompraBono extends javax.swing.JPanel {
 
     private void botonComprarActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    	if(!listaUsuarios.isSelectionEmpty()){
-	    	int a = Integer.parseInt((String) this.meses.getSelectedItem());
-	    	Socio socio = listaSocios.get(this.listaUsuarios.getSelectedIndex());
-	    	if(controlAlquilerCompra.compraBono(BonoEnum.valueOf(tipo.getSelectedItem().toString()), a, socio.getNick())){
-	    		JOptionPane.showMessageDialog(null,  "Bono comprado","Exito", JOptionPane.INFORMATION_MESSAGE);
-	    	}else{
-	    		JOptionPane.showMessageDialog(null,  "Fallo","ERROR", JOptionPane.INFORMATION_MESSAGE);	    	
-	    	}
-    	}else
+    	//if(!listaUsuarios.isSelectionEmpty()){
+    		
+    		if(muestraLista == true && !listaUsuarios.isSelectionEmpty()){
+    			int a = Integer.parseInt((String) this.meses.getSelectedItem());
+    	    	Socio socio = listaSocios.get(this.listaUsuarios.getSelectedIndex());
+    	    	if(controlAlquilerCompra.compraBono(BonoEnum.valueOf(tipo.getSelectedItem().toString()), a, socio.getNick())){
+    	    		JOptionPane.showMessageDialog(null,  "Bono comprado","Exito", JOptionPane.INFORMATION_MESSAGE);
+    	    	}else{
+    	    		JOptionPane.showMessageDialog(null,  "Fallo","ERROR", JOptionPane.INFORMATION_MESSAGE);	    	
+    	    	}
+    		}else if(muestraLista == false){
+    			int a = Integer.parseInt((String) this.meses.getSelectedItem());
+    	    	String socio = controlUsuarios.getNick();
+    	    	if(controlAlquilerCompra.compraBono(BonoEnum.valueOf(tipo.getSelectedItem().toString()), a, socio)){
+    	    		JOptionPane.showMessageDialog(null,  "Bono comprado","Exito", JOptionPane.INFORMATION_MESSAGE);
+    	    	}else{
+    	    		JOptionPane.showMessageDialog(null,  "Fallo","ERROR", JOptionPane.INFORMATION_MESSAGE);	    	
+    	    	}
+    		}
+    		
+	    	
+    	/*}*/else
     		JOptionPane.showMessageDialog(null,  "Elige usuario","ERROR", JOptionPane.INFORMATION_MESSAGE);
     }                                            
 

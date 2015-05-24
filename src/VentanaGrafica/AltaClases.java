@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
+import transfers.Clases;
 import transfers.Entrenador;
 import Control.ControladorClases;
 import Control.ControladorInstalaciones;
@@ -17,17 +18,35 @@ import Control.ControladorUsuarios;
 public class AltaClases extends javax.swing.JPanel {
 	private ControladorUsuarios controlUsuarios;
 	private ControladorClases controlClases;
+	private boolean modificar;
+	private Clases clase;
     /**
      * Creates new form PanelClases
      */
     public AltaClases(ControladorUsuarios controlUsu, ControladorClases controlCla) {
+    	modificar = false;
     	controlClases = controlCla;
     	controlUsuarios = controlUsu;
         initComponents();
         cargaEntrenadores();
     }
+    
+    public AltaClases(Clases clase, ControladorUsuarios controlUsu, ControladorClases controlCla) {
+    	this.clase = clase;
+    	modificar = true;
+    	controlClases = controlCla;
+    	controlUsuarios = controlUsu;
+        initComponents();
+        rellenaDatos();
+        cargaEntrenadores();
+    }
 
-    private void cargaEntrenadores() {
+    private void rellenaDatos() {
+    	jcTipoClase.setSelectedItem(clase.getClase().toString());
+    	jcTipoDeporte.setSelectedItem(clase.getTipo().toString());
+	}
+
+	private void cargaEntrenadores() {
     	DefaultListModel<Entrenador> modeloLista = new DefaultListModel<Entrenador>();
     	ArrayList<Entrenador> listaUsuarios = controlUsuarios.listaEntrenador();
     	if(!listaUsuarios.isEmpty()){

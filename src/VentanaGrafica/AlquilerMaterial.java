@@ -24,7 +24,7 @@ import Control.ControladorUsuarios;
 
 /**
  *
- * @author juanjose
+ * @author Cristina
  */
 public class AlquilerMaterial extends javax.swing.JPanel implements ListSelectionListener {
 
@@ -32,6 +32,7 @@ public class AlquilerMaterial extends javax.swing.JPanel implements ListSelectio
 	private ControladorUsuarios controlUsuarios;
 	private ControladorMateriales controlMaterial;
 	private ArrayList<Material> lista;
+	private boolean muestraLista;
 	private ArrayList<Socio> listaSocios;
 	boolean[] horas;
     /**
@@ -174,33 +175,66 @@ public class AlquilerMaterial extends javax.swing.JPanel implements ListSelectio
     }                       
 
     private void botonAlquilarActionPerformed(java.awt.event.ActionEvent evt) {
-    	if(!this.listaMaterial.isSelectionEmpty() && !this.listaHoras.isSelectionEmpty() && !this.listaUsuarios.isSelectionEmpty()){
-	    	Material mat = this.lista.get(listaMaterial.getSelectedIndex());
-	    	java.util.Date fecha1 = new java.util.Date();
-	    	long date = fecha1.getTime();
-	    	Date fecha = new Date(date);
-	    	//Date fecha = new Date(fecha1.getYear(), fecha1.getMonth(), fecha1.getDate());
-	    	int hora =  Integer.parseInt((String) listaHoras.getSelectedValue());
-	    	String socio = listaSocios.get(listaUsuarios.getSelectedIndex()).getNick();
-	    	if(control.alquilarMaterial(mat.getId(), socio, hora, fecha)){
-	    		DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
-				horas = controlMaterial.VerHoras(mat.getId());
-		    	if(horas.length != 0){
-		    		int a = 0;
-		    		for(int i = 0; i < horas.length; i++){
-		    			if(horas[i]){
-		    				modeloListaHoras.add(a, Integer.toString(i + 9));
-		    				a++;
-		    			}
-		    		}
-		    	}
-		    	listaHoras.removeAll();
-		    	listaHoras.setModel(modeloListaHoras);
-		    	JOptionPane.showMessageDialog(null,  "Exito al alquilar el material","EXITO", JOptionPane.INFORMATION_MESSAGE);
-	    	}
-	    	else
-	    		JOptionPane.showConfirmDialog(null, "Error al alquilar el material", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-    	}else{
+    	if(!this.listaMaterial.isSelectionEmpty() && !this.listaHoras.isSelectionEmpty() /*&& !this.listaUsuarios.isSelectionEmpty()*/){
+	    	
+    		if(muestraLista == true && !this.listaUsuarios.isSelectionEmpty()){
+    			
+    			Material mat = this.lista.get(listaMaterial.getSelectedIndex());
+    	    	java.util.Date fecha1 = new java.util.Date();
+    	    	long date = fecha1.getTime();
+    	    	Date fecha = new Date(date);
+    	    	//Date fecha = new Date(fecha1.getYear(), fecha1.getMonth(), fecha1.getDate());
+    	    	int hora =  Integer.parseInt((String) listaHoras.getSelectedValue());
+    	    	String socio = listaSocios.get(listaUsuarios.getSelectedIndex()).getNick();
+    	    	if(control.alquilarMaterial(mat.getId(), socio, hora, fecha)){
+    	    		DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+    				horas = controlMaterial.VerHoras(mat.getId());
+    		    	if(horas.length != 0){
+    		    		int a = 0;
+    		    		for(int i = 0; i < horas.length; i++){
+    		    			if(horas[i]){
+    		    				modeloListaHoras.add(a, Integer.toString(i + 9));
+    		    				a++;
+    		    			}
+    		    		}
+    		    	}
+    		    	listaHoras.removeAll();
+    		    	listaHoras.setModel(modeloListaHoras);
+    		    	JOptionPane.showMessageDialog(null,  "Exito al alquilar el material","EXITO", JOptionPane.INFORMATION_MESSAGE);
+    	    	}
+    	    	else
+    	    		JOptionPane.showConfirmDialog(null, "Error al alquilar el material", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    			
+    		}else if(muestraLista == false){
+    			Material mat = this.lista.get(listaMaterial.getSelectedIndex());
+    	    	java.util.Date fecha1 = new java.util.Date();
+    	    	long date = fecha1.getTime();
+    	    	Date fecha = new Date(date);
+    	    	//Date fecha = new Date(fecha1.getYear(), fecha1.getMonth(), fecha1.getDate());
+    	    	int hora =  Integer.parseInt((String) listaHoras.getSelectedValue());
+    	    	String socio = controlUsuarios.getNick();
+    	    	if(control.alquilarMaterial(mat.getId(), socio, hora, fecha)){
+    	    		DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+    				horas = controlMaterial.VerHoras(mat.getId());
+    		    	if(horas.length != 0){
+    		    		int a = 0;
+    		    		for(int i = 0; i < horas.length; i++){
+    		    			if(horas[i]){
+    		    				modeloListaHoras.add(a, Integer.toString(i + 9));
+    		    				a++;
+    		    			}
+    		    		}
+    		    	}
+    		    	listaHoras.removeAll();
+    		    	listaHoras.setModel(modeloListaHoras);
+    		    	JOptionPane.showMessageDialog(null,  "Exito al alquilar el material","EXITO", JOptionPane.INFORMATION_MESSAGE);
+    	    	}
+    	    	else
+    	    		JOptionPane.showConfirmDialog(null, "Error al alquilar el material", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}
+    		
+    		
+    	}else{//primer if
     		JOptionPane.showConfirmDialog(null, "Debes seleccionar todos los componentes", "ERROR", JOptionPane.INFORMATION_MESSAGE);
 
     	}

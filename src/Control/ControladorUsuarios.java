@@ -57,6 +57,7 @@ public class ControladorUsuarios {
 	}
 
 	public UsuarioEnum login(String user, String pass) {
+		this.nick = user;
 		if(usuarios.tipoUsuarioAdmin(c, user, pass) != null)
 			return UsuarioEnum.Admin;
 		else if(usuarios.tipoUsuarioSocio(c, user, pass) != null)

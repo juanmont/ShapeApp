@@ -223,32 +223,63 @@ public class AlquilerInstalacion extends javax.swing.JPanel implements ListSelec
     private void botonAlquActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
     	if(!this.listaInstalaciones.isSelectionEmpty() && !this.listaHoras.isSelectionEmpty()
-    			&& !this.listaUsuarios.isSelectionEmpty() && this.listaClases.isSelectionEmpty()){
-	    	Instalaciones mat = this.lista.get(listaInstalaciones.getSelectedIndex());
-	    	java.util.Date fecha1 = new java.util.Date();
-	    	long date = fecha1.getTime();
-	    	Date fecha = new Date(date);
-	    	//Date fecha = new Date(fecha1.getYear(), fecha1.getMonth(), fecha1.getDate());
-	    	int hora =  Integer.parseInt((String) listaHoras.getSelectedValue());
-	    	String socio = listaSocios.get(listaUsuarios.getSelectedIndex()).getNick();
-	    	if(controlAlq.alquilarInstalacion(mat.getNumero(), socio, hora, fecha, -1)){
-				DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
-				horas = controlInst.verHoras(mat);
-		    	if(horas.length != 0){
-		    		int a = 0;
-		    		for(int i = 0; i < horas.length; i++){
-		    			if(horas[i]){
-		    				modeloListaHoras.add(a, Integer.toString(i + 9));
-		    				a++;
-		    			}
-		    		}
-		    	}
-		    	listaHoras.removeAll();
-		    	listaHoras.setModel(modeloListaHoras);
-		    	JOptionPane.showMessageDialog(null,  "Instalacion Alquilada","EXITO", JOptionPane.INFORMATION_MESSAGE);
-	    	}
-	    	else
-	    		JOptionPane.showConfirmDialog(null, "Error al alquilar la instalacion", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    			/*&& !this.listaUsuarios.isSelectionEmpty() && this.listaClases.isSelectionEmpty()*/){
+    		
+    		if(muestraLista == true && !this.listaUsuarios.isSelectionEmpty() && !this.listaClases.isSelectionEmpty()){
+    			Instalaciones mat = this.lista.get(listaInstalaciones.getSelectedIndex());
+    	    	java.util.Date fecha1 = new java.util.Date();
+    	    	long date = fecha1.getTime();
+    	    	Date fecha = new Date(date);
+    	    	//Date fecha = new Date(fecha1.getYear(), fecha1.getMonth(), fecha1.getDate());
+    	    	int hora =  Integer.parseInt((String) listaHoras.getSelectedValue());
+    	    	String socio = listaSocios.get(listaUsuarios.getSelectedIndex()).getNick();
+    	    	if(controlAlq.alquilarInstalacion(mat.getNumero(), socio, hora, fecha, -1)){
+    				DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+    				horas = controlInst.verHoras(mat);
+    		    	if(horas.length != 0){
+    		    		int a = 0;
+    		    		for(int i = 0; i < horas.length; i++){
+    		    			if(horas[i]){
+    		    				modeloListaHoras.add(a, Integer.toString(i + 9));
+    		    				a++;
+    		    			}
+    		    		}
+    		    	}
+    		    	listaHoras.removeAll();
+    		    	listaHoras.setModel(modeloListaHoras);
+    		    	JOptionPane.showMessageDialog(null,  "Instalacion Alquilada","EXITO", JOptionPane.INFORMATION_MESSAGE);
+    	    	}
+    	    	else
+    	    		JOptionPane.showConfirmDialog(null, "Error al alquilar la instalacion", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}else if(muestraLista == false){
+    			Instalaciones mat = this.lista.get(listaInstalaciones.getSelectedIndex());
+    	    	java.util.Date fecha1 = new java.util.Date();
+    	    	long date = fecha1.getTime();
+    	    	Date fecha = new Date(date);
+    	    	//Date fecha = new Date(fecha1.getYear(), fecha1.getMonth(), fecha1.getDate());
+    	    	int hora =  Integer.parseInt((String) listaHoras.getSelectedValue());
+    	    	String socio = controlUsuario.getNick();
+    	    	if(controlAlq.alquilarInstalacion(mat.getNumero(), socio, hora, fecha, -1)){
+    				DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+    				horas = controlInst.verHoras(mat);
+    		    	if(horas.length != 0){
+    		    		int a = 0;
+    		    		for(int i = 0; i < horas.length; i++){
+    		    			if(horas[i]){
+    		    				modeloListaHoras.add(a, Integer.toString(i + 9));
+    		    				a++;
+    		    			}
+    		    		}
+    		    	}
+    		    	listaHoras.removeAll();
+    		    	listaHoras.setModel(modeloListaHoras);
+    		    	JOptionPane.showMessageDialog(null,  "Instalacion Alquilada","EXITO", JOptionPane.INFORMATION_MESSAGE);
+    	    	}
+    	    	else
+    	    		JOptionPane.showConfirmDialog(null, "Error al alquilar la instalacion", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}
+    		
+	    
     	}else if(!this.listaInstalaciones.isSelectionEmpty() && !this.listaHoras.isSelectionEmpty() 
     			&& this.listaUsuarios.isSelectionEmpty() && !this.listaClases.isSelectionEmpty()){
     		Instalaciones mat = this.lista.get(listaInstalaciones.getSelectedIndex());

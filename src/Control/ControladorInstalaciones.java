@@ -37,16 +37,24 @@ public class ControladorInstalaciones {
 		
 	}
 
-	public boolean AltaInstalacion(String numero, String tipoDeporte, String tipo) {
-		ins.setNumero(Integer.parseInt(numero));
+	public boolean AltaInstalacion(String disponibilidad, String tipoDeporte, PistaEnum tipo) {
+		ins.setDisponibilidad(disponibilidad);
 		ins.setTipo(tipoDeporte);
-		ins.setPista(tipo);
+		ins.setPista(tipo.toString());
 		return instalaciones.altaInstalacion(ins);
 	}
 
 	public boolean[] verHoras(Instalaciones insta) {
 		// TODO Auto-generated method stub
 		return instalaciones.verHoras(insta);
+	}
+
+	public boolean ModificarInstalacio(String disponibilidad, String tipoDeporte,
+			PistaEnum tipoPista) {
+		ins.setDisponibilidad(disponibilidad);
+		ins.setTipo(tipoDeporte);
+		ins.setPista(tipoPista.toString());
+		return instalaciones.modificarInstalacion(ins);
 	}
 
 }

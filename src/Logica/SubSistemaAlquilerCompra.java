@@ -119,19 +119,14 @@ public class SubSistemaAlquilerCompra implements FachadaAlquilerCompra {
 	public boolean contratacionClase(ClaseSocio claseU) {
 		if(claseU != null){
 			Clases cla = this.clase.findById(c, claseU.getId_clase());
-			if(cla.getClase() == ClaseEnum.GRUPO) {
 				int a = this.claseS.insertClaseSocio(c, claseU);
 				if (a == 1) {
 					return true;
 				} else {
 					return false;
 				}
-			} else {
-				return false;
-			}
-		} else {
+		}else 
 			return false;
-		}
 	}
 
 	@Override

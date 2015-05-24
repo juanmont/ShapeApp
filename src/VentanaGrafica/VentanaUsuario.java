@@ -17,6 +17,7 @@ import Control.ControladorInstalaciones;
 import Control.ControladorMateriales;
 import Control.ControladorUsuarios;
 
+
 /**
  *
  * @author Cristina
@@ -49,6 +50,7 @@ public class VentanaUsuario extends javax.swing.JPanel {
         initComponents();
         this.setVisible(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,10 +64,8 @@ public class VentanaUsuario extends javax.swing.JPanel {
         botonAlquilerInst = new javax.swing.JButton();
         botonContrMonitor = new javax.swing.JButton();
         botonAlquMaterial = new javax.swing.JButton();
-        botonComGim = new javax.swing.JButton();
-        botonComPis = new javax.swing.JButton();
+        botonBono = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
-        botonCancelar = new javax.swing.JButton();
         panelInterno = new javax.swing.JPanel();
         panelListas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -74,6 +74,7 @@ public class VentanaUsuario extends javax.swing.JPanel {
         listaHoras = new javax.swing.JList();
         etiquetaDeportes = new javax.swing.JLabel();
         etiquetaHoras = new javax.swing.JLabel();
+        botonClase = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
@@ -108,21 +109,12 @@ public class VentanaUsuario extends javax.swing.JPanel {
             }
         });
 
-        botonComGim.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        botonComGim.setForeground(new java.awt.Color(102, 102, 102));
-        botonComGim.setText("Compra Bono Gimnasio");
-        botonComGim.addActionListener(new java.awt.event.ActionListener() {
+        botonBono.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        botonBono.setForeground(new java.awt.Color(102, 102, 102));
+        botonBono.setText("Compra Bono");
+        botonBono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonComGimActionPerformed(evt);
-            }
-        });
-
-        botonComPis.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        botonComPis.setForeground(new java.awt.Color(102, 102, 102));
-        botonComPis.setText("Compra Bono Piscina");
-        botonComPis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonComPisActionPerformed(evt);
+                botonBonoActionPerformed(evt);
             }
         });
 
@@ -132,15 +124,6 @@ public class VentanaUsuario extends javax.swing.JPanel {
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
-            }
-        });
-
-        botonCancelar.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        botonCancelar.setForeground(new java.awt.Color(102, 102, 102));
-        botonCancelar.setText("Cancelar");
-        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCancelarActionPerformed(evt);
             }
         });
 
@@ -221,6 +204,15 @@ public class VentanaUsuario extends javax.swing.JPanel {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
+        botonClase.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        botonClase.setForeground(new java.awt.Color(102, 102, 102));
+        botonClase.setText("Contratacion Clase");
+        botonClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonClaseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,13 +225,12 @@ public class VentanaUsuario extends javax.swing.JPanel {
                             .addComponent(botonAlquilerInst))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(botonContrMonitor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(botonAlquMaterial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(botonCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonContrMonitor, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(botonSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonComPis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonComGim, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(botonBono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(botonClase, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonAlquMaterial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -253,33 +244,25 @@ public class VentanaUsuario extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(tituloUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(botonAlquilerInst)
                         .addGap(11, 11, 11)
                         .addComponent(botonContrMonitor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonClase)
+                        .addGap(11, 11, 11)
                         .addComponent(botonAlquMaterial)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonComGim)
+                        .addComponent(botonBono)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(botonComPis)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonSalir))
                     .addComponent(panelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
-    public String getNick() {
-		return nick;
-	}
-	public void setNick(String nick) {
-		this.nick = nick;
-	}
-	private void botonAlquilerInstActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    private void botonAlquilerInstActionPerformed(java.awt.event.ActionEvent evt) {                                                  
     	panelInstalacion = new AlquilerInstalacion(controlUsuarios, controlClases, controlAlquilerCompra, controlInstalaciones, false);
     	panelListas.setVisible(false);
         quitaPaneles();
@@ -313,10 +296,9 @@ public class VentanaUsuario extends javax.swing.JPanel {
         this.setPreferredSize(new Dimension(50,100));
         panelInterno.add(panelMaterial, BorderLayout.CENTER);
         panelMaterial.setVisible(true);
-      
     }                                                 
 
-    private void botonComGimActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void botonBonoActionPerformed(java.awt.event.ActionEvent evt) {                                          
     	panelCompraAbono = new CompraBono(controlUsuarios, controlAlquilerCompra, false);
         panelListas.setVisible(false);
         quitaPaneles();
@@ -325,34 +307,24 @@ public class VentanaUsuario extends javax.swing.JPanel {
         panelCompraAbono.setPreferredSize(new Dimension(400,300));
         panelInterno.add(panelCompraAbono, BorderLayout.CENTER);
         panelCompraAbono.setVisible(true);
-    }                                           
-
-    private void botonComPisActionPerformed(java.awt.event.ActionEvent evt) {                                            
-    	panelCompraAbono = new CompraBono(controlUsuarios, controlAlquilerCompra, false);
-        panelListas.setVisible(false);
-        quitaPaneles();
-        panelInterno.setLayout(new BorderLayout());
-        panelInterno.setSize(300, 300);
-        panelCompraAbono.setPreferredSize(new Dimension(400,300));
-        panelInterno.add(panelCompraAbono, BorderLayout.CENTER);
-        panelCompraAbono.setVisible(true);
-    }                                           
-
-    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                              
-    	panelListas.setVisible(true);
-    	quitaPaneles(); 
-    	panelInterno.setLayout(new BorderLayout());
-        panelInterno.setSize(500, 300);
-        panelListas.setPreferredSize(new Dimension(500,200));
-        this.setPreferredSize(new Dimension(500,400));
-        panelInterno.add(panelListas, BorderLayout.CENTER);
-    }                                             
+    }                                         
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {                                           
     	System.exit(0);
     }                                          
 
-    
+    private void botonClaseActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    	panelContratacionClases = new ContratacionClases(controlClases, controlUsuarios, controlAlquilerCompra, false);
+    	panelListas.setVisible(false);
+        quitaPaneles();
+        panelInterno.setLayout(new BorderLayout());
+        panelInterno.setSize(500, 500);
+        panelContratacionClases.setPreferredSize(new Dimension(500,500));
+        this.setPreferredSize(new Dimension(500,500));
+        panelInterno.add(panelContratacionClases, BorderLayout.CENTER);
+        panelContratacionClases.setVisible(true);
+    }                                          
+
     private void quitaPaneles() {
 		if(panelCompraAbono != null)
 			panelCompraAbono.setVisible(false);
@@ -362,15 +334,16 @@ public class VentanaUsuario extends javax.swing.JPanel {
 			panelInstalacion.setVisible(false);
 		if(panelMaterial != null)
 			panelMaterial.setVisible(false);
-		
+		if(panelContratacionClases != null)
+			panelContratacionClases.setVisible(false);
 	}
-
+    
+    
     // Variables declaration - do not modify                     
     private javax.swing.JButton botonAlquMaterial;
     private javax.swing.JButton botonAlquilerInst;
-    private javax.swing.JButton botonCancelar;
-    private javax.swing.JButton botonComGim;
-    private javax.swing.JButton botonComPis;
+    private javax.swing.JButton botonBono;
+    private javax.swing.JButton botonClase;
     private javax.swing.JButton botonContrMonitor;
     private javax.swing.JButton botonSalir;
     private javax.swing.JLabel etiquetaDeportes;
@@ -386,5 +359,6 @@ public class VentanaUsuario extends javax.swing.JPanel {
     private ContratacionEntrenador panelContratacionEntrenador;
     private AlquilerMaterial panelMaterial;
     private AlquilerInstalacion panelInstalacion;
+    private ContratacionClases panelContratacionClases;
     // End of variables declaration                   
 }

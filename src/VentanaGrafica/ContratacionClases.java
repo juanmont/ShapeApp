@@ -6,24 +6,48 @@
 
 package VentanaGrafica;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import transfers.Clases;
+import transfers.Socio;
+import Control.ControladorAlquilerCompra;
 import Control.ControladorClases;
+import Control.ControladorUsuarios;
+
 
 /**
  *
- * @author juanjose
+ * @author Cristina
  */
-public class ContratacionClases extends javax.swing.JPanel {
+public class ContratacionClases extends javax.swing.JPanel implements ListSelectionListener {
 
-	private ControladorClases contrClases;
-	
+	private ControladorClases controlClases;
+	private ControladorUsuarios controlUsuarios;
+	private ControladorAlquilerCompra controlAlq;
+	private ArrayList<Clases> lista;
+	private boolean muestraLista;
+	private boolean[] horas;
+	ArrayList<Socio> listaSocio;
 	
     /**
      * Creates new form PanelClases
+     * @param controlClases 
      */
-    public ContratacionClases(ControladorClases contrClases) {
-        this.contrClases = contrClases;
+    public ContratacionClases(ControladorClases controlClases, ControladorUsuarios controlUsuarios, ControladorAlquilerCompra controlAlq, boolean muestraLista) {
+        this.controlAlq = controlAlq;
+    	this.controlClases = controlClases;
+        this.controlUsuarios = controlUsuarios;
     	initComponents();
+    	listaUsuarios.setVisible(muestraLista);
+    	etiquetaUsuarios.setVisible(muestraLista);
+    	jScrollPane3.setVisible(muestraLista);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,24 +66,17 @@ public class ContratacionClases extends javax.swing.JPanel {
         etiquetaClases = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botonContrClases = new javax.swing.JButton();
+        etiquetaUsuarios = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaUsuarios = new javax.swing.JList();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
         tirutloContrClases.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         tirutloContrClases.setText("CONTRATACION CLASES");
 
-        listaClases.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listaClases);
 
-        listaHoras.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(listaHoras);
 
         etiquetaClases.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
@@ -75,29 +92,68 @@ public class ContratacionClases extends javax.swing.JPanel {
             }
         });
 
+        etiquetaUsuarios.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        etiquetaUsuarios.setText("Usuarios");
+
+        jScrollPane3.setViewportView(listaUsuarios);
+        
+        
+        DefaultListModel<Socio> modeloListaUsuario = new DefaultListModel<Socio>();
+    	listaSocio = controlUsuarios.listaSocios();
+    	if(!listaSocio.isEmpty()){
+    		for(int i = 0; i < listaSocio.size(); i++){
+    			modeloListaUsuario.add(i, listaSocio.get(i));
+        	}
+    	}
+       
+    	listaUsuarios.removeAll();
+    	listaUsuarios.setModel(modeloListaUsuario);
+        
+        
+        
+        DefaultListModel<Clases> modeloLista = new DefaultListModel<Clases>();
+    	lista = controlClases.listaClasesAll();
+    	if(!lista.isEmpty()){
+    		for(int i = 0; i < lista.size(); i++){
+        		modeloLista.add(i, lista.get(i));
+        	}
+    	}
+    	this.listaClases.removeAll();
+    	this.listaClases.setModel(modeloLista);
+    	this.listaClases.addListSelectionListener(this);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(tirutloContrClases))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
                         .addComponent(etiquetaClases)
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(botonContrClases)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel3)
+                        .addGap(80, 80, 80)
+                        .addComponent(etiquetaUsuarios))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tirutloContrClases)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(0, 115, Short.MAX_VALUE)
+                                    .addComponent(botonContrClases)
+                                    .addGap(131, 131, 131))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(34, 34, 34)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,32 +161,106 @@ public class ContratacionClases extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(tirutloContrClases)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiquetaClases)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etiquetaClases, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(etiquetaUsuarios)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(botonContrClases)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
     private void botonContrClasesActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
+    	if(!this.listaHoras.isSelectionEmpty() && !this.listaClases.isSelectionEmpty() /*&& !this.listaUsuarios.isSelectionEmpty()*/){
+    		
+    		if(muestraLista == true && !this.listaUsuarios.isSelectionEmpty()){
+    			Clases clase = this.lista.get(this.listaClases.getSelectedIndex());
+        		String nick = this.listaSocio.get(this.listaUsuarios.getSelectedIndex()).getNick();
+        		if(this.controlAlq.contratarClase(clase.getId(), nick)){
+        			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+        			horas = controlClases.verHoras(clase);
+        	    	if(horas.length != 0){
+        	    		int a = 0;
+        	    		for(int i = 0; i < horas.length; i++){
+        	    			if(horas[i]){
+        	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+        	    				a++;
+        	    			}
+        	    		}
+        	    	}
+        	    	this.listaHoras.removeAll();
+        	    	listaHoras.setModel(modeloListaHoras);
+            		JOptionPane.showConfirmDialog(null, "Clase contratada", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+        		}else
+            		JOptionPane.showConfirmDialog(null, "Fallo al contratatar la clase", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}else if(muestraLista == false){
+    			Clases clase = this.lista.get(this.listaClases.getSelectedIndex());
+        		String nick = controlUsuarios.getNick();
+        		if(this.controlAlq.contratarClase(clase.getId(), nick)){
+        			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+        			horas = controlClases.verHoras(clase);
+        	    	if(horas.length != 0){
+        	    		int a = 0;
+        	    		for(int i = 0; i < horas.length; i++){
+        	    			if(horas[i]){
+        	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+        	    				a++;
+        	    			}
+        	    		}
+        	    	}
+        	    	this.listaHoras.removeAll();
+        	    	listaHoras.setModel(modeloListaHoras);
+            		JOptionPane.showConfirmDialog(null, "Clase contratada", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+        		}else
+            		JOptionPane.showConfirmDialog(null, "Fallo al contratatar la clase", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}
+    		
+    		
+    	}else
+    		JOptionPane.showConfirmDialog(null, "Debes seleccionar todos los componentes", "ERROR", JOptionPane.INFORMATION_MESSAGE);
     }                                                
 
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton botonContrClases;
+    private javax.swing.JLabel etiquetaUsuarios;
     private javax.swing.JLabel etiquetaClases;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaClases;
     private javax.swing.JList listaHoras;
+    private javax.swing.JList listaUsuarios;
     private javax.swing.JLabel tirutloContrClases;
-    // End of variables declaration                   
+    // End of variables declaration         
+    
+    
+    public void valueChanged(ListSelectionEvent arg0) {
+		if(this.listaClases.getSelectedIndex() >= 0){
+			Clases ins = this.lista.get(listaClases.getSelectedIndex());
+			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+			horas = controlClases.verHoras(ins);
+	    	if(horas.length != 0){
+	    		int a = 0;
+	    		for(int i = 0; i < horas.length; i++){
+	    			if(horas[i]){
+	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+	    				a++;
+	    			}
+	    		}
+	    	}
+	    	this.listaHoras.removeAll();
+	    	listaHoras.setModel(modeloListaHoras);
+		}
+	}
+    
 }
+

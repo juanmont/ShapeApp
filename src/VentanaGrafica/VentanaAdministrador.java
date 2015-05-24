@@ -636,6 +636,5 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     private AltaUsuario panelUsuario;
     private AltaMaterial panelMaterial;
     private AltaClases panelClases;
-    private AltaBono panelBono;
     // End of variables declaration//GEN-END:variables
 }

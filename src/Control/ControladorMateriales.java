@@ -36,4 +36,12 @@ public class ControladorMateriales {
 		return materiales.altaMaterial(mat);
 	}
 
+	public boolean modificarMaterial(String nombre, String descripcion, String tipo) {
+		Material mat = new Material();
+		mat.setNombre(nombre);
+		mat.setDescripcion(descripcion);
+		mat.setTipo(tipo);
+		return materiales.modificarMaterial(mat);
+	}
+
 }

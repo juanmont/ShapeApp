@@ -17,12 +17,7 @@ import Control.ControladorClases;
 import Control.ControladorInstalaciones;
 import Control.ControladorUsuarios;
 import transfers.Clases;
-import transfers.Entrenador;
-import transfers.Instalaciones;
 import transfers.Socio;
-
-
-
 
 
 /**
@@ -36,6 +31,7 @@ public class ContratacionEntrenador extends javax.swing.JPanel implements ListSe
 	private ControladorAlquilerCompra controlAlq;
 	private ControladorClases controlClases;
 	private ArrayList<Clases> lista;
+	private boolean muestraLista;
 	private boolean[] horas;
 	ArrayList<Socio> listaSocio;
     /**
@@ -48,9 +44,8 @@ public class ContratacionEntrenador extends javax.swing.JPanel implements ListSe
     	this.controlClases = controlClases;
     	initComponents();
     	listaUsuarios.setVisible(muestraLista);
-    	etiquetaUsuarios.setVisible(muestraLista);
     	jScrollPane3.setVisible(muestraLista);
-    	
+    	etiquetaUsuarios.setVisible(muestraLista);   	
     }
 
 
@@ -178,26 +173,51 @@ public class ContratacionEntrenador extends javax.swing.JPanel implements ListSe
 
     private void botonContrActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    	if(!this.jList1.isSelectionEmpty() && !this.listaEntrenador.isSelectionEmpty() && !this.listaUsuarios.isSelectionEmpty()){
-    		Clases clase = this.lista.get(this.listaEntrenador.getSelectedIndex());
-    		String nick = this.listaSocio.get(this.listaUsuarios.getSelectedIndex()).getNick();
-    		if(this.controlAlq.contratarClase(clase.getId(), nick)){
-    			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
-    			horas = controlClases.verHoras(clase);
-    	    	if(horas.length != 0){
-    	    		int a = 0;
-    	    		for(int i = 0; i < horas.length; i++){
-    	    			if(horas[i]){
-    	    				modeloListaHoras.add(a, Integer.toString(i + 9));
-    	    				a++;
-    	    			}
-    	    		}
-    	    	}
-    	    	this.jList1.removeAll();
-    	    	jList1.setModel(modeloListaHoras);
-        		JOptionPane.showConfirmDialog(null, "Clase contratada", "EXITO", JOptionPane.INFORMATION_MESSAGE);
-    		}else
-        		JOptionPane.showConfirmDialog(null, "Fallo al contratatar la clase", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    	if(!this.jList1.isSelectionEmpty() && !this.listaEntrenador.isSelectionEmpty() /*&& !this.listaUsuarios.isSelectionEmpty()*/){
+    		
+    		if(muestraLista == true && !this.listaUsuarios.isSelectionEmpty()){
+    			Clases clase = this.lista.get(this.listaEntrenador.getSelectedIndex());
+        		String nick = this.listaSocio.get(this.listaUsuarios.getSelectedIndex()).getNick();
+        		if(this.controlAlq.contratarClase(clase.getId(), nick)){
+        			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+        			horas = controlClases.verHoras(clase);
+        	    	if(horas.length != 0){
+        	    		int a = 0;
+        	    		for(int i = 0; i < horas.length; i++){
+        	    			if(horas[i]){
+        	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+        	    				a++;
+        	    			}
+        	    		}
+        	    	}
+        	    	this.jList1.removeAll();
+        	    	jList1.setModel(modeloListaHoras);
+            		JOptionPane.showConfirmDialog(null, "Clase contratada", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+        		}else
+            		JOptionPane.showConfirmDialog(null, "Fallo al contratatar la clase", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}else if(muestraLista == false){
+    			Clases clase = this.lista.get(this.listaEntrenador.getSelectedIndex());
+        		String nick = controlUsuario.getNick();
+        		if(this.controlAlq.contratarClase(clase.getId(), nick)){
+        			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+        			horas = controlClases.verHoras(clase);
+        	    	if(horas.length != 0){
+        	    		int a = 0;
+        	    		for(int i = 0; i < horas.length; i++){
+        	    			if(horas[i]){
+        	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+        	    				a++;
+        	    			}
+        	    		}
+        	    	}
+        	    	this.jList1.removeAll();
+        	    	jList1.setModel(modeloListaHoras);
+            		JOptionPane.showConfirmDialog(null, "Clase contratada", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+        		}else
+            		JOptionPane.showConfirmDialog(null, "Fallo al contratatar la clase", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    		}
+    		
+    		
     	}else
     		JOptionPane.showConfirmDialog(null, "Debes seleccionar todos los componentes", "ERROR", JOptionPane.INFORMATION_MESSAGE);
     }                                          
@@ -218,7 +238,6 @@ public class ContratacionEntrenador extends javax.swing.JPanel implements ListSe
     // End of variables declaration                   
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
 		if(this.listaEntrenador.getSelectedIndex() >= 0){
 			Clases ins = this.lista.get(listaEntrenador.getSelectedIndex());
 			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();

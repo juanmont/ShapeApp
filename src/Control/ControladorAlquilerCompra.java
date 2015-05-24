@@ -49,7 +49,7 @@ public class ControladorAlquilerCompra {
 		ClaseSocio clase = new ClaseSocio();
 		clase.setId_clase(idClase);
 		clase.setNick(nick);
-		return alquilerCompra.contratacionEntrenador(clase);
+		return alquilerCompra.contratacionClase(clase);
 	}
 	
 	public boolean compraBono(BonoEnum tipo,int  meses, String nick){

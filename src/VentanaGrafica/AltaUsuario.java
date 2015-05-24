@@ -396,6 +396,9 @@ public class AltaUsuario extends javax.swing.JPanel {
         		else 
         			if(control.modificarUsuario(socio, null ,null, null))
     					JOptionPane.showMessageDialog(btGuardar, "Socio modificado correctamente", "OK", JOptionPane.OK_OPTION);
+        			else 
+        				JOptionPane.showMessageDialog(btGuardar, "No se ha podido modificar", "ERROR", ERROR);
+        				
         	}
         	
         }
