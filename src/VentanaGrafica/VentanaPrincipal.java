@@ -20,6 +20,7 @@ public class VentanaPrincipal extends JFrame{
 	ControladorInstalaciones controlInstalaciones;
 	ControladorUsuarios controlUsuarios;
 	VentanaInicio login;
+	private VentanaUsuario vUsuario; 
 	Connection con;
 	
 	public VentanaPrincipal(Connection c) {
@@ -29,7 +30,7 @@ public class VentanaPrincipal extends JFrame{
 		controlInstalaciones = new ControladorInstalaciones(c);
 		controlClases = new ControladorClases(c);
 		controlMateriales = new ControladorMateriales(c);
-		controlAlquilerCompra = new ControladorAlquilerCompra();
+		controlAlquilerCompra = new ControladorAlquilerCompra(c);
 		login = new VentanaInicio(this,con, controlUsuarios);
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
@@ -49,7 +50,7 @@ public class VentanaPrincipal extends JFrame{
 				controlClases, controlInstalaciones, controlUsuarios, controlUsuarios.getNick());
 		login.setVisible(false);
 		this.setResizable(true);
-		this.setSize(700, 500);
+		this.setSize(800, 500);
 		this.add(vAdmin, BorderLayout.CENTER);
 		vAdmin.setVisible(true);
 		this.setResizable(false);
@@ -75,6 +76,18 @@ public class VentanaPrincipal extends JFrame{
 		this.add(vUsuario, BorderLayout.CENTER);
 		vUsuario.setVisible(true);
 		this.setResizable(false);
+	}
+	
+	public void cambiaVentanaSalir(){
+		if(this.vUsuario.isVisible()){
+			this.vUsuario.setVisible(false);
+			login.setVisible(true);
+			this.setResizable(false);		
+		}
+		/*this.setSize(800, 500);
+		this.add(vUsuario, BorderLayout.CENTER);
+		vUsuario.setVisible(true);
+		this.setResizable(false);*/
 	}
 	
 

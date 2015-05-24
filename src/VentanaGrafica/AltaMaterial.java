@@ -137,7 +137,7 @@ public class AltaMaterial extends javax.swing.JPanel {
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {
        	if(compruebaCampos()){
        		if(controlMateriales.AltaMaterial(jtfNombre.getText(), jtDescripcion.getText(), jcbTipo.getSelectedItem().toString()))
-       			JOptionPane.showMessageDialog(bGuardar, "Guardado correctamente", "OK", JOptionPane.OK_OPTION);
+       			JOptionPane.showMessageDialog(bGuardar, "Guardado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
        		else
        			JOptionPane.showMessageDialog(bGuardar, "Error al dar de alta el material", "ERROR", JOptionPane.ERROR_MESSAGE);
        	}

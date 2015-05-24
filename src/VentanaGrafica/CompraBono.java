@@ -5,7 +5,15 @@
  */
 package VentanaGrafica;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
+import enums.BonoEnum;
+import transfers.Socio;
 import Control.ControladorAlquilerCompra;
+import Control.ControladorUsuarios;
 
 /**
  *
@@ -13,14 +21,22 @@ import Control.ControladorAlquilerCompra;
  */
 public class CompraBono extends javax.swing.JPanel {
 
-	ControladorAlquilerCompra control;
+	private ControladorAlquilerCompra controlAlquilerCompra;
+	private ControladorUsuarios controlUsuarios;
+	private ArrayList<Socio> listaSocios;
 	
     /**
-     * Creates new form CompraAbonoPiscina
+     * Creates new form CompraBono
+     * @param muestraLista 
+     * @param controlAlquilerCompra 
      */
-    public CompraBono(ControladorAlquilerCompra controlador) {
-    	control = controlador;
-        initComponents();
+    public CompraBono(ControladorUsuarios controlUsuarios, ControladorAlquilerCompra controlAlquilerCompra, boolean muestraLista) {
+        this.controlUsuarios = controlUsuarios;
+    	this.controlAlquilerCompra = controlAlquilerCompra;
+    	initComponents();
+        listaUsuarios.setVisible(muestraLista);
+        etiquetaUsuarios.setVisible(muestraLista);
+        jScrollPane1.setVisible(muestraLista);
     }
 
     /**
@@ -34,38 +50,60 @@ public class CompraBono extends javax.swing.JPanel {
 
         tituloCompraBono = new javax.swing.JLabel();
         etiquetaMeses = new javax.swing.JLabel();
-        precio = new javax.swing.JTextField();
+        meses = new javax.swing.JComboBox();
         etiquetaPrecio = new javax.swing.JLabel();
-        compraBono = new javax.swing.JButton();
-        meses = new javax.swing.JTextField();
+        precio = new javax.swing.JLabel();
+        etiquetaUsuarios = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaUsuarios = new javax.swing.JList();
+        etiqeutaTipo = new javax.swing.JLabel();
+        tipo = new javax.swing.JComboBox();
+        botonComprar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
-
+        
+        meses.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", 
+        		"3", "6", "9", "12", "24"}));
+        
         tituloCompraBono.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        tituloCompraBono.setText("Compra Bono");
+        tituloCompraBono.setText("COMPRA BONO");
 
         etiquetaMeses.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        etiquetaMeses.setForeground(new java.awt.Color(102, 102, 102));
         etiquetaMeses.setText("Meses");
 
-        precio.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        precio.setForeground(new java.awt.Color(102, 102, 102));
-
         etiquetaPrecio.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        etiquetaPrecio.setForeground(new java.awt.Color(102, 102, 102));
         etiquetaPrecio.setText("Precio");
 
-        compraBono.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
-        compraBono.setForeground(new java.awt.Color(102, 102, 102));
-        compraBono.setText("Comprar Bono");
-        compraBono.addActionListener(new java.awt.event.ActionListener() {
+        precio.setText("precio");
+
+        etiquetaUsuarios.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        etiquetaUsuarios.setText("Usuarios");
+
+        jScrollPane1.setViewportView(listaUsuarios);
+        
+        
+        DefaultListModel<Socio> modeloLista = new DefaultListModel<Socio>();
+    	listaSocios = controlUsuarios.listaSocios();
+    	if(!listaSocios.isEmpty()){
+    		for(int i = 0; i < listaSocios.size(); i++){
+        		modeloLista.add(i, listaSocios.get(i));
+        	}
+    	}
+       
+    	listaUsuarios.removeAll();
+        listaUsuarios.setModel(modeloLista);
+
+        etiqeutaTipo.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        etiqeutaTipo.setText("Tipo");
+
+        tipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PISCINA", "GIMNASIO" }));
+
+        botonComprar.setText("Comprar Bono");
+        botonComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                compraBonoActionPerformed(evt);
+                botonComprarActionPerformed(evt);
             }
         });
-
-        meses.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        meses.setForeground(new java.awt.Color(102, 102, 102));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,21 +112,37 @@ public class CompraBono extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addGap(97, 97, 97)
                         .addComponent(tituloCompraBono))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(etiquetaMeses, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                            .addComponent(etiquetaPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(precio, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                            .addComponent(meses)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(compraBono)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(55, 55, 55)
+                                        .addComponent(etiqeutaTipo)
+                                        .addGap(32, 32, 32))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(etiquetaPrecio)
+                                            .addComponent(etiquetaMeses))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(meses, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(precio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tipo, 0, 99, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addComponent(botonComprar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(etiquetaUsuarios))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,30 +150,55 @@ public class CompraBono extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(tituloCompraBono)
                 .addGap(18, 18, 18)
+                .addComponent(etiquetaUsuarios)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etiquetaMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(meses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(etiquetaPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(compraBono)
-                .addContainerGap())
+                    .addComponent(etiqeutaTipo)
+                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(meses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(etiquetaMeses))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(etiquetaPrecio)
+                            .addComponent(precio))
+                        .addGap(18, 18, 18)
+                        .addComponent(botonComprar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
-    private void compraBonoActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void botonComprarActionPerformed(java.awt.event.ActionEvent evt) {                                             
         // TODO add your handling code here:
-    }                                          
+    	if(!listaUsuarios.isSelectionEmpty()){
+	    	int a = Integer.parseInt((String) this.meses.getSelectedItem());
+	    	Socio socio = listaSocios.get(this.listaUsuarios.getSelectedIndex());
+	    	if(controlAlquilerCompra.compraBono(BonoEnum.valueOf(tipo.getSelectedItem().toString()), a, socio.getNick())){
+	    		JOptionPane.showMessageDialog(null,  "Bono comprado","Exito", JOptionPane.INFORMATION_MESSAGE);
+	    	}else{
+	    		JOptionPane.showMessageDialog(null,  "Fallo","ERROR", JOptionPane.INFORMATION_MESSAGE);	    	
+	    	}
+    	}else
+    		JOptionPane.showMessageDialog(null,  "Elige usuario","ERROR", JOptionPane.INFORMATION_MESSAGE);
+    }                                            
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton compraBono;
+    private javax.swing.JButton botonComprar;
+    private javax.swing.JLabel etiqeutaTipo;
     private javax.swing.JLabel etiquetaMeses;
     private javax.swing.JLabel etiquetaPrecio;
-    private javax.swing.JTextField meses;
-    private javax.swing.JTextField precio;
+    private javax.swing.JLabel etiquetaUsuarios;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaUsuarios;
+    private javax.swing.JComboBox meses;
+    private javax.swing.JLabel precio;
+    private javax.swing.JComboBox tipo;
     private javax.swing.JLabel tituloCompraBono;
     // End of variables declaration                   
 }

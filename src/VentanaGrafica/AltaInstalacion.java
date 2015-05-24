@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 
 import transfers.Instalaciones;
 import enums.PistaEnum;
-import enums.TipoEnum;
 import Control.ControladorInstalaciones;
 
 /**
@@ -32,19 +31,6 @@ public class AltaInstalacion extends javax.swing.JPanel {
         initComponents();
         this.setVisible(true);
     }
-    
-    public AltaInstalacion(Instalaciones ins, ControladorInstalaciones controladorInst) {
-    	controlInstalaciones = controladorInst;
-    	instalacion = ins;
-        initComponents();
-        this.setVisible(true);
-        jcDisponibilidad.setSelectedItem(ins.getDisponibilidad().toString());
-        jcbTipo.setSelectedItem(ins.getTipo().toString());
-        if(ins.getPista() == PistaEnum.CUBIERTA)
-        	chkCubierta.setSelected(true);
-        else if(ins.getPista() == PistaEnum.EXTERIOR)
-        	chkExterior.setSelected(true);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,25 +42,25 @@ public class AltaInstalacion extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        jlbPista = new javax.swing.JLabel();
+        jlbInstalacion = new javax.swing.JLabel();
         jlbTipo = new javax.swing.JLabel();
-        jDisponibilidad = new javax.swing.JLabel();
+        jlbNumero = new javax.swing.JLabel();
         chkCubierta = new javax.swing.JRadioButton();
         chkExterior = new javax.swing.JRadioButton();
         jcbTipo = new javax.swing.JComboBox();
+        jtfNumero = new JFormattedTextField();
         btGuardar = new javax.swing.JButton();
-        jcDisponibilidad = new javax.swing.JComboBox();
 
         jLabel5.setText("jLabel5");
 
         setBackground(new java.awt.Color(153, 204, 255));
 
-        jlbPista.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        jlbPista.setText("INSTALACION");
+        jlbInstalacion.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jlbInstalacion.setText("Instalación:");
 
         jlbTipo.setText("Tipo");
 
-        jDisponibilidad.setText("Disponibilidad");
+        jlbNumero.setText("Numero:");
 
         chkCubierta.setBackground(new java.awt.Color(153, 204, 255));
         chkCubierta.setText("Cubierta");
@@ -84,6 +70,8 @@ public class AltaInstalacion extends javax.swing.JPanel {
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "FUTBOL7", "FUTBOL11", "BALONCESTO", "TENIS", "PADEL" }));
 
+        jtfNumero.setValue(0);
+
         btGuardar.setText("GUARDAR");
         btGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,67 +79,68 @@ public class AltaInstalacion extends javax.swing.JPanel {
             }
         });
 
-        jcDisponibilidad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LUNESAVIERNES", "FINESDESEMANA" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
+                .addComponent(jlbInstalacion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlbTipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDisponibilidad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btGuardar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addComponent(jlbNumero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btGuardar)
+                            .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(chkCubierta)
-                        .addGap(63, 63, 63))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(chkExterior)
-                        .addGap(41, 41, 41))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(jlbPista)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(chkExterior)
+                    .addComponent(chkCubierta))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jlbPista)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbTipo)
-                    .addComponent(chkCubierta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jDisponibilidad)
-                    .addComponent(jcDisponibilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chkExterior))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btGuardar)
+                .addContainerGap()
+                .addComponent(jlbInstalacion)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlbTipo)
+                            .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlbNumero)
+                            .addComponent(chkExterior))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btGuardar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(chkCubierta)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {
     	if(compruebaCampos()){
-    		PistaEnum tipo = null;
+    		String tipo = "";
     		if(chkCubierta.isSelected())
-    			tipo = PistaEnum.CUBIERTA;
+    			tipo = "CUBIERTA";
     		else 
-    			tipo = PistaEnum.EXTERIOR;
-    		if(controlInstalaciones.AltaInstalacion(jcDisponibilidad.getSelectedItem().toString(), jcbTipo.getSelectedItem().toString(), tipo)) {
-    			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
+    			tipo = "EXTERIOR";
+    		if(controlInstalaciones.AltaInstalacion(jtfNumero.getText(), jcbTipo.getSelectedItem().toString(), tipo)) {
+    			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
     		} else
     			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar la instalacion", "ERROR", JOptionPane.ERROR_MESSAGE);		
     	}
@@ -160,17 +149,17 @@ public class AltaInstalacion extends javax.swing.JPanel {
     }
     
     private boolean compruebaCampos(){
-    	return chkCubierta.isSelected() || chkExterior.isSelected();
+    	return jtfNumero.getText() != "" && chkCubierta.isSelected() || chkExterior.isSelected();
     }
 
     private javax.swing.JButton btGuardar;
     private javax.swing.JRadioButton chkCubierta;
     private javax.swing.JRadioButton chkExterior;
-    private javax.swing.JLabel jDisponibilidad;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JComboBox jcDisponibilidad;
     private javax.swing.JComboBox jcbTipo;
-    private javax.swing.JLabel jlbPista;
+    private javax.swing.JLabel jlbNumero;
+    private javax.swing.JLabel jlbInstalacion;
     private javax.swing.JLabel jlbTipo;
+    private javax.swing.JFormattedTextField jtfNumero;
     // End of variables declaration//GEN-END:variables
 }

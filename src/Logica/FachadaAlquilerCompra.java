@@ -3,7 +3,6 @@ package Logica;
 import java.util.ArrayList;
 
 import transfers.Bono;
-import transfers.BonoUsuario;
 import transfers.ClaseSocio;
 import transfers.Clases;
 import transfers.InstalacionUsuario;
@@ -26,7 +25,7 @@ public interface FachadaAlquilerCompra {
 	
 	public boolean contratacionClase(ClaseSocio clase);
 	
-	public boolean compraAbonoPis(BonoUsuario bono);
+	public boolean compraAbonoPis(Bono bono);
 	
-	public boolean compraAbonoGim(BonoUsuario bono);
+	public boolean compraAbonoGim(Bono bono);
 }

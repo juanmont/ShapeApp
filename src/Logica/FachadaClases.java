@@ -7,6 +7,6 @@ import transfers.Clases;
 public interface FachadaClases {
 	public boolean altaClase(Clases clase);
 	public boolean bajaClase(Clases clase);
-	public ArrayList<Clases> listaClases();
+	public ArrayList<Clases> listaClasesAll();
 	
 }

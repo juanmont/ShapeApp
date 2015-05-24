@@ -35,7 +35,7 @@ public class DaoMaterialUsuario implements IMaterialUsuarioDao{
 		PreparedStatement buscarName=null;
 		ResultSet objetoEncontrado=null;
 		try{
-			buscarName=connection.prepareStatement("select * from clase_socio where nick like ?");
+			buscarName=connection.prepareStatement("select * from material_usuario where nick like ?");
 			//asociamos el valor que queremos buscar
 			buscarName.setString(1,nick);
 			//ejecutamos la consulta
@@ -112,7 +112,7 @@ public class DaoMaterialUsuario implements IMaterialUsuarioDao{
 		try{
 			buscarID=connection.prepareStatement(""
 					+"select * "
-					+ "from clase_socio "
+					+ "from material_usuario "
 					+ "where id_materiales = ? AND dia = ? AND horario = ?");
 			//asociamos el valor que queremos buscar
 			buscarID.setInt(1, materialUsuario.getIdMateriales());
@@ -140,7 +140,7 @@ public class DaoMaterialUsuario implements IMaterialUsuarioDao{
 		PreparedStatement buscarName=null;
 		ResultSet objetoEncontrado=null;
 		try{
-			buscarName=connection.prepareStatement("select * from clase_socio where id_materiales like ?");
+			buscarName=connection.prepareStatement("select * from material_usuario where id_materiales like ?");
 			//asociamos el valor que queremos buscar
 			buscarName.setInt(1,material);
 			//ejecutamos la consulta

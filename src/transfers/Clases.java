@@ -35,4 +35,8 @@ public class Clases {
 	public void setId(int pista) {
 		this.id = pista;
 	}
+	@Override
+	public String toString() {
+		return "Entrenador: " + idEntrenador + " tipo: " + tipo + " clase: " + clase;
+	}
 }

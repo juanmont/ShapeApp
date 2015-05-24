@@ -22,10 +22,12 @@ import transfers.Usuario;
  */
 public class AltaUsuario extends javax.swing.JPanel {
 	private ControladorUsuarios control;
+	private boolean modificar;
     /**
      * Creates new form AltaMaterial
      */
     public AltaUsuario(boolean personal, ControladorUsuarios controlador) {
+    	modificar = false;
     	control = controlador;
         initComponents();
         if(!personal){
@@ -41,11 +43,22 @@ public class AltaUsuario extends javax.swing.JPanel {
         
     }
     
-    public AltaUsuario(Usuario socio, ControladorUsuarios controlador){
+    public AltaUsuario(Usuario socio, ControladorUsuarios controlador, boolean personal){
+    	modificar = true;
     	control = controlador;
     	initComponents();
-    	jlTipo.setVisible(false);
-    	jcbTipo.setVisible(false);
+    	if(!personal){
+        	jlTipo.setVisible(false);
+        	jcbTipo.setVisible(false);
+        	jtSueldo.setVisible(false);
+        	jlSueldo.setVisible(false);
+        	jtHoraEntrada.setVisible(false);
+        	jlHoraEntrada.setVisible(false);
+        	jtHoraSalida.setVisible(false);
+        	jlHoraSalida.setVisible(false);
+        }
+    	jtfUsuario.setEditable(false);
+    	jtfDNI.setEditable(false);
     	rellenaDatos(socio);
     	inhabilitaCampos();
     }
@@ -316,11 +329,14 @@ public class AltaUsuario extends javax.swing.JPanel {
         		ent.rellenaDatos(rellenaUsuario());
         		if(compruebaDatosPersona()){
         			ent = rellenaEntrenador(ent);
-        			if(control.altaUsuario(null, null, null, ent))
-        				JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
+        			if(!modificar){
+        				if(control.altaUsuario(null, null, null, ent))
+        					JOptionPane.showMessageDialog(btGuardar, "Entrenador guardado correctamente", "OK", JOptionPane.OK_OPTION);
+        				}
         			else
-            			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar el entrenador", "ERROR", JOptionPane.ERROR_MESSAGE);
-        			}
+        				if(control.modificarUsuario(null, null ,null, ent))
+        					JOptionPane.showMessageDialog(btGuardar, "Entrenador modificado correctamente", "OK", JOptionPane.OK_OPTION);
+        		}
         		else
         			JOptionPane.showMessageDialog(btGuardar, "Debe asignar datos especificos de personal", "ERROR", ERROR);
         	}
@@ -329,12 +345,14 @@ public class AltaUsuario extends javax.swing.JPanel {
         		func.rellenaDatos(rellenaUsuario());
         		if(compruebaDatosPersona()){
         			func = rellenaFuncionario(func);
-        			if(control.altaUsuario(null, null ,func, null))
-        				JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
-        			else
-            			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar el funcionario", "ERROR", JOptionPane.ERROR_MESSAGE);
-        			
+        			if(!modificar){
+        				if(control.altaUsuario(null, null ,func, null))
+        					JOptionPane.showMessageDialog(btGuardar, "Funcionario guardado correctamente", "OK", JOptionPane.OK_OPTION);
         			}
+        			else
+        				if(control.modificarUsuario(null, null ,func, null))
+        					JOptionPane.showMessageDialog(btGuardar, "Funcionario modificado correctamente", "OK", JOptionPane.OK_OPTION);
+        		}
         		else
         			JOptionPane.showMessageDialog(btGuardar, "Debe asignar datos especificos de personal", "ERROR", ERROR);
         		
@@ -343,10 +361,13 @@ public class AltaUsuario extends javax.swing.JPanel {
         	else{
         		Socio socio = new Socio();
         		socio.rellenaDatos(rellenaUsuario());
-        		if(control.altaUsuario(socio, null, null, null))
-        			JOptionPane.showConfirmDialog(btGuardar, "Guardado Correctamente", "OK", JOptionPane.OK_OPTION);
-        		else
-        			JOptionPane.showConfirmDialog(btGuardar, "Error al guardar el socio", "ERROR", JOptionPane.ERROR_MESSAGE);
+        		if(!modificar){
+        			if(control.altaUsuario(socio, null, null, null))
+        				JOptionPane.showMessageDialog(btGuardar, "Socio guardado correctamente", "OK", JOptionPane.OK_OPTION);
+        		}
+        		else 
+        			if(control.modificarUsuario(socio, null ,null, null))
+    					JOptionPane.showMessageDialog(btGuardar, "Socio modificado correctamente", "OK", JOptionPane.OK_OPTION);
         	}
         	
         }

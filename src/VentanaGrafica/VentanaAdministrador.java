@@ -379,7 +379,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
         panelInterno.add(PanelLista, BorderLayout.CENTER);
     	PanelLista.setVisible(true);    	
     	DefaultListModel<Clases> modeloLista = new DefaultListModel<Clases>();
-    	ArrayList<Clases> listaUsuarios = controlClases.listaClases();
+    	ArrayList<Clases> listaUsuarios = controlClases.listaClasesAll();
     	for(int i = 0; i < listaUsuarios.size(); i++){
     		modeloLista.add(i, listaUsuarios.get(i));
     	}
@@ -396,7 +396,7 @@ public class VentanaAdministrador extends javax.swing.JPanel {
     	quitaPaneles();
     	 Object o = Lista.getSelectedValue();
          if(o instanceof Usuario){
-        	 panelUsuario = new AltaUsuario((Usuario)o, controlUsuarios);
+        	 panelUsuario = new AltaUsuario((Usuario)o, controlUsuarios, true);
              panelInterno.add(panelUsuario, BorderLayout.CENTER);
          }
          else if(o instanceof Material){

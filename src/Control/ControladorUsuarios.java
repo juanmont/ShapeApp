@@ -105,4 +105,10 @@ public class ControladorUsuarios {
 		
 	}
 
+
+	public boolean modificarUsuario(Socio socio, Admin admin, Funcionario funcionario, Entrenador entrenador) {
+		// TODO Auto-generated method stub
+		return usuarios.modificarUsuario(socio, admin, funcionario, entrenador);
+	}
+
 }

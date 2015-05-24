@@ -5,26 +5,54 @@
  */
 package VentanaGrafica;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import Control.ControladorAlquilerCompra;
+import Control.ControladorClases;
 import Control.ControladorInstalaciones;
+import Control.ControladorUsuarios;
+import transfers.Clases;
+import transfers.Entrenador;
+import transfers.Instalaciones;
+import transfers.Socio;
+
+
+
+
 
 /**
  *
  * @author Cristina
  */
-public class ContratacionEntrenador extends javax.swing.JPanel {
+public class ContratacionEntrenador extends javax.swing.JPanel implements ListSelectionListener{
 
-	ControladorAlquilerCompra controlCompra;
-	ControladorInstalaciones controlInstalaciones;
-	
+	private ControladorUsuarios controlUsuario;
+	private ControladorInstalaciones controlInst;
+	private ControladorAlquilerCompra controlAlq;
+	private ControladorClases controlClases;
+	private ArrayList<Clases> lista;
+	private boolean[] horas;
+	ArrayList<Socio> listaSocio;
     /**
      * Creates new form ContratacionEntrenador
      */
-    public ContratacionEntrenador(ControladorAlquilerCompra controlComp, ControladorInstalaciones controlInst) {
-    	controlCompra = controlComp;
-    	controlInstalaciones = controlInst;
-        initComponents();
+    public ContratacionEntrenador( ControladorUsuarios controlUsuario, ControladorAlquilerCompra controlAlquilerCompra, ControladorInstalaciones controlInstalaciones,ControladorClases controlClases, boolean muestraLista) {
+        this.controlAlq = controlAlquilerCompra;
+        this.controlInst = controlInstalaciones;
+    	this.controlUsuario = controlUsuario;
+    	this.controlClases = controlClases;
+    	initComponents();
+    	listaUsuarios.setVisible(muestraLista);
+    	etiquetaUsuarios.setVisible(muestraLista);
+    	jScrollPane3.setVisible(muestraLista);
+    	
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,39 +63,67 @@ public class ContratacionEntrenador extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        TituloEntrenador = new java.awt.Label();
+        tituloContr = new javax.swing.JLabel();
+        etiquetaEntrenador = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaEntrenador = new javax.swing.JList();
+        etiquetaHoras = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listaHoras = new javax.swing.JList();
-        entrenador = new javax.swing.JLabel();
-        horasLibres = new javax.swing.JLabel();
-        contratar = new javax.swing.JButton();
+        jList1 = new javax.swing.JList();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaUsuarios = new javax.swing.JList();
+        etiquetaUsuarios = new javax.swing.JLabel();
+        botonContr = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(153, 204, 255));
 
-        TituloEntrenador.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        TituloEntrenador.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
-        TituloEntrenador.setText("CONTRATACION ENTRENADOR");
+        tituloContr.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        tituloContr.setText("CONTRATACION ENTRENADOR");
+
+        etiquetaEntrenador.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        etiquetaEntrenador.setText("Entrenador");
 
         jScrollPane1.setViewportView(listaEntrenador);
 
-        jScrollPane2.setViewportView(listaHoras);
+        etiquetaHoras.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        etiquetaHoras.setText("Horas");
 
-        entrenador.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        entrenador.setForeground(new java.awt.Color(102, 102, 102));
-        entrenador.setText("Entrenador");
+        jScrollPane2.setViewportView(jList1);
 
-        horasLibres.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        horasLibres.setForeground(new java.awt.Color(102, 102, 102));
-        horasLibres.setText("Horas Libres");
+        jScrollPane3.setViewportView(listaUsuarios);
+        
+        
+        DefaultListModel<Socio> modeloListaUsuario = new DefaultListModel<Socio>();
+    	listaSocio = controlUsuario.listaSocios();
+    	if(!listaSocio.isEmpty()){
+    		for(int i = 0; i < listaSocio.size(); i++){
+    			modeloListaUsuario.add(i, listaSocio.get(i));
+        	}
+    	}
+       
+    	listaUsuarios.removeAll();
+    	listaUsuarios.setModel(modeloListaUsuario);
+        
+        
+        
+        DefaultListModel<Clases> modeloLista = new DefaultListModel<Clases>();
+    	lista = controlClases.listaClasesIndividual();
+    	if(!lista.isEmpty()){
+    		for(int i = 0; i < lista.size(); i++){
+        		modeloLista.add(i, lista.get(i));
+        	}
+    	}
+    	this.listaEntrenador.removeAll();
+    	this.listaEntrenador.setModel(modeloLista);
+    	this.listaEntrenador.addListSelectionListener(this);
+    	
+        etiquetaUsuarios.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
+        etiquetaUsuarios.setText("Usuarios");
 
-        contratar.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        contratar.setForeground(new java.awt.Color(102, 102, 102));
-        contratar.setText("Contratar Entrenador");
-        contratar.addActionListener(new java.awt.event.ActionListener() {
+        botonContr.setText("Contratar Entrenador");
+        botonContr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contratarActionPerformed(evt);
+                botonContrActionPerformed(evt);
             }
         });
 
@@ -75,57 +131,109 @@ public class ContratacionEntrenador extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TituloEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(entrenador)
-                        .addGap(103, 103, 103)
-                        .addComponent(horasLibres)))
-                .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(contratar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tituloContr))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(etiquetaEntrenador)
+                        .addGap(54, 54, 54)
+                        .addComponent(etiquetaHoras)
+                        .addGap(56, 56, 56)
+                        .addComponent(etiquetaUsuarios))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(botonContr)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(TituloEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(entrenador)
-                    .addComponent(horasLibres))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(tituloContr)
                 .addGap(18, 18, 18)
-                .addComponent(contratar)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiquetaEntrenador)
+                    .addComponent(etiquetaHoras)
+                    .addComponent(etiquetaUsuarios))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(botonContr)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
     }// </editor-fold>                        
 
-    private void contratarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void botonContrActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
-    }                                         
+    	if(!this.jList1.isSelectionEmpty() && !this.listaEntrenador.isSelectionEmpty() && !this.listaUsuarios.isSelectionEmpty()){
+    		Clases clase = this.lista.get(this.listaEntrenador.getSelectedIndex());
+    		String nick = this.listaSocio.get(this.listaUsuarios.getSelectedIndex()).getNick();
+    		if(this.controlAlq.contratarClase(clase.getId(), nick)){
+    			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+    			horas = controlClases.verHoras(clase);
+    	    	if(horas.length != 0){
+    	    		int a = 0;
+    	    		for(int i = 0; i < horas.length; i++){
+    	    			if(horas[i]){
+    	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+    	    				a++;
+    	    			}
+    	    		}
+    	    	}
+    	    	this.jList1.removeAll();
+    	    	jList1.setModel(modeloListaHoras);
+        		JOptionPane.showConfirmDialog(null, "Clase contratada", "EXITO", JOptionPane.INFORMATION_MESSAGE);
+    		}else
+        		JOptionPane.showConfirmDialog(null, "Fallo al contratatar la clase", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    	}else
+    		JOptionPane.showConfirmDialog(null, "Debes seleccionar todos los componentes", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+    }                                          
 
 
     // Variables declaration - do not modify                     
-    private java.awt.Label TituloEntrenador;
-    private javax.swing.JButton contratar;
-    private javax.swing.JLabel entrenador;
-    private javax.swing.JLabel horasLibres;
+    private javax.swing.JButton botonContr;
+    private javax.swing.JLabel etiquetaEntrenador;
+    private javax.swing.JLabel etiquetaHoras;
+    private javax.swing.JLabel etiquetaUsuarios;
+    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList listaEntrenador;
-    private javax.swing.JList listaHoras;
+    private javax.swing.JList listaUsuarios;
+    private javax.swing.JLabel tituloContr;
     // End of variables declaration                   
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(this.listaEntrenador.getSelectedIndex() >= 0){
+			Clases ins = this.lista.get(listaEntrenador.getSelectedIndex());
+			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+			horas = controlClases.verHoras(ins);
+	    	if(horas.length != 0){
+	    		int a = 0;
+	    		for(int i = 0; i < horas.length; i++){
+	    			if(horas[i]){
+	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+	    				a++;
+	    			}
+	    		}
+	    	}
+	    	this.jList1.removeAll();
+	    	jList1.setModel(modeloListaHoras);
+		}
+	}
 }

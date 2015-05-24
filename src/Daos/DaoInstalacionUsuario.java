@@ -86,15 +86,23 @@ public class DaoInstalacionUsuario implements IInstalacionUsuarioDao{
 		PreparedStatement insertClase=null;
 		int result=0;
 		try{
-			insertClase=connection.prepareStatement("INSERT INTO instalacion_usuario"
-					+ "(id_clase, dia, horario, nick, instalacion)"
-					+ " VALUES (?,?,?)");
+			String relleno = "INSERT INTO instalacion_usuario"
+					+ "(dia, horario, nick, instalacion";
+			if(instalacionUsuario.getIdClase() != -1)
+				relleno += ", id_clase";
+			relleno += ") VALUES (?,?,?,?";
+			if(instalacionUsuario.getIdClase() != -1)
+				relleno += ",?";
+			relleno +=")";
+			insertClase=connection.prepareStatement(relleno);
 			//asociamos el valor que queremos buscar
-			insertClase.setInt(1, instalacionUsuario.getIdClase());
-			insertClase.setDate(2, instalacionUsuario.getDia());
-			insertClase.setInt(3, instalacionUsuario.getHorario());
-			insertClase.setString(4, instalacionUsuario.getNick());
-			insertClase.setInt(5, instalacionUsuario.getNumInstalacion());
+			
+			insertClase.setDate(1, instalacionUsuario.getDia());
+			insertClase.setInt(2, instalacionUsuario.getHorario());
+			insertClase.setString(3, instalacionUsuario.getNick());
+			insertClase.setInt(4, instalacionUsuario.getNumInstalacion());
+			if(instalacionUsuario.getIdClase() != -1)
+				insertClase.setInt(5, instalacionUsuario.getIdClase());
 			result=insertClase.executeUpdate();
 			connection.commit();
 		} catch (TransferException e) {

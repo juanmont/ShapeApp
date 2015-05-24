@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import Logica.FachadaInstalaciones;
 import Logica.SubSistemaInstalaciones;
-import enums.DisponibilidadEnum;
 import enums.PistaEnum;
 import transfers.Instalaciones;
 
@@ -38,16 +37,16 @@ public class ControladorInstalaciones {
 		
 	}
 
-	public boolean AltaInstalacion(String Disponibilidad, String tipoDeporte, PistaEnum tipo) {
-		ins.setDisponibilidad(Disponibilidad);
+	public boolean AltaInstalacion(String numero, String tipoDeporte, String tipo) {
+		ins.setNumero(Integer.parseInt(numero));
 		ins.setTipo(tipoDeporte);
-		ins.setPista(tipo.toString());
+		ins.setPista(tipo);
 		return instalaciones.altaInstalacion(ins);
 	}
 
-	public ArrayList<Instalaciones> verHoras() {
+	public boolean[] verHoras(Instalaciones insta) {
 		// TODO Auto-generated method stub
-		return null;
+		return instalaciones.verHoras(insta);
 	}
 
 }

@@ -15,4 +15,5 @@ public interface FachadaMateriales {
 	public Material verMaterial(Material mat);
 	
 	public ArrayList<Material> listaMateriales();
+	public boolean[] verHoras(int id);
 }

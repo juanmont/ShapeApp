@@ -2,7 +2,6 @@ package Logica;
 
 import java.util.ArrayList;
 
-import transfers.BonoUsuario;
 import transfers.ClaseSocio;
 import transfers.Clases;
 import transfers.Entrenador;
@@ -10,14 +9,13 @@ import transfers.InstalacionUsuario;
 import transfers.MaterialUsuario;
 import transfers.Bono;
 import Daos.DaoBono;
-import Daos.DaoBonoUsuario;
 import Daos.DaoClase;
 import Daos.DaoClaseSocio;
 import Daos.DaoEntrenador;
 import Daos.DaoInstalacionUsuario;
 import Daos.DaoMaterialUsuario;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 
 import enums.BonoEnum;
 import enums.ClaseEnum;
@@ -25,7 +23,7 @@ import enums.ClaseEnum;
 public class SubSistemaAlquilerCompra implements FachadaAlquilerCompra {
 
 	private Connection c;
-	private DaoBonoUsuario bonoU;
+	private DaoBono bonoU;
 	private DaoBono bono;
 	private DaoClase clase;
 	private DaoClaseSocio claseS;
@@ -39,7 +37,7 @@ public class SubSistemaAlquilerCompra implements FachadaAlquilerCompra {
 	public SubSistemaAlquilerCompra(Connection con) {
 		this.c = con;
 		bono = new DaoBono();
-		bonoU = new DaoBonoUsuario();
+		bonoU = new DaoBono();
 		clase = new DaoClase();
 		claseS = new DaoClaseSocio();
 		insta = new DaoInstalacionUsuario();
@@ -137,10 +135,9 @@ public class SubSistemaAlquilerCompra implements FachadaAlquilerCompra {
 	}
 
 	@Override
-	public boolean compraAbonoPis(BonoUsuario bonoU) {
+	public boolean compraAbonoPis(Bono bonoU) {
 		if(bonoU != null) {
-			Bono b = this.bono.findById(c, bonoU.getBonoId());
-			if(b.getBono() == BonoEnum.PISCINA) {
+			if(bonoU.getBono() == BonoEnum.PISCINA) {
 				int a = this.bonoU.insertBonoUsuario(c, bonoU);
 				if (a == 1) {
 					return true;
@@ -156,10 +153,9 @@ public class SubSistemaAlquilerCompra implements FachadaAlquilerCompra {
 	}
 
 	@Override
-	public boolean compraAbonoGim(BonoUsuario bonoU) {
+	public boolean compraAbonoGim(Bono bonoU) {
 		if(bonoU != null) {
-			Bono b = this.bono.findById(c, bonoU.getBonoId());
-			if(b.getBono() == BonoEnum.GIMNASIO) {
+			if(bonoU.getBono() == BonoEnum.GIMNASIO) {
 				int a = this.bonoU.insertBonoUsuario(c, bonoU);
 				if (a == 1) {
 					return true;

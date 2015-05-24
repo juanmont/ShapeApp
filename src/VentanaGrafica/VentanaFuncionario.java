@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -36,6 +37,8 @@ public class VentanaFuncionario extends javax.swing.JPanel {
 	private JFrame frame;
 	private Connection con;
 	private String nick;
+	private List<Instalaciones> lista;
+	private boolean[] horas;
 	
     /**
      * Creates new form VentanaFuncionario
@@ -116,18 +119,24 @@ public class VentanaFuncionario extends javax.swing.JPanel {
 
         panelListas.setBackground(new java.awt.Color(153, 204, 255));
 
-        listaDeportes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Futbol7", "Futbol11", "Baloncesto", "Tenis", "Padel" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        
+        DefaultListModel<Instalaciones> modeloListaInst = new DefaultListModel<Instalaciones>();
+    	lista = controlInstalaciones.listaInstalaciones();
+    	if(!lista.isEmpty()){
+    		for(int i = 0; i < lista.size(); i++){
+    			modeloListaInst.add(i, lista.get(i));
+    		}
+    	}
+    	listaDeportes.removeAll();
+    	listaDeportes.setModel(modeloListaInst);
         scrListaDeportes.setViewportView(listaDeportes);
 
-        listaHoras.setModel(new javax.swing.AbstractListModel() {
+       /*listaHoras.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "11:00", "12:00", "13:00", "14:00", "21:00" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+       */
         scrListaHoras.setViewportView(listaHoras);
 
         HorasLibre.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
@@ -271,7 +280,7 @@ public class VentanaFuncionario extends javax.swing.JPanel {
     }//GEN-LAST:event_SalirActionPerformed
 
     private void bAlqInstalacionActionPerformed(java.awt.event.ActionEvent evt) {
-    	panelInstalacion = new AlquilerInstalacion(controlAlquilerCompra);
+    	panelInstalacion = new AlquilerInstalacion(controlUsuarios, controlClases, controlAlquilerCompra, controlInstalaciones, true);
     	panelListas.setVisible(false);
         quitaPaneles();
         panelInterno.setLayout(new BorderLayout());
@@ -283,40 +292,52 @@ public class VentanaFuncionario extends javax.swing.JPanel {
     }
 
     private void AlqMaterialActionPerformed(java.awt.event.ActionEvent evt) {
-    	panelMaterial = new AlquilerMaterial(controlAlquilerCompra);
+    	panelMaterial = new AlquilerMaterial(controlMateriales, controlAlquilerCompra, controlUsuarios, true);
     	panelListas.setVisible(false);
         quitaPaneles();
         panelInterno.setLayout(new BorderLayout());
-        panelInterno.setSize(300, 300);
-        panelMaterial.setPreferredSize(new Dimension(300,200));
+        panelInterno.setSize(300, 400);
+        panelMaterial.setPreferredSize(new Dimension(300,300));
         this.setPreferredSize(new Dimension(500,400));
         panelInterno.add(panelMaterial, BorderLayout.CENTER);
         panelMaterial.setVisible(true);
     }
 
     private void ContEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {
-    	panelContratacionEntrenador = new ContratacionEntrenador(controlAlquilerCompra, controlInstalaciones);
+    	panelContratacionEntrenador = new ContratacionEntrenador(controlUsuarios, controlAlquilerCompra, controlInstalaciones, controlClases, true);
         panelListas.setVisible(false);
         quitaPaneles();
         panelInterno.setLayout(new BorderLayout());
-        panelInterno.setSize(300, 300);
-        panelContratacionEntrenador.setPreferredSize(new Dimension(300,200));
+        panelInterno.setSize(300, 400);
+        panelContratacionEntrenador.setPreferredSize(new Dimension(300,300));
+        this.setPreferredSize(new Dimension(500,400));
         panelInterno.add(panelContratacionEntrenador, BorderLayout.CENTER);
         panelContratacionEntrenador.setVisible(true);
     }
 
     private void btVerHorasActionPerformed(java.awt.event.ActionEvent evt) {
-        ArrayList<Instalaciones> listaInstalaciones = controlInstalaciones.verHoras();
-        if(listaInstalaciones != null){
-        	DefaultListModel<String> modeloLista;
-        	for(Instalaciones i: listaInstalaciones){
-        		
-        	}
-        }
+    	if(this.listaDeportes.getSelectedIndex() >= 0){
+			Instalaciones ins = this.lista.get(listaDeportes.getSelectedIndex());
+			DefaultListModel<String> modeloListaHoras = new DefaultListModel<String>();
+			horas = controlInstalaciones.verHoras(ins);
+	    	if(horas.length != 0){
+	    		int a = 0;
+	    		for(int i = 0; i < horas.length; i++){
+	    			if(horas[i]){
+	    				modeloListaHoras.add(a, Integer.toString(i + 9));
+	    				a++;
+	    			}
+	    		}
+	    	}
+	    	listaHoras.removeAll();
+	    	listaHoras.setModel(modeloListaHoras);
+    	}else{
+    		
+    	}
     }
 
     private void CompraAbonoPiscActionPerformed(java.awt.event.ActionEvent evt) {
-    	panelCompraAbono = new CompraBono(controlAlquilerCompra);
+    	panelCompraAbono = new CompraBono(controlUsuarios, controlAlquilerCompra, true);
         panelListas.setVisible(false);
         quitaPaneles();
         panelInterno.setLayout(new BorderLayout());

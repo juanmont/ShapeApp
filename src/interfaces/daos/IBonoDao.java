@@ -8,9 +8,10 @@ import transfers.Bono;
 public interface IBonoDao {
 	
 	List<Bono> findAll(Connection connection);
+	public Bono findByNickAndBono(Connection connection, Bono bonoUsuario);
+	List<Bono> findByNick(Connection connection, String nick);
+ 	int insertBonoUsuario(Connection connection, Bono bonoUsuario);
+	int borrarBonoUsuario(Connection connection, Bono bonoUsuario);
 	List<Bono> findByTipo(Connection connection, String tipo);
 	Bono findById(Connection connection, int id);
-	Bono findByNickAndBono(Connection connection, Bono bono);
-	int borrarBonoUsuario(Connection connection, Bono bonoUsuario);
-	int insertBonoUsuario(Connection connection, Bono bono);
 }
